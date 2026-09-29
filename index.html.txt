@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Earth and Faith</title>
+</head>
+<body>
+  <h1>Earth and Faith</h1>
+  <p>Coming soon.</p>
+</body>
+</html>
