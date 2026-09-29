@@ -1,3 +1,4 @@
+---
 tags: [Basics]
 layout: post
 title: "What Is Atheism? Meaning, Types and Common Myths"
