@@ -22,7 +22,13 @@ body { top: 0 !important; }
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
-    includedLanguages: 'en,hi,hy,es,fr,de,ar,ru,zh-CN,bn,ur,ta,te,mr,gu,pa',
+    function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'ef-lang');
+}
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
     autoDisplay: false
   }, 'ef-lang');
