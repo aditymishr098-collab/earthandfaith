@@ -1,6 +1,8 @@
 ---
 layout: home
-title: Latest Posts
 ---
 
-Welcome to **Earth and Faith**, a personal blog where I explore religion, science and reason with curiosity, evidence and respect for people.
+<div class="hero">
+  <h1>Questions are never dangerous.</h1>
+  <p>A personal blog about religion, science and reason. I question ideas, never people.</p>
+</div>
