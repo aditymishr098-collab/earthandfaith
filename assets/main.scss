@@ -18,13 +18,11 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 h1, h2, h3, h4, .site-title, .post-link { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; }
 
-/* Header */
 .site-header { border-top: 4px solid var(--accent); border-bottom: 1px solid var(--line); }
 .site-title, .site-title:visited { color: var(--ink); font-size: 1.4rem; font-weight: 700; }
 .site-nav .page-link { color: var(--muted); font-size: 0.95rem; }
 .site-nav .page-link:hover { color: var(--accent); text-decoration: none; }
 
-/* Home hero */
 .hero { position: relative; overflow: hidden; padding: 4rem 0 3rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line); }
 .hero::before, .hero::after { content: ""; position: absolute; border: 1px solid var(--line); border-radius: 50%; pointer-events: none; }
 .hero::before { width: 560px; height: 560px; right: -170px; bottom: -330px; }
@@ -33,7 +31,6 @@ h1, h2, h3, h4, .site-title, .post-link { font-family: var(--serif); font-weight
 .hero h1 { font-size: clamp(2.3rem, 7vw, 3.9rem); line-height: 1.06; letter-spacing: -0.025em; margin: 0 0 1.1rem; max-width: 14ch; }
 .hero p { font-size: 1.15rem; color: var(--muted); max-width: 32rem; margin: 0; }
 
-/* Post list */
 .post-list-heading { font-family: inherit; font-size: 1rem; font-weight: 500; color: var(--muted); margin: 2rem 0 0; letter-spacing: 0; }
 .post-list { margin: 0; list-style: none; }
 .post-list > li { margin: 0; padding: 1.7rem 0; border-bottom: 1px solid var(--line); }
@@ -46,7 +43,6 @@ h1, h2, h3, h4, .site-title, .post-link { font-family: var(--serif); font-weight
 .post-link:hover { color: var(--accent); text-decoration: none; }
 .post-list p, .post-list li > p { color: var(--muted); margin: 0; }
 
-/* Post and page content */
 .post-title, .page-heading { font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.12; letter-spacing: -0.02em; }
 .post-content { margin-top: 1.5rem; }
 .post-content h2 { font-size: 1.6rem; margin: 2.4rem 0 0.6rem; }
@@ -54,14 +50,12 @@ h1, h2, h3, h4, .site-title, .post-link { font-family: var(--serif); font-weight
 .post-content li { margin-bottom: 0.3rem; }
 blockquote { border-left: 3px solid var(--earth); color: var(--muted); font-family: var(--serif); font-size: 1.1rem; padding-left: 1.2rem; }
 
-/* Footer */
 .site-footer { border-top: 1px solid var(--line); padding: 2rem 0; margin-top: 3rem; color: var(--muted); font-size: 0.9rem; }
 .site-footer .wrapper { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem 1.5rem; }
 .site-footer p { margin: 0; }
 .site-footer nav a, .site-footer nav a:visited { color: var(--muted); margin-right: 1.2rem; }
 .site-footer nav a:hover { color: var(--accent); }
 
-/* Dark mode follows the reader's device setting */
 @media (prefers-color-scheme: dark) {
   :root { --ink: #e4ebe7; --muted: #9db0a7; --line: #26332e; --accent: #6fcfae; --earth: #d9a25f; }
   body { background-color: #0f1614; }
