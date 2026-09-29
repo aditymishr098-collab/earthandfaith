@@ -1,3 +1,4 @@
+---
 tags: [History]
 layout: post
 title: "How Many Religions Are There in the World? A Complete Guide"
