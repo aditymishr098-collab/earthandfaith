@@ -26,6 +26,10 @@ If you email me, I will use your address only to reply to you. I will not sell o
 
 ## External links
 
+## Cookies and translation
+
+This site does not set cookies of its own. If you choose a language from the language menu, the page is translated by Google Translate, which loads scripts from Google and may set a cookie to remember your choice. See the [Google Privacy Policy](https://policies.google.com/privacy) for details. Translations are automatic and may contain errors; the English text is the original.
+
 Some posts may link to other websites. I am not responsible for the content or privacy practices of those websites.
 
 ## Changes
