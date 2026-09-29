@@ -26,6 +26,27 @@ body { overflow-x: hidden; }
   .ef-side-inner { margin-left: 0; }
   .ef-main { padding: 2rem 1.5rem; }
 }
+@media (prefers-color-scheme: dark) {
+  body { background-color: #0f1614; color: #e4ebe7; }
+  .site-header { border-color: #26332e; background-color: #0f1614; }
+  .site-title, .site-title:visited { color: #f3ead2; }
+  .site-nav .page-link, .site-nav .page-link:visited { color: #b9cfc4; }
+  .site-nav .page-link:hover { color: #e8b64a; }
+  .site-nav { background-color: #0f1614; border-color: #26332e; }
+  .site-nav .menu-icon > svg { fill: #b9cfc4; }
+  .site-footer { border-color: #26332e; background-color: #0f1614; color: #9db0a7; }
+  .site-footer a, .site-footer a:visited { color: #9db0a7; }
+  .site-footer .footer-heading { color: #e4ebe7; }
+  .ef-side { background: #0a1f1a; }
+  .ef-main { background: #0f1614; }
+  .ef-label { color: #9db0a7; }
+  .ef-post { border-bottom-color: #26332e; }
+  .ef-meta { color: #e0b060; }
+  .ef-meta span + span { color: #9db0a7; }
+  .ef-post h2 a { color: #eef3ef; }
+  .ef-post h2 a:hover { color: #e8b64a; }
+  .ef-post p { color: #b3c2bb; }
+}
 </style>
 <div class="ef">
 <section class="ef-side">
