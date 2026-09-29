@@ -10,9 +10,7 @@ plugins:
   - jekyll-seo-tag
 
 header_pages:
-  - about.md
-  - contact.md
-  - privacy-policy.md
-  - disclaimer.md
+  -header_pages:
+  - hidden.md
 
 show_excerpts: true
