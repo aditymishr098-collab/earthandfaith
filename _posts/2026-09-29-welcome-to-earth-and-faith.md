@@ -1,4 +1,5 @@
 ---
+tags: [Blog]
 layout: post
 title: "Welcome to Earth and Faith"
 date: 2026-09-29
