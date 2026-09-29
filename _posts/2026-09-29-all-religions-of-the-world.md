@@ -1,4 +1,4 @@
----
+tags: [History]
 layout: post
 title: "How Many Religions Are There in the World? A Complete Guide"
 date: 2026-09-29
