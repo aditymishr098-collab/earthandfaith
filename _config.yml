@@ -1,0 +1,18 @@
+title: Earth and Faith
+description: A personal blog about religion, science, reason and the questions we all ask.
+url: "https://earthandfaith.online"
+baseurl: ""
+lang: en
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+header_pages:
+  - about.md
+  - contact.md
+  - privacy-policy.md
+  - disclaimer.md
+
+show_excerpts: true
