@@ -4,8 +4,36 @@
     <nav>
       <a href="{{ '/about/' | relative_url }}">About</a>
       <a href="{{ '/contact/' | relative_url }}">Contact</a>
-      <a href="{{ '/privacy-policy/' | relative_url }}">Privacy</a>
+      <a href="{{ '/privacy-policy/' | relative_url }}">Privacy Policy</a>
       <a href="{{ '/disclaimer/' | relative_url }}">Disclaimer</a>
     </nav>
   </div>
 </footer>
+
+<style>
+.site-header .wrapper { position: relative; }
+#ef-lang { position: absolute; right: 20px; top: 14px; z-index: 20; }
+body { top: 0 !important; }
+.skiptranslate iframe.goog-te-banner-frame { display: none !important; }
+#goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+@media (max-width: 600px) { #ef-lang { right: 10px; top: 12px; } }
+</style>
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,hi,hy',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'ef-lang');
+}
+(function () {
+  var box = document.createElement('div');
+  box.id = 'ef-lang';
+  (document.querySelector('.site-header .wrapper') || document.body).appendChild(box);
+  var s = document.createElement('script');
+  s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  s.async = true;
+  document.body.appendChild(s);
+})();
+</script>
