@@ -50,4 +50,17 @@ function googleTranslateElementInit() {
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.appendChild(s);
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+  function save(v) { try { localStorage.setItem('ef-consent', v); } catch (e) {} }
+  var c = null;
+  try { c = localStorage.getItem('ef-consent'); } catch (e) {}
+  if (c === 'yes') { loadGA(); return; }
+  if (c === 'no' || !box) { return; }
+  box.hidden = false;
+  document.getElementById('ef-yes').onclick = function () { save('yes'); box.hidden = true; loadGA(); };
+  document.getElementById('ef-no').onclick = function () { save('no'); box.hidden = true; };
+})();
+</script>
