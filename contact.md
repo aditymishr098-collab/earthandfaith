@@ -10,7 +10,7 @@ I would love to hear from you. Whether you agree or disagree with something you 
 
 ## What you can write to me about
 
-- **Questions** about a post or about a topic on this blog
+- **Questions** about a post or about a topic on this blog (you can also use the [Ask a Question](/ask/) page)
 - **Corrections**: if you think I have made a factual mistake, please tell me which post and which sentence, and if possible send a source
 - **Ideas for future posts** or topics you would like me to explore
 - **Your own story or perspective**, if you would like to share it

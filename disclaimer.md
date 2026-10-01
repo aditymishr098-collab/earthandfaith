@@ -22,6 +22,14 @@ I try to be accurate and to rely on reliable sources, but I am not perfect and s
 
 Nothing on this site is legal, medical, psychological, financial or religious advice. It is for information and discussion only. If you are struggling with your beliefs, your family or your wellbeing, please consider talking to a trusted person or a qualified professional.
 
+## Maps, timelines and statistics
+
+The World Religion Map, the timeline and other figures on this site are simplified overviews based on public estimates, such as those of the Pew Research Center, and on historical scholarship. Numbers and dates are approximate, may be out of date and are often debated. They are not exact or official data.
+
+## Reader questions
+
+Answers to questions sent through the [Ask a Question](/ask/) page are general information and personal opinion. They are not professional advice, and I cannot promise to answer every question.
+
 ## Religious texts and beliefs
 
 When I describe the beliefs or texts of a religion, I aim to describe them fairly, but believers of that religion may understand them differently. Every tradition has many interpretations. My summaries cannot replace the voices of the believers themselves.
