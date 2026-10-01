@@ -20,6 +20,10 @@ body { overflow-x: hidden; }
 .ef-post h2 a { color: #12332b; text-decoration: none; }
 .ef-post h2 a:hover { color: #a06a12; text-decoration: underline; }
 .ef-post p { color: #4a5852; margin: 0; }
+.ef-pager { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 2rem; }
+.ef-pager a, .ef-pager span { min-width: 2.4rem; padding: 0.4rem 0.8rem; text-align: center; font-size: 0.95rem; color: #12332b; border: 1px solid #d5dcd7; border-radius: 999px; text-decoration: none; }
+.ef-pager a:hover { border-color: #a06a12; color: #a06a12; }
+.ef-pager .ef-cur { color: #fff; background: #12332b; border-color: #12332b; }
 @media (max-width: 800px) {
   .ef { grid-template-columns: 1fr; }
   .ef-side { padding: 3rem 1.5rem 8rem; }
@@ -30,13 +34,8 @@ body { overflow-x: hidden; }
   body { background-color: #0f1614; color: #e4ebe7; }
   .site-header { border-color: #26332e; background-color: #0f1614; }
   .site-title, .site-title:visited { color: #f3ead2; }
-  .site-nav .page-link, .site-nav .page-link:visited { color: #b9cfc4; }
-  .site-nav .page-link:hover { color: #e8b64a; }
-  .site-nav { background-color: #0f1614; border-color: #26332e; }
-  .site-nav .menu-icon > svg { fill: #b9cfc4; }
   .site-footer { border-color: #26332e; background-color: #0f1614; color: #9db0a7; }
   .site-footer a, .site-footer a:visited { color: #9db0a7; }
-  .site-footer .footer-heading { color: #e4ebe7; }
   .ef-side { background: #0a1f1a; }
   .ef-main { background: #0f1614; }
   .ef-label { color: #9db0a7; }
@@ -46,6 +45,9 @@ body { overflow-x: hidden; }
   .ef-post h2 a { color: #eef3ef; }
   .ef-post h2 a:hover { color: #e8b64a; }
   .ef-post p { color: #b3c2bb; }
+  .ef-pager a, .ef-pager span { color: #e4ebe7; border-color: #26332e; }
+  .ef-pager a:hover { border-color: #e8b64a; color: #e8b64a; }
+  .ef-pager .ef-cur { color: #0f1614; background: #e8b64a; border-color: #e8b64a; }
 }
 </style>
 <div class="ef">
@@ -58,13 +60,20 @@ body { overflow-x: hidden; }
 <section class="ef-main">
 <div class="ef-main-inner">
 <p class="ef-label">Latest posts</p>
-{% for post in site.posts %}
+{% for post in paginator.posts %}
 <article class="ef-post">
 <div class="ef-meta"><span>{{ post.date | date: "%b %-d, %Y" }}</span><span>{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span></div>
 <h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
 <p>{{ post.excerpt | strip_html | strip_newlines | truncatewords: 38 }}</p>
 </article>
 {% endfor %}
+{% if paginator.total_pages > 1 %}
+<nav class="ef-pager" aria-label="Pagination">
+{% if paginator.previous_page %}<a href="{{ paginator.previous_page_path | relative_url }}">Previous</a>{% endif %}
+{% for p in (1..paginator.total_pages) %}{% if p == paginator.page %}<span class="ef-cur">{{ p }}</span>{% elsif p == 1 %}<a href="{{ '/' | relative_url }}">1</a>{% else %}<a href="{{ site.paginate_path | replace: ':num', p | relative_url }}">{{ p }}</a>{% endif %}{% endfor %}
+{% if paginator.next_page %}<a href="{{ paginator.next_page_path | relative_url }}">Next</a>{% endif %}
+</nav>
+{% endif %}
 </div>
 </section>
 </div>
