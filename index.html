@@ -2,50 +2,68 @@
 layout: default
 ---
 <style>
-.ef-maps { display: grid; margin-top: 0.4rem; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin: 0 0 1.6rem; }
-.ef-map-card, .ef-map-card:visited { display: block; padding: 0.9rem 1rem; border: 1px solid var(--line, #dde2dc); border-radius: 12px; color: inherit; text-decoration: none; }
-.ef-map-card:hover { border-color: var(--accent, #1f6f5c); text-decoration: none; }
-.ef-map-card b { display: block; font-size: 1rem; color: var(--accent, #1f6f5c); }
-.ef-map-card span { font-size: 0.88rem; color: var(--muted, #5d6b66); }
-.ef-search { display: block; width: 100%; box-sizing: border-box; margin: 0 0 0.6rem; padding: 0.65rem 1rem; font: inherit; font-size: 1rem; color: inherit; background: transparent; border: 1px solid var(--line, #dde2dc); border-radius: 10px; }
+.ef-atlas { position: relative; overflow: hidden; margin: 0.4rem 0 1.6rem; padding: 1.3rem 1.3rem 1.4rem; background: #12332b; color: #f3ead2; border-radius: 18px; }
+.ef-atlas-art { position: absolute; right: -30px; bottom: -40px; width: 340px; height: auto; opacity: 0.9; pointer-events: none; }
+.ef-atlas h2 { position: relative; margin: 0 0 0.9rem; font-family: var(--serif, Georgia, serif); font-size: 1.15rem; font-weight: 700; color: #f3ead2; letter-spacing: 0; }
+.ef-cards { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; max-width: 62%; }
+.ef-card, .ef-card:visited { display: block; padding: 0.75rem 0.9rem; color: #f3ead2; background: rgba(243,234,210,0.1); border: 1px solid rgba(243,234,210,0.22); border-radius: 12px; text-decoration: none; }
+.ef-card:hover { background: rgba(243,234,210,0.2); border-color: #e8b64a; text-decoration: none; }
+.ef-card b { display: block; font-size: 0.98rem; color: #e8b64a; }
+.ef-card span { display: block; margin-top: 0.15rem; font-size: 0.82rem; line-height: 1.4; color: #cfe0d6; }
+.ef-search { display: block; width: 100%; box-sizing: border-box; margin: 0 0 1rem; padding: 0.65rem 1rem; font: inherit; font-size: 1rem; color: inherit; background: transparent; border: 1px solid var(--line, #dde2dc); border-radius: 10px; }
 .ef-search:focus { outline: 2px solid var(--accent, #1f6f5c); outline-offset: 1px; }
-.ef-list { list-style: none; margin: 0; padding: 0; }
-.ef-item { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 1rem; padding: 1.2rem 0; border-top: 1px solid var(--line, #dde2dc); }
+.ef-posts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.ef-item { display: block; padding: 1.1rem 1.2rem; border: 1px solid var(--line, #dde2dc); border-radius: 14px; background: rgba(127,127,127,0.06); }
 .ef-item[hidden] { display: none; }
-.ef-meta { font-size: 0.85rem; color: var(--muted, #5d6b66); padding-top: 0.3rem; line-height: 1.5; }
-.ef-meta b { display: block; color: var(--accent, #1f6f5c); font-weight: 600; }
-.ef-item h2 { margin: 0 0 0.35rem; font-size: 1.35rem; line-height: 1.25; }
-.ef-item h2 a, .ef-item h2 a:visited { color: inherit; text-decoration: none; }
-.ef-item h2 a:hover { color: var(--accent, #1f6f5c); }
-.ef-item p { margin: 0; color: var(--muted, #5d6b66); font-size: 0.98rem; line-height: 1.55; }
-.ef-empty { display: none; padding: 1.2rem 0; color: var(--muted, #5d6b66); border-top: 1px solid var(--line, #dde2dc); }
+.ef-pill { display: inline-block; margin-right: 0.5rem; padding: 0.05rem 0.65rem; font-size: 0.78rem; font-weight: 700; color: #8a4b0f; background: #f7e9cf; border-radius: 999px; }
+.ef-date { font-size: 0.82rem; color: var(--muted, #5d6b66); }
+.ef-item h3 { margin: 0.55rem 0 0.4rem; font-size: 1.2rem; line-height: 1.3; }
+.ef-item h3 a, .ef-item h3 a:visited { color: inherit; text-decoration: none; }
+.ef-item h3 a:hover { color: var(--accent, #1f6f5c); }
+.ef-item p { margin: 0; color: var(--muted, #5d6b66); font-size: 0.95rem; line-height: 1.55; }
+.ef-empty { display: none; padding: 1.2rem 0; color: var(--muted, #5d6b66); }
 .ef-pager { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.4rem; }
 .ef-pager button { min-width: 2.4rem; padding: 0.4rem 0.8rem; font: inherit; font-size: 0.95rem; color: inherit; background: transparent; border: 1px solid var(--line, #dde2dc); border-radius: 999px; cursor: pointer; }
 .ef-pager button:hover { border-color: var(--accent, #1f6f5c); color: var(--accent, #1f6f5c); }
 .ef-pager button.cur { color: #fff; background: var(--accent, #1f6f5c); border-color: var(--accent, #1f6f5c); }
-@media (max-width: 600px) {
-  .ef-item { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
-  .ef-meta { padding-top: 0; }
-  .ef-meta b { display: inline; margin-right: 0.6rem; }
+@media (prefers-color-scheme: dark) { .ef-pill { color: #f0c987; background: rgba(232,182,74,0.18); } }
+@media (max-width: 800px) {
+  .ef-cards { max-width: 100%; }
+  .ef-atlas-art { display: none; }
+  .ef-posts { grid-template-columns: minmax(0, 1fr); }
 }
+@media (min-width: 801px) and (max-width: 1000px) { .ef-atlas-art { opacity: 0.35; } }
 </style>
-<div class="ef-maps">
-  <a class="ef-map-card" href="{{ '/religion-map/' | relative_url }}"><b>Religion Map</b><span>Which faith leads in each country</span></a>
-  <a class="ef-map-card" href="{{ '/world-hardship-map/' | relative_url }}"><b>Hardship Map</b><span>Hunger, poverty, conflict and violence</span></a>
-  <a class="ef-map-card" href="{{ '/civilizations-map/' | relative_url }}"><b>Civilizations</b><span>Slide through time: who lived where</span></a>
-  <a class="ef-map-card" href="{{ '/lost-faiths/' | relative_url }}"><b>Lost Faiths</b><span>Religions that faded, and those that survive</span></a>
-  <a class="ef-map-card" href="{{ '/compare-religions/' | relative_url }}"><b>Compare Religions</b><span>Pick two and see them side by side</span></a>
-  <a class="ef-map-card" href="{{ '/on-this-day/' | relative_url }}"><b>On This Day</b><span>Science, space and history by date</span></a>
-</div>
+<section class="ef-atlas" aria-label="Maps and tools">
+  <svg class="ef-atlas-art" viewBox="0 0 340 260" aria-hidden="true" focusable="false">
+    <circle cx="190" cy="150" r="120" fill="#1b4a3e"/>
+    <g fill="none" stroke="#2c6b5a" stroke-width="1">
+      <ellipse cx="190" cy="150" rx="120" ry="40"/><ellipse cx="190" cy="150" rx="60" ry="120"/><line x1="70" y1="150" x2="310" y2="150"/><line x1="190" y1="30" x2="190" y2="270"/>
+    </g>
+    <path d="M118 112c14-18 38-22 52-12 10 8 4 22-8 30-10 7-8 20-22 22-16 2-30-14-22-40z" fill="#2c8a6b"/>
+    <path d="M196 92c18-12 46-6 56 10 8 14-6 24-14 36-8 12 0 28-14 34-16 6-26-12-30-30-4-18-8-38 2-50z" fill="#d7a94a"/>
+    <path d="M262 150c12-8 28 0 28 14 0 16-18 26-30 18-8-6-10-24 2-32z" fill="#c0563f"/>
+    <path d="M140 188c10-6 26-2 28 10 2 14-12 28-24 22-10-6-14-24-4-32z" fill="#e9c47a"/>
+    <circle cx="190" cy="150" r="146" fill="none" stroke="#e8b64a" stroke-width="1.5" stroke-dasharray="3 7"/>
+    <circle cx="300" cy="62" r="14" fill="#e8b64a"/>
+  </svg>
+  <h2>Maps and tools</h2>
+  <div class="ef-cards">
+    <a class="ef-card" href="{{ '/religion-map/' | relative_url }}"><b>Religion Map</b><span>Which faith leads in each country</span></a>
+    <a class="ef-card" href="{{ '/world-hardship-map/' | relative_url }}"><b>Hardship Map</b><span>Hunger, poverty, conflict and violence</span></a>
+    <a class="ef-card" href="{{ '/civilizations-map/' | relative_url }}"><b>Civilizations Map</b><span>Slide through time: who lived where</span></a>
+    <a class="ef-card" href="{{ '/lost-faiths/' | relative_url }}"><b>Lost Faiths</b><span>Religions that faded, and those that survive</span></a>
+    <a class="ef-card" href="{{ '/compare-religions/' | relative_url }}"><b>Compare Religions</b><span>Pick two and see them side by side</span></a>
+    <a class="ef-card" href="{{ '/on-this-day/' | relative_url }}"><b>On This Day</b><span>Science, space and history by date</span></a>
+  </div>
+</section>
 <input class="ef-search" id="ef-q" type="search" placeholder="Search posts" aria-label="Search posts" autocomplete="off">
-<ul class="ef-list" id="ef-list">
+<ul class="ef-posts" id="ef-list">
 {% for post in site.posts %}
   <li class="ef-item">
-    <div class="ef-meta">{% if post.tags.size > 0 %}<b>{{ post.tags[0] }}</b>{% endif %}{{ post.date | date: "%b %-d, %Y" }}</div>
-    <div>
-      <h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
-      <p>{{ post.excerpt | strip_html | strip_newlines | truncatewords: 34 }}</p>
-    </div>
+    <div>{% if post.tags.size > 0 %}<span class="ef-pill">{{ post.tags[0] }}</span>{% endif %}<span class="ef-date">{{ post.date | date: "%b %-d, %Y" }}</span></div>
+    <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+    <p>{{ post.excerpt | strip_html | strip_newlines | truncatewords: 30 }}</p>
   </li>
 {% endfor %}
 </ul>
