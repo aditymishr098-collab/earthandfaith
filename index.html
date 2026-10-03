@@ -2,102 +2,99 @@
 layout: default
 ---
 <style>
-body { overflow-x: hidden; }
-.page-content { padding: 0 !important; }
-.ef { width: 100vw; margin-left: calc(50% - 50vw); display: grid; grid-template-columns: 2fr 3fr; }
-.ef-side { position: relative; overflow: hidden; background: #12332b; color: #f3ead2; padding: 4rem 2.5rem 9rem; }
-.ef-side::after { content: ""; position: absolute; left: 50%; bottom: -150px; width: 280px; height: 280px; margin-left: -140px; border-radius: 50%; background: #e8b64a; }
-.ef-side-inner { position: relative; z-index: 1; max-width: 26rem; margin-left: auto; }
-.ef-side h1 { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: clamp(2.6rem, 6vw, 4.2rem); line-height: 1.02; letter-spacing: -0.03em; font-weight: 700; margin: 0 0 1.2rem; color: #f3ead2; }
-.ef-side p { font-size: 1.1rem; line-height: 1.6; color: #b9cfc4; margin: 0; }
-.ef-main { background: #ffffff; padding: 3rem 2.5rem; }
-.ef-main-inner { max-width: 38rem; }
-.ef-label { font-size: 1rem; color: #5d6b66; margin: 0 0 0.5rem; }
-.ef-post { padding: 1.6rem 0; border-bottom: 1px solid #e3e8e4; }
-.ef-meta { font-size: 0.85rem; color: #a06a12; }
-.ef-meta span + span { margin-left: 1rem; color: #5d6b66; }
-.ef-post h2 { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 1.75rem; line-height: 1.2; font-weight: 600; margin: 0.3rem 0 0.5rem; }
-.ef-post h2 a { color: #12332b; text-decoration: none; }
-.ef-post h2 a:hover { color: #a06a12; text-decoration: underline; }
-.ef-post p { color: #4a5852; margin: 0; }
-.ef-pager { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 2rem; }
-.ef-pager a, .ef-pager span { min-width: 2.4rem; padding: 0.4rem 0.8rem; text-align: center; font-size: 0.95rem; color: #12332b; border: 1px solid #d5dcd7; border-radius: 999px; text-decoration: none; }
-.ef-pager a:hover { border-color: #a06a12; color: #a06a12; }
-.ef-pager .ef-cur { color: #fff; background: #12332b; border-color: #12332b; }
-@media (max-width: 800px) {
-  .ef { grid-template-columns: 1fr; }
-  .ef-side { padding: 3rem 1.5rem 8rem; }
-  .ef-side-inner { margin-left: 0; }
-  .ef-main { padding: 2rem 1.5rem; }
-}
-@media (prefers-color-scheme: dark) {
-  body { background-color: #0f1614; color: #e4ebe7; }
-  .site-header { border-color: #26332e; background-color: #0f1614; }
-  .site-title, .site-title:visited { color: #f3ead2; }
-  .site-footer { border-color: #26332e; background-color: #0f1614; color: #9db0a7; }
-  .site-footer a, .site-footer a:visited { color: #9db0a7; }
-  .ef-side { background: #0a1f1a; }
-  .ef-main { background: #0f1614; }
-  .ef-label { color: #9db0a7; }
-  .ef-post { border-bottom-color: #26332e; }
-  .ef-meta { color: #e0b060; }
-  .ef-meta span + span { color: #9db0a7; }
-  .ef-post h2 a { color: #eef3ef; }
-  .ef-post h2 a:hover { color: #e8b64a; }
-  .ef-post p { color: #b3c2bb; }
-  .ef-pager a, .ef-pager span { color: #e4ebe7; border-color: #26332e; }
-  .ef-pager a:hover { border-color: #e8b64a; color: #e8b64a; }
-  .ef-pager .ef-cur { color: #0f1614; background: #e8b64a; border-color: #e8b64a; }
+.ef-hero { padding: 1.2rem 0 1.4rem; }
+.ef-hero h1 { margin: 0 0 0.5rem; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.12; letter-spacing: -0.02em; }
+.ef-hero p { margin: 0; font-size: 1.1rem; color: var(--muted, #5d6b66); max-width: 34rem; }
+.ef-maps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin: 0 0 1.6rem; }
+.ef-map-card, .ef-map-card:visited { display: block; padding: 0.9rem 1rem; border: 1px solid var(--line, #dde2dc); border-radius: 12px; color: inherit; text-decoration: none; }
+.ef-map-card:hover { border-color: var(--accent, #1f6f5c); text-decoration: none; }
+.ef-map-card b { display: block; font-size: 1rem; color: var(--accent, #1f6f5c); }
+.ef-map-card span { font-size: 0.88rem; color: var(--muted, #5d6b66); }
+.ef-search { display: block; width: 100%; box-sizing: border-box; margin: 0 0 0.6rem; padding: 0.65rem 1rem; font: inherit; font-size: 1rem; color: inherit; background: transparent; border: 1px solid var(--line, #dde2dc); border-radius: 10px; }
+.ef-search:focus { outline: 2px solid var(--accent, #1f6f5c); outline-offset: 1px; }
+.ef-list { list-style: none; margin: 0; padding: 0; }
+.ef-item { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 1rem; padding: 1.2rem 0; border-top: 1px solid var(--line, #dde2dc); }
+.ef-item[hidden] { display: none; }
+.ef-meta { font-size: 0.85rem; color: var(--muted, #5d6b66); padding-top: 0.3rem; line-height: 1.5; }
+.ef-meta b { display: block; color: var(--accent, #1f6f5c); font-weight: 600; }
+.ef-item h2 { margin: 0 0 0.35rem; font-size: 1.35rem; line-height: 1.25; }
+.ef-item h2 a, .ef-item h2 a:visited { color: inherit; text-decoration: none; }
+.ef-item h2 a:hover { color: var(--accent, #1f6f5c); }
+.ef-item p { margin: 0; color: var(--muted, #5d6b66); font-size: 0.98rem; line-height: 1.55; }
+.ef-empty { display: none; padding: 1.2rem 0; color: var(--muted, #5d6b66); border-top: 1px solid var(--line, #dde2dc); }
+.ef-pager { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.4rem; }
+.ef-pager button { min-width: 2.4rem; padding: 0.4rem 0.8rem; font: inherit; font-size: 0.95rem; color: inherit; background: transparent; border: 1px solid var(--line, #dde2dc); border-radius: 999px; cursor: pointer; }
+.ef-pager button:hover { border-color: var(--accent, #1f6f5c); color: var(--accent, #1f6f5c); }
+.ef-pager button.cur { color: #fff; background: var(--accent, #1f6f5c); border-color: var(--accent, #1f6f5c); }
+@media (max-width: 600px) {
+  .ef-item { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
+  .ef-meta { padding-top: 0; }
+  .ef-meta b { display: inline; margin-right: 0.6rem; }
 }
 </style>
-<div class="ef">
-<section class="ef-side">
-<div class="ef-side-inner">
-<h1>Earth and Faith</h1>
-<p>Questions are never dangerous. A personal blog about religion, science and reason.</p>
+<div class="ef-hero">
+  <h1>Questions are never dangerous.</h1>
+  <p>A personal blog about religion, science and reason. I question ideas, never people.</p>
 </div>
-</section>
-<section class="ef-main">
-<div class="ef-main-inner">
-<p class="ef-label">Latest posts</p>
-<div id="ef-posts">
+<div class="ef-maps">
+  <a class="ef-map-card" href="{{ '/religion-map/' | relative_url }}"><b>Religion Map</b><span>Which faith leads in each country</span></a>
+  <a class="ef-map-card" href="{{ '/world-hardship-map/' | relative_url }}"><b>Hardship Map</b><span>Hunger, poverty, conflict and violence</span></a>
+</div>
+<input class="ef-search" id="ef-q" type="search" placeholder="Search posts" aria-label="Search posts" autocomplete="off">
+<ul class="ef-list" id="ef-list">
 {% for post in site.posts %}
-<article class="ef-post">
-<div class="ef-meta"><span>{{ post.date | date: "%b %-d, %Y" }}</span><span>{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span></div>
-<h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
-<p>{{ post.excerpt | strip_html | strip_newlines | truncatewords: 38 }}</p>
-</article>
+  <li class="ef-item">
+    <div class="ef-meta">{% if post.tags.size > 0 %}<b>{{ post.tags[0] }}</b>{% endif %}{{ post.date | date: "%b %-d, %Y" }}</div>
+    <div>
+      <h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+      <p>{{ post.excerpt | strip_html | strip_newlines | truncatewords: 34 }}</p>
+    </div>
+  </li>
 {% endfor %}
-</div>
-<nav id="ef-pager" class="ef-pager" aria-label="Pagination"></nav>
-</div>
-</section>
-</div>
+</ul>
+<div class="ef-empty" id="ef-empty">No posts match your search.</div>
+<div class="ef-pager" id="ef-pager"></div>
 <script>
 (function () {
   var PER = 5;
-  var items = document.querySelectorAll('#ef-posts .ef-post');
+  var items = Array.prototype.slice.call(document.querySelectorAll('#ef-list .ef-item'));
   var pager = document.getElementById('ef-pager');
-  var pages = Math.ceil(items.length / PER);
-  function show(n, scroll) {
-    n = Math.max(1, Math.min(pages, n));
-    items.forEach(function (el, i) {
-      el.style.display = (i >= (n - 1) * PER && i < n * PER) ? '' : 'none';
-    });
-    pager.innerHTML = '';
-    if (pages < 2) { return; }
-    function btn(label, target, cur) {
-      var a = document.createElement(cur ? 'span' : 'a');
-      a.textContent = label;
-      if (cur) { a.className = 'ef-cur'; }
-      else { a.href = '#'; a.onclick = function (e) { e.preventDefault(); show(target, true); }; }
-      pager.appendChild(a);
+  var empty = document.getElementById('ef-empty');
+  var box = document.getElementById('ef-q');
+  var page = 1;
+  function render(scroll) {
+    var q = box.value.trim().toLowerCase();
+    var shown = 0;
+    if (q) {
+      items.forEach(function (li) {
+        var hit = li.textContent.toLowerCase().indexOf(q) !== -1;
+        li.hidden = !hit;
+        if (hit) { shown++; }
+      });
+      empty.style.display = shown ? 'none' : 'block';
+      pager.innerHTML = '';
+      return;
     }
-    if (n > 1) { btn('Previous', n - 1); }
-    for (var p = 1; p <= pages; p++) { btn(String(p), p, p === n); }
-    if (n < pages) { btn('Next', n + 1); }
-    if (scroll) { document.querySelector('.ef-label').scrollIntoView({behavior: 'smooth'}); }
+    empty.style.display = 'none';
+    var pages = Math.max(1, Math.ceil(items.length / PER));
+    if (page > pages) { page = pages; }
+    items.forEach(function (li, i) { li.hidden = !(i >= (page - 1) * PER && i < page * PER); });
+    pager.innerHTML = '';
+    if (pages > 1) {
+      for (var p = 1; p <= pages; p++) {
+        (function (n) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = n;
+          if (n === page) { b.className = 'cur'; b.setAttribute('aria-current', 'page'); }
+          b.addEventListener('click', function () { page = n; render(true); });
+          pager.appendChild(b);
+        })(p);
+      }
+    }
+    if (scroll) { window.scrollTo(0, 0); }
   }
-  show(1, false);
+  box.addEventListener('input', function () { render(false); });
+  render(false);
 })();
 </script>
