@@ -103,6 +103,8 @@ Dates and numbers on the history pages are approximate and sometimes debated. If
 
 - Email: [contact@earthandfaith.online](mailto:contact@earthandfaith.online)
 - Instagram: [@adity_m09](https://www.instagram.com/adity_m09)
+- Telegram
+  (https://t.me/earthandfaithcommunity)
 
 ## Copyright
 
