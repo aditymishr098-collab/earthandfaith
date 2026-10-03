@@ -4,7 +4,7 @@ title: Disclaimer
 permalink: /disclaimer/
 ---
 
-*Last updated: September 30, 2026*
+*Last updated: October 3, 2026*
 
 ## Personal opinions
 
@@ -28,7 +28,11 @@ Nothing on this site is legal, medical, psychological, financial, engineering or
 
 ## Maps, timelines and statistics
 
-The World Religion Map, the timeline and other figures on this site are simplified overviews based on public estimates, such as those of the Pew Research Center, and on historical scholarship. Numbers and dates are approximate, may be out of date and are often debated. They are not exact or official data.
+The World Religion Map, World Hardship Map, Civilizations Map, Lost Faiths, Compare Religions, On This Day and the timeline are simplified overviews based on public estimates and data (for example Pew Research Center and the World Bank) and on historical scholarship. Numbers, dates and borders are approximate, may be out of date and are often debated. Ancient dates and death tolls in particular are rough estimates. Country data may be missing or old. None of this is exact or official data.
+
+## Use of AI tools
+
+I build this site and write some of its content with the help of AI tools. I check and publish everything myself and I am responsible for it, but mistakes can still happen. Please tell me if you find one.
 
 ## Reader questions
 
@@ -48,7 +52,7 @@ I am not responsible for the content, accuracy or availability of external websi
 
 ## Copyright
 
-Unless stated otherwise, the text on this site is copyright &copy; Earth and Faith. You may quote short passages with a clear link back to the original post. Please do not republish whole posts without permission.
+Unless stated otherwise, the text on this site is copyright &copy; Adity Mishra, Earth and Faith. You may quote short passages with a clear link back to the original post. Please do not republish whole posts without permission.
 
 ## Limitation of liability
 
