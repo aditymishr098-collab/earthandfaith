@@ -123,6 +123,16 @@ Where in the world do people face the most hunger, poverty, war and violence? Ch
   choose("hun");
   d3.json("https://cdn.jsdelivr.net/gh/johan/world.geo.json@master/countries.geo.json").then(function (g) {
     g.features = g.features.filter(function (f) { return f.id !== "ATA"; });
+    g.features.forEach(function (f) {
+      var gm = f.geometry; if (!gm) { return; }
+      var polys = gm.type === "Polygon" ? [gm.coordinates] : gm.type === "MultiPolygon" ? gm.coordinates : [];
+      polys.forEach(function (rings) {
+        rings.forEach(function (ring, i) {
+          var big = d3.geoArea({type: "Polygon", coordinates: [ring]}) > 2 * Math.PI;
+          if ((i === 0 && big) || (i > 0 && !big)) { ring.reverse(); }
+        });
+      });
+    });
     var w = 960, h = 500, box = $("hm-map");
     var path = d3.geoPath(d3.geoNaturalEarth1().fitSize([w, h], g));
     box.innerHTML = "";
