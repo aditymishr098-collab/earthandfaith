@@ -1,0 +1,93 @@
+---
+layout: page
+title: "Living and Lost Religions"
+permalink: /lost-faiths/
+---
+<p>Religions are born, they spread, and some of them fade away. This timeline shows religions that no longer have a continuous community of believers, and a few ancient ones that survive today as very small communities. Pick a filter, then read the notes under each bar.</p>
+<style>
+#lf-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+#lf-filter button { padding: 0.4rem 0.95rem; font: inherit; font-size: 0.92rem; color: inherit; background: transparent; border: 1px solid var(--line, #dde2dc); border-radius: 999px; cursor: pointer; }
+#lf-filter button.on { color: #fff; background: var(--accent, #1f6f5c); border-color: var(--accent, #1f6f5c); }
+.lf-axis { position: relative; height: 1.4rem; margin: 0.4rem 0 0.2rem; font-size: 0.75rem; color: var(--muted, #5d6b66); border-bottom: 1px solid var(--line, #dde2dc); }
+.lf-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.lf-axis span:first-child { transform: none; }
+.lf-axis span:last-child { transform: translateX(-100%); }
+.lf-row { padding: 0.9rem 0; border-bottom: 1px solid var(--line, #dde2dc); }
+.lf-row h3 { margin: 0 0 0.3rem; font-size: 1.1rem; }
+.lf-tag { display: inline-block; margin-left: 0.5rem; padding: 0.05rem 0.6rem; font-size: 0.75rem; font-weight: 600; border-radius: 999px; vertical-align: middle; color: #fff; }
+.lf-ext { background: #8b3a2e; } .lf-rev { background: #2c6b9a; } .lf-liv { background: #3a7a4b; } .lf-mix { background: #8a6a12; }
+.lf-track { position: relative; height: 0.7rem; background: rgba(127,127,127,0.15); border-radius: 999px; margin: 0.4rem 0; }
+.lf-bar { position: absolute; top: 0; height: 100%; min-width: 6px; border-radius: 999px; }
+.lf-bar.lf-ext { background: #8b3a2e; } .lf-bar.lf-rev { background: #2c6b9a; } .lf-bar.lf-liv { background: #3a7a4b; } .lf-bar.lf-mix { background: #8a6a12; }
+.lf-dates { font-size: 0.85rem; color: var(--muted, #5d6b66); }
+.lf-row p { margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--muted, #5d6b66); }
+</style>
+<div id="lf-filter" role="group" aria-label="Filter religions"></div>
+<div class="lf-axis" id="lf-axis"></div>
+<div id="lf-list"></div>
+<h2>What these labels mean</h2>
+<ul>
+<li><strong>Faded away:</strong> no continuous community of believers remains. The religion is known from texts, ruins and art.</li>
+<li><strong>Modern revival:</strong> the original religion faded, but today some people try to revive it. These revivals are usually small and rebuilt from surviving sources, so they are not identical to the ancient practice.</li>
+<li><strong>Survives in mixed form:</strong> the old religion lost its state and temples, but some beliefs and customs live on, often blended with another religion.</li>
+<li><strong>Living, very small:</strong> an old religion that still has believers today, but only a small community.</li>
+</ul>
+<p>Dates are approximate. A religion rarely ends on one day. Usually it fades over generations as rulers, trade, conquest or new faiths change a society. I am describing history, not judging anyone's beliefs, past or present.</p>
+<script>
+(function () {
+  var MIN = -3500, MAX = 2026;
+  var T = { ext: "Faded away", rev: "Modern revival", mix: "Survives in mixed form", liv: "Living, very small" };
+  var R = [
+    ["Sumerian and Mesopotamian religion", -3500, 200, "ext", "Gods of sky, earth and water such as Enlil and Inanna, with temples at the centre of every city. Local cults slowly disappeared in the first centuries CE."],
+    ["Ancient Egyptian religion", -3100, 537, "rev", "Ra, Osiris, Isis and many more. The last hieroglyphic inscription is from 394 CE and the temple of Philae was closed around 535 to 537 CE. A small modern revival called Kemetism exists."],
+    ["Canaanite and Phoenician religion", -1500, 300, "ext", "Gods such as Baal and Astarte, worshipped across the eastern Mediterranean. It faded under Roman rule and the spread of Christianity."],
+    ["Ancient Greek religion", -1600, 392, "rev", "The Olympian gods, oracles and festivals. Public worship ended under Roman Christian emperors around 391 to 392 CE. A small modern revival is called Hellenism."],
+    ["Roman religion", -750, 392, "ext", "State cults, household gods and many borrowed foreign gods. Ended as the state religion around 391 to 392 CE."],
+    ["Mithraism", 100, 400, "ext", "A secret society popular among Roman soldiers, who met in underground temples. It faded in the 4th century CE."],
+    ["Manichaeism", 240, 1500, "ext", "Founded by the prophet Mani in the 3rd century CE. It once spread from Rome to China. It faded in the West by around 600 CE and lasted in parts of China for roughly another thousand years."],
+    ["Celtic religion (Druidry)", -800, 700, "rev", "The pre-Christian faiths of the Celtic peoples, mostly known from Roman and later Irish writers. Modern Druidry is a revival."],
+    ["Norse religion", 700, 1100, "rev", "Odin, Thor and Freya, in the Viking Age. Scandinavia was gradually Christianized, with Iceland officially accepting Christianity around the year 1000. A modern revival called Ásatrú has a few thousand members in Iceland."],
+    ["Slavic and Baltic religion", 500, 1387, "rev", "Gods such as Perun. Christianization came between about 900 and 1100 for most Slavs. Lithuania, the last pagan state in Europe, converted in 1387. Modern revivals include Rodnovery."],
+    ["Aztec religion", 1300, 1521, "mix", "Human sacrifice and a sun god at the centre of state religion. The state religion ended with the Spanish conquest. Some beliefs live on mixed with Catholicism."],
+    ["Maya religion", -1000, 1697, "mix", "Cosmic calendars, rulers as sacred figures, and ball-game rituals. Many Maya communities today still keep older customs, mixed with Christianity."],
+    ["Inca religion", 1200, 1533, "mix", "The Sun god Inti and sacred mountains. Andean customs such as honouring Pachamama (Mother Earth) continue today, often alongside Catholicism."],
+    ["Samaritanism", -500, null, "liv", "An ancient branch of Israelite religion with fewer than a thousand people today, mostly near Mount Gerizim and in Holon."],
+    ["Zoroastrianism", -1000, null, "liv", "Once the state religion of Persian empires. Today well under 200,000 people worldwide follow it, mainly in India (the Parsis) and Iran. The date it began is debated."],
+    ["Mandaeism", 100, null, "liv", "A small religion that honours John the Baptist, found among communities from Iraq and Iran. It has a few tens of thousands of followers."]
+  ];
+  function $(id) { return document.getElementById(id); }
+  function fmt(y) { return y < 0 ? (-y) + " BCE" : y + " CE"; }
+  function pos(y) { return ((y - MIN) / (MAX - MIN)) * 100; }
+  var cur = "all";
+  var axis = $("lf-axis");
+  [-3500, -2000, -500, 1000, 2026].forEach(function (y) {
+    var s = document.createElement("span"); s.style.left = pos(y) + "%"; s.textContent = y === 2026 ? "Today" : fmt(y); axis.appendChild(s);
+  });
+  var f = $("lf-filter");
+  [["all", "All"], ["ext", T.ext], ["rev", T.rev], ["mix", T.mix], ["liv", T.liv]].forEach(function (k) {
+    var b = document.createElement("button"); b.type = "button"; b.textContent = k[1];
+    b.addEventListener("click", function () { cur = k[0]; draw(); });
+    b.setAttribute("data-k", k[0]); f.appendChild(b);
+  });
+  function draw() {
+    Array.prototype.forEach.call(f.children, function (b) { b.className = b.getAttribute("data-k") === cur ? "on" : ""; });
+    var out = $("lf-list"); out.innerHTML = "";
+    R.filter(function (r) { return cur === "all" || r[3] === cur; }).forEach(function (r) {
+      var end = r[2] === null ? MAX : r[2];
+      var row = document.createElement("div"); row.className = "lf-row";
+      var h = document.createElement("h3"); h.textContent = r[0];
+      var tag = document.createElement("span"); tag.className = "lf-tag lf-" + r[3]; tag.textContent = T[r[3]]; h.appendChild(tag);
+      var tr = document.createElement("div"); tr.className = "lf-track";
+      var bar = document.createElement("div"); bar.className = "lf-bar lf-" + r[3];
+      bar.style.left = pos(r[1]) + "%"; bar.style.width = Math.max(0.6, pos(end) - pos(r[1])) + "%";
+      tr.appendChild(bar);
+      var d = document.createElement("div"); d.className = "lf-dates";
+      d.textContent = "About " + fmt(r[1]) + " to " + (r[2] === null ? "today" : fmt(r[2]));
+      var p = document.createElement("p"); p.textContent = r[4];
+      row.appendChild(h); row.appendChild(tr); row.appendChild(d); row.appendChild(p);
+      out.appendChild(row);
+    });
+  }
+  draw();
+})();
+</script>

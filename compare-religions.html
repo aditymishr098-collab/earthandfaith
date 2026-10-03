@@ -1,0 +1,64 @@
+---
+layout: page
+title: "Compare Two Religions"
+permalink: /compare-religions/
+---
+<p>Choose two religions and see them side by side. Each answer is a short, simplified summary, and the religions themselves are more varied than any table can show.</p>
+<style>
+.cr-pick { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+.cr-pick select { width: 100%; padding: 0.6rem 0.8rem; font: inherit; color: var(--ink, inherit); background: transparent; border: 1px solid var(--line, #ccc); border-radius: 8px; box-sizing: border-box; }
+.cr-pick option { color: #17211f; background: #fff; }
+#cr-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+#cr-table th, #cr-table td { padding: 0.65rem 0.7rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line, #dde2dc); }
+#cr-table thead th { font-family: var(--serif, Georgia, serif); font-size: 1.1rem; }
+#cr-table th.cr-k { width: 28%; font-weight: 600; color: var(--muted, #5d6b66); }
+@media (max-width: 600px) {
+  #cr-table th, #cr-table td { padding: 0.5rem 0.4rem; font-size: 0.88rem; }
+  #cr-table th.cr-k { width: 24%; }
+}
+</style>
+<div class="cr-pick">
+  <select id="cr-a" aria-label="First religion"></select>
+  <select id="cr-b" aria-label="Second religion"></select>
+</div>
+<table id="cr-table"></table>
+<p style="font-size:0.88rem">Follower numbers are rounded estimates, mostly based on Pew Research Center figures for 2020. Dates for the oldest traditions are debated by scholars. If you spot a mistake, please write to me through the <a href="{{ '/contact/' | relative_url }}">Contact</a> page.</p>
+<script>
+(function () {
+  var K = ["Followers (approx.)", "Began", "Place of origin", "Founder", "Main texts", "Idea of God", "Place of worship", "Weekly holy day", "After death"];
+  var D = {
+    "Christianity": ["About 2.3 billion", "1st century CE", "Roman province of Judea", "Jesus of Nazareth (followers regard him as the Son of God)", "The Bible (Old and New Testament)", "One God, usually understood as Father, Son and Holy Spirit (the Trinity)", "Church", "Sunday (for most)", "Heaven or hell in most traditions; beliefs vary"],
+    "Islam": ["About 1.9 billion", "7th century CE", "Mecca and Medina, Arabia", "Muhammad (regarded as the final prophet)", "The Quran, along with the Hadith", "One God (Allah), strictly one", "Mosque", "Friday (congregational prayer)", "Day of Judgement, then paradise or hell"],
+    "Hinduism": ["About 1.2 billion", "Roots go back 3,000 years or more", "Indian subcontinent", "No single founder", "Vedas, Upanishads, Bhagavad Gita, Ramayana, Mahabharata", "One ultimate reality seen in many forms. Traditions worship Vishnu, Shiva, Devi and others", "Mandir (temple) and home shrines", "No single day. It varies by tradition and deity", "Rebirth (samsara), with liberation (moksha) as the goal"],
+    "Buddhism": ["About 320 million", "About 5th to 4th century BCE", "Northern India and Nepal", "Siddhartha Gautama, the Buddha", "Pali Canon (Tripitaka) and Mahayana sutras", "Not centred on a creator god. Focus is on ending suffering", "Temple, monastery or stupa", "No fixed weekly day. Vesak is a major yearly festival", "Rebirth until nirvana is reached"],
+    "Sikhism": ["About 25 to 30 million", "Late 15th century CE", "Punjab", "Guru Nanak", "Guru Granth Sahib", "One God (Ik Onkar)", "Gurdwara", "No fixed day. Gatherings are often held on Sundays", "Cycle of rebirth, ended by union with God"],
+    "Judaism": ["About 15 million", "Roots in the first millennium BCE", "The Levant (Israel and Canaan)", "Traditionally Abraham and Moses", "Tanakh (Hebrew Bible) and Talmud", "One God", "Synagogue", "Shabbat (Friday evening to Saturday evening)", "Views vary a lot between Jewish traditions"],
+    "Jainism": ["About 4 to 5 million", "Mahavira lived about 6th century BCE. Followers say the tradition is far older", "India", "Mahavira (the 24th Tirthankara)", "Agamas", "No creator god. Tirthankaras are teachers who show the way", "Temple (derasar)", "No fixed weekly day", "Rebirth until liberation (moksha)"],
+    "Zoroastrianism": ["Well under 200,000", "Date is debated, between about 1500 and 600 BCE", "Ancient Persia (Iran)", "Zarathustra (Zoroaster)", "Avesta", "One supreme god, Ahura Mazda, in a struggle between good and evil", "Fire temple", "No fixed weekly day", "Judgement of the soul, then a place of reward or punishment"],
+    "Baháʼí Faith": ["About 5 to 8 million", "19th century CE", "Persia (Iran)", "Baháʼu'lláh", "Kitáb-i-Aqdas and other writings of Baháʼu'lláh", "One God, with religions seen as stages in one story", "Houses of worship and community centres", "No fixed weekly day", "The soul continues to grow after death"]
+  };
+  var names = Object.keys(D);
+  function $(id) { return document.getElementById(id); }
+  var a = $("cr-a"), b = $("cr-b");
+  [a, b].forEach(function (s) {
+    names.forEach(function (n) { var o = document.createElement("option"); o.value = n; o.textContent = n; s.appendChild(o); });
+  });
+  a.value = "Hinduism"; b.value = "Buddhism";
+  function draw() {
+    var t = $("cr-table"); t.innerHTML = "";
+    var head = t.createTHead().insertRow();
+    ["", a.value, b.value].forEach(function (x, i) {
+      var th = document.createElement("th"); th.textContent = x; if (i === 0) { th.className = "cr-k"; } head.appendChild(th);
+    });
+    var body = t.createTBody();
+    K.forEach(function (k, i) {
+      var r = body.insertRow();
+      var th = document.createElement("th"); th.className = "cr-k"; th.scope = "row"; th.textContent = k; r.appendChild(th);
+      r.insertCell().textContent = D[a.value][i];
+      r.insertCell().textContent = D[b.value][i];
+    });
+  }
+  a.addEventListener("change", draw); b.addEventListener("change", draw);
+  draw();
+})();
+</script>

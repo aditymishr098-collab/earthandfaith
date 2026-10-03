@@ -1,0 +1,136 @@
+---
+layout: page
+title: "On This Day"
+permalink: /on-this-day/
+---
+<p>What happened on this date in science, space and history? The page opens on today's date. Use the buttons or pick any day.</p>
+<style>
+#od-date { font-size: 1.7rem; font-weight: 700; font-family: var(--serif, Georgia, serif); margin: 0.4rem 0 0.8rem; }
+.od-ctl { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 1rem; }
+.od-ctl button, .od-ctl select { padding: 0.4rem 0.9rem; font: inherit; font-size: 0.92rem; color: var(--ink, inherit); background: transparent; border: 1px solid var(--line, #ccc); border-radius: 999px; cursor: pointer; }
+.od-ctl button:hover { border-color: var(--accent, #1f6f5c); color: var(--accent, #1f6f5c); }
+.od-ctl option { color: #17211f; background: #fff; }
+.od-ev { padding: 1rem 0; border-top: 1px solid var(--line, #dde2dc); }
+.od-ev b { font-family: var(--serif, Georgia, serif); font-size: 1.25rem; margin-right: 0.6rem; }
+.od-tag { font-size: 0.78rem; font-weight: 600; color: var(--accent, #1f6f5c); }
+.od-ev p { margin: 0.25rem 0 0; }
+#od-none, #od-next-h { color: var(--muted, #5d6b66); }
+</style>
+<div id="od-date"></div>
+<div class="od-ctl">
+  <button id="od-prev" type="button">&larr; Previous day</button>
+  <button id="od-today" type="button">Today</button>
+  <button id="od-nextb" type="button">Next day &rarr;</button>
+  <select id="od-m" aria-label="Month"></select>
+  <select id="od-d" aria-label="Day"></select>
+</div>
+<div id="od-list"></div>
+<p id="od-none" hidden>I have not added an entry for this date yet. Here are the next ones coming up:</p>
+<div id="od-next"></div>
+<p style="font-size:0.88rem">This list is a hand-picked selection, not a complete record, and I keep adding to it. Where a date is traditional or disputed I say so. If you find a mistake, please write to me through the <a href="{{ '/contact/' | relative_url }}">Contact</a> page.</p>
+<script>
+(function () {
+  var MON = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var DIM = [31,29,31,30,31,30,31,31,30,31,30,31];
+  // [month, day, year, text, tag]
+  var E = [
+    [1, 7, 1610, "Galileo first sees the moons of Jupiter through his telescope, showing that not everything orbits the Earth.", "Science"],
+    [1, 8, 1642, "Galileo dies near Florence, still under house arrest imposed by the Church.", "Science"],
+    [1, 8, 1942, "Stephen Hawking is born in Oxford.", "Science"],
+    [1, 26, 1950, "The Constitution of India comes into force, and India becomes a republic.", "India"],
+    [1, 27, 1945, "Soviet troops liberate the Auschwitz camp. Today is remembered as International Holocaust Remembrance Day.", "History"],
+    [2, 12, 1809, "Charles Darwin is born in Shrewsbury, England.", "Science"],
+    [2, 14, 1990, "Voyager 1 turns its camera back and takes the 'Pale Blue Dot' photograph of Earth from about 6 billion kilometres away.", "Space"],
+    [2, 15, 1564, "Galileo Galilei is born in Pisa.", "Science"],
+    [2, 18, 1930, "Clyde Tombaugh finds Pluto on photographic plates in Arizona.", "Space"],
+    [2, 19, 1473, "Nicolaus Copernicus, who placed the Sun at the centre of the solar system, is born in Poland.", "Science"],
+    [2, 28, 1928, "C. V. Raman discovers the effect of scattered light that now carries his name. India marks National Science Day.", "India"],
+    [3, 13, 1781, "William Herschel discovers the planet Uranus.", "Space"],
+    [3, 14, 1879, "Albert Einstein is born in Ulm, Germany.", "Science"],
+    [3, 14, 2018, "Stephen Hawking dies in Cambridge.", "Science"],
+    [3, 18, 1965, "Alexei Leonov makes the first spacewalk in history.", "Space"],
+    [4, 12, 1961, "Yuri Gagarin becomes the first human in space.", "Space"],
+    [4, 14, 1891, "B. R. Ambedkar is born in Mhow.", "India"],
+    [4, 18, 1955, "Albert Einstein dies in Princeton.", "Science"],
+    [4, 19, 1975, "India launches its first satellite, Aryabhata.", "India"],
+    [4, 24, 1990, "The Hubble Space Telescope is launched.", "Space"],
+    [4, 25, 1953, "James Watson and Francis Crick publish the double-helix structure of DNA in Nature. Rosalind Franklin's X-ray work was key evidence.", "Science"],
+    [5, 8, 1980, "The World Health Organization declares smallpox eradicated.", "Science"],
+    [5, 14, 1796, "Edward Jenner gives the first smallpox vaccination.", "Science"],
+    [5, 29, 1919, "Observations of a solar eclipse support Einstein's general theory of relativity.", "Science"],
+    [6, 16, 1963, "Valentina Tereshkova becomes the first woman in space.", "Space"],
+    [6, 22, 1633, "Galileo is forced by the Inquisition to say that the Earth does not move.", "Science"],
+    [7, 4, 2012, "Scientists at CERN announce the discovery of a particle consistent with the Higgs boson.", "Science"],
+    [7, 14, 2015, "NASA's New Horizons flies past Pluto.", "Space"],
+    [7, 20, 1969, "Apollo 11 lands on the Moon, and Neil Armstrong becomes the first person to walk on it.", "Space"],
+    [7, 22, 2019, "India launches Chandrayaan-2 to the Moon.", "India"],
+    [8, 15, 1947, "India becomes independent from British rule.", "India"],
+    [8, 18, 1868, "During a solar eclipse, astronomers detect a new yellow line in sunlight, which leads to the discovery of helium.", "Science"],
+    [8, 20, 1977, "Voyager 2 is launched.", "Space"],
+    [8, 23, 2023, "India's Chandrayaan-3 lands near the Moon's south pole, a first for any country.", "India"],
+    [8, 25, 2012, "Voyager 1 enters interstellar space, the first human-made object to do so.", "Space"],
+    [9, 5, 1977, "Voyager 1 is launched.", "Space"],
+    [9, 14, 2015, "LIGO detects gravitational waves for the first time (announced in February 2016).", "Science"],
+    [9, 17, 1879, "Periyar E. V. Ramasamy is born in Erode, later a leading voice for rationalism and equality in India.", "India"],
+    [9, 24, 2014, "India's Mangalyaan reaches Mars orbit on its first attempt.", "India"],
+    [9, 28, 1928, "Alexander Fleming notices the mould that leads to penicillin (the date is traditional).", "Science"],
+    [10, 2, 1869, "Mohandas Karamchand Gandhi is born in Porbandar.", "India"],
+    [10, 3, 1990, "East and West Germany are reunified after 45 years.", "History"],
+    [10, 4, 1957, "The Soviet Union launches Sputnik 1, the first artificial satellite.", "Space"],
+    [10, 12, 1492, "Columbus's first voyage reaches the Caribbean, beginning lasting European contact with, and conquest of, the Americas.", "History"],
+    [10, 14, 1947, "Chuck Yeager flies faster than the speed of sound.", "Science"],
+    [10, 14, 1956, "B. R. Ambedkar converts to Buddhism with hundreds of thousands of followers in Nagpur.", "India"],
+    [10, 22, 2008, "India launches Chandrayaan-1, which later helps find evidence of water on the Moon.", "India"],
+    [10, 31, 1517, "Martin Luther is traditionally said to have posted his 95 Theses, which started the Protestant Reformation.", "History"],
+    [11, 5, 2013, "India launches Mangalyaan, its Mars Orbiter Mission.", "India"],
+    [11, 5, 2018, "Voyager 2 enters interstellar space.", "Space"],
+    [11, 7, 1867, "Marie Curie is born in Warsaw. She wins Nobel Prizes in both Physics and Chemistry.", "Science"],
+    [11, 12, 1980, "Voyager 1 flies past Saturn.", "Space"],
+    [11, 24, 1859, "Darwin publishes On the Origin of Species.", "Science"],
+    [12, 14, 1900, "Max Planck presents his quantum idea to the German Physical Society, a start of quantum physics (traditional date).", "Science"],
+    [12, 17, 1903, "The Wright brothers make the first powered flight at Kitty Hawk.", "Science"],
+    [12, 21, 1968, "Apollo 8 is launched, and its crew will be the first humans to orbit the Moon.", "Space"],
+    [12, 24, 1968, "Apollo 8 astronauts take the 'Earthrise' photograph.", "Space"]
+  ];
+  function $(id) { return document.getElementById(id); }
+  var now = new Date(), m = now.getMonth(), d = now.getDate();
+  var ms = $("od-m"), ds = $("od-d");
+  MON.forEach(function (n, i) { var o = document.createElement("option"); o.value = i; o.textContent = n; ms.appendChild(o); });
+  function fillDays() {
+    ds.innerHTML = "";
+    for (var i = 1; i <= DIM[m]; i++) { var o = document.createElement("option"); o.value = i; o.textContent = i; ds.appendChild(o); }
+    d = Math.min(d, DIM[m]); ds.value = d;
+  }
+  function doy(mm, dd) { var s = 0; for (var i = 0; i < mm; i++) { s += DIM[i]; } return s + dd; }
+  function add(parent, ev) {
+    var box = document.createElement("div"); box.className = "od-ev";
+    var y = document.createElement("b"); y.textContent = ev[2];
+    var t = document.createElement("span"); t.className = "od-tag"; t.textContent = ev[4];
+    var p = document.createElement("p"); p.textContent = ev[3];
+    box.appendChild(y); box.appendChild(t); box.appendChild(p); parent.appendChild(box);
+  }
+  function draw() {
+    $("od-date").textContent = d + " " + MON[m];
+    ms.value = m; ds.value = d;
+    var list = $("od-list"), nx = $("od-next"); list.innerHTML = ""; nx.innerHTML = "";
+    var hit = E.filter(function (e) { return e[0] === m + 1 && e[1] === d; }).sort(function (a, b) { return a[2] - b[2]; });
+    hit.forEach(function (e) { add(list, e); });
+    $("od-none").hidden = hit.length > 0;
+    if (!hit.length) {
+      var here = doy(m, d);
+      E.map(function (e) { var k = doy(e[0] - 1, e[1]) - here; if (k < 0) { k += 366; } return {k: k, e: e}; })
+        .sort(function (a, b) { return a.k - b.k; }).slice(0, 3)
+        .forEach(function (x) { var w = document.createElement("div"); add(w, x.e); w.firstChild.firstChild.textContent = MON[x.e[0] - 1] + " " + x.e[1] + ", " + x.e[2]; nx.appendChild(w.firstChild); });
+    }
+  }
+  function step(n) {
+    var dt = new Date(2024, m, d + n); m = dt.getMonth(); d = dt.getDate(); fillDays(); draw();
+  }
+  $("od-prev").addEventListener("click", function () { step(-1); });
+  $("od-nextb").addEventListener("click", function () { step(1); });
+  $("od-today").addEventListener("click", function () { var n = new Date(); m = n.getMonth(); d = n.getDate(); fillDays(); draw(); });
+  ms.addEventListener("change", function () { m = +ms.value; fillDays(); draw(); });
+  ds.addEventListener("change", function () { d = +ds.value; draw(); });
+  ms.value = m; fillDays(); draw();
+})();
+</script>

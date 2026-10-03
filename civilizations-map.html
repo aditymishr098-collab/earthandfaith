@@ -1,0 +1,157 @@
+---
+layout: page
+title: "Map of Ancient Civilizations"
+permalink: /civilizations-map/
+---
+<p>Drag the slider through time, or press Play, and watch which civilizations were active on the map. Tap a dot to read about it.</p>
+<style>
+#cv-ctl { display: flex; align-items: center; gap: 0.8rem; margin: 1rem 0 0.4rem; }
+#cv-play { flex: none; min-width: 5rem; padding: 0.45rem 1rem; font: inherit; font-size: 0.95rem; color: #fff; background: var(--accent, #1f6f5c); border: 0; border-radius: 999px; cursor: pointer; }
+#cv-year-input { flex: 1; min-width: 0; accent-color: var(--accent, #1f6f5c); }
+#cv-year { font-size: 1.6rem; font-weight: 700; font-family: var(--serif, Georgia, serif); margin: 0.2rem 0 0.4rem; }
+#cv-map { min-height: 160px; }
+#cv-map path.land { fill: rgba(128,128,128,0.22); stroke: rgba(128,128,128,0.45); stroke-width: 0.4; }
+#cv-map circle { cursor: pointer; stroke: #fff; stroke-width: 1.5; }
+#cv-map circle.sel { stroke: var(--ink, #000); stroke-width: 3; }
+#cv-legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: 0.82rem; margin: 0.4rem 0 0.8rem; }
+#cv-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+#cv-legend i { width: 0.8rem; height: 0.8rem; border-radius: 50%; display: inline-block; }
+#cv-list { list-style: none; margin: 0.6rem 0 0; padding: 0; }
+#cv-list li { padding: 0.7rem 0; border-top: 1px solid var(--line, #dde2dc); cursor: pointer; }
+#cv-list li.sel { background: rgba(127,127,127,0.1); }
+#cv-list b { display: inline-block; margin-right: 0.5rem; }
+#cv-list .cv-dates { font-size: 0.85rem; color: var(--muted, #5d6b66); }
+#cv-list p { margin: 0.2rem 0 0; font-size: 0.95rem; color: var(--muted, #5d6b66); }
+#cv-none { color: var(--muted, #5d6b66); }
+#cv-status { font-size: 0.9rem; color: var(--muted, #5d6b66); }
+</style>
+<div id="cv-year">3000 BCE</div>
+<div id="cv-ctl">
+  <button id="cv-play" type="button">Play</button>
+  <input id="cv-year-input" type="range" min="-3500" max="1900" step="10" value="-3000" aria-label="Year">
+</div>
+<div id="cv-map" role="img" aria-label="World map with dots for the civilizations active in the chosen year">Loading the map…</div>
+<div id="cv-legend"></div>
+<h2 id="cv-head">Active in this year</h2>
+<ul id="cv-list"></ul>
+<p id="cv-none" hidden>No civilization from this list is shown for this year. That does not mean nobody lived here. This map only shows a selection of well-known civilizations.</p>
+<p id="cv-status"></p>
+<h2>How to read this map</h2>
+<ul>
+<li>Each dot marks the <strong>core region</strong> of a civilization, not its full borders. Empires grew and shrank over time.</li>
+<li>Dates are <strong>approximate</strong> and scholars sometimes disagree. Many dates come from archaeology, not from written records.</li>
+<li>This is a selection of famous examples. Many other societies, such as the many peoples of Africa, Australia and the Americas, are not shown. Their absence is a limit of this list, not a statement about them.</li>
+<li>BCE means "before the common era", the years counted backwards from year 1.</li>
+</ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+(function () {
+  var REG = {
+    "Middle East": "#c0563f", "Africa": "#d9a02e", "South Asia": "#7a4fa3",
+    "East Asia": "#2c8a6b", "Europe": "#2f6fb3", "Americas": "#c4488a"
+  };
+  var C = [
+    ["Norte Chico (Caral)", -3000, -1800, -10.9, -77.5, "Americas", "One of the oldest cities in the Americas, in what is now Peru."],
+    ["Mesopotamia (Sumer, Babylon, Assyria)", -3500, -539, 32.0, 45.0, "Middle East", "Between the Tigris and Euphrates. Cities, writing and early law appear here."],
+    ["Ancient Egypt", -3100, -30, 26.0, 31.0, "Africa", "From the first pharaohs to the Roman conquest, along the Nile."],
+    ["Indus Valley", -2600, -1900, 27.0, 68.0, "South Asia", "Planned cities such as Mohenjo-daro and Harappa. Its script is still undeciphered."],
+    ["Minoan Crete", -2700, -1450, 35.2, 25.0, "Europe", "A sea-trading island culture with grand palaces such as Knossos."],
+    ["Early China (Shang and Zhou)", -1600, -256, 36.0, 114.0, "East Asia", "Bronze, oracle bones and the first Chinese states."],
+    ["Olmec", -1200, -400, 18.0, -94.5, "Americas", "Often called the mother culture of Mesoamerica. Known for the giant stone heads."],
+    ["Ancient Greece", -800, -146, 38.0, 23.0, "Europe", "City-states, philosophy, theatre and early democracy in Athens."],
+    ["Persian (Achaemenid) Empire", -550, -330, 30.0, 52.0, "Middle East", "A huge empire from Egypt to the Indus."],
+    ["Maurya Empire", -322, -185, 25.6, 85.1, "South Asia", "The first empire to unite much of the subcontinent. Ashoka ruled here."],
+    ["Roman Empire (West)", -27, 476, 41.9, 12.5, "Europe", "From the first emperor to the fall of the Western empire."],
+    ["Teotihuacan", -100, 550, 19.7, -98.8, "Americas", "A great planned city near modern Mexico City."],
+    ["Maya", -2000, 1697, 17.0, -90.0, "Americas", "The Classic age peaked around 250 to 900 CE. The last independent Maya city fell in 1697. Maya people live today."],
+    ["Kingdom of Aksum", 100, 940, 14.1, 38.7, "Africa", "A trading power in Ethiopia and Eritrea, with tall carved stone obelisks."],
+    ["Khmer Empire", 802, 1431, 13.4, 103.9, "East Asia", "Builders of Angkor Wat in Cambodia."],
+    ["Great Zimbabwe", 1100, 1450, -20.3, 30.9, "Africa", "A stone-walled trading city in southern Africa."],
+    ["Mongol Empire", 1206, 1368, 47.2, 102.8, "East Asia", "The largest connected land empire in history."],
+    ["Mali Empire", 1235, 1600, 11.4, -8.9, "Africa", "West African empire rich in gold, with Timbuktu as a centre of learning."],
+    ["Aztec (Triple Alliance)", 1428, 1521, 19.4, -99.1, "Americas", "Tenochtitlan was among the largest cities in the world."],
+    ["Inca Empire", 1438, 1533, -13.5, -72.0, "Americas", "The largest empire in the Americas, run without a written script."],
+    ["Ottoman Empire", 1299, 1922, 41.0, 29.0, "Middle East", "Ruled much of south-eastern Europe, western Asia and north Africa."]
+  ];
+  function $(id) { return document.getElementById(id); }
+  function fmt(y) { if (y === 0) { y = 1; } return y < 0 ? (-y) + " BCE" : y + " CE"; }
+  var slider = $("cv-year-input"), svg = null, proj = null, dots = null, sel = -1, timer = null;
+
+  var lg = $("cv-legend");
+  Object.keys(REG).forEach(function (k) {
+    var s = document.createElement("span"), i = document.createElement("i");
+    i.style.background = REG[k]; s.appendChild(i); s.appendChild(document.createTextNode(k)); lg.appendChild(s);
+  });
+
+  function active(y) { var out = []; C.forEach(function (c, i) { if (y >= c[1] && y <= c[2]) { out.push(i); } }); return out; }
+
+  function update() {
+    var y = +slider.value;
+    $("cv-year").textContent = fmt(y);
+    var act = active(y), set = {};
+    act.forEach(function (i) { set[i] = 1; });
+    if (dots) {
+      dots.attr("display", function (d, i) { return set[i] ? null : "none"; })
+          .attr("class", function (d, i) { return i === sel ? "sel" : null; });
+    }
+    var ul = $("cv-list"); ul.innerHTML = "";
+    act.forEach(function (i) {
+      var c = C[i], li = document.createElement("li");
+      if (i === sel) { li.className = "sel"; }
+      var b = document.createElement("b"); b.textContent = c[0];
+      var d = document.createElement("span"); d.className = "cv-dates"; d.textContent = fmt(c[1]) + " to " + fmt(c[2]);
+      var p = document.createElement("p"); p.textContent = c[6];
+      li.appendChild(b); li.appendChild(d); li.appendChild(p);
+      li.addEventListener("click", function () { sel = i; update(); });
+      ul.appendChild(li);
+    });
+    $("cv-none").hidden = act.length > 0;
+    $("cv-head").textContent = "Active in " + fmt(y) + " (" + act.length + ")";
+  }
+
+  slider.addEventListener("input", update);
+  $("cv-play").addEventListener("click", function () {
+    var btn = $("cv-play");
+    if (timer) { clearInterval(timer); timer = null; btn.textContent = "Play"; return; }
+    if (+slider.value >= +slider.max) { slider.value = slider.min; }
+    btn.textContent = "Pause";
+    timer = setInterval(function () {
+      var v = +slider.value + 20;
+      if (v >= +slider.max) { v = +slider.max; clearInterval(timer); timer = null; btn.textContent = "Play"; }
+      slider.value = v; update();
+    }, 120);
+  });
+  update();
+
+  if (!window.d3) { $("cv-map").textContent = "The map library could not be loaded. The list below still works."; return; }
+  d3.json("https://cdn.jsdelivr.net/gh/johan/world.geo.json@master/countries.geo.json").then(function (g) {
+    g.features = g.features.filter(function (f) { return f.id !== "ATA"; });
+    g.features.forEach(function (f) {
+      var gm = f.geometry; if (!gm) { return; }
+      var polys = gm.type === "Polygon" ? [gm.coordinates] : gm.type === "MultiPolygon" ? gm.coordinates : [];
+      polys.forEach(function (rings) {
+        rings.forEach(function (ring, i) {
+          var big = d3.geoArea({type: "Polygon", coordinates: [ring]}) > 2 * Math.PI;
+          if ((i === 0 && big) || (i > 0 && !big)) { ring.reverse(); }
+        });
+      });
+    });
+    var w = 960, h = 500, box = $("cv-map");
+    proj = d3.geoNaturalEarth1().fitSize([w, h], g);
+    var path = d3.geoPath(proj);
+    box.innerHTML = "";
+    svg = d3.select(box).append("svg").attr("viewBox", "0 0 " + w + " " + h).style("width", "100%").style("height", "auto");
+    svg.selectAll("path").data(g.features).join("path").attr("class", "land").attr("d", path);
+    dots = svg.selectAll("circle").data(C).join("circle")
+      .attr("cx", function (d) { return proj([d[4], d[3]])[0]; })
+      .attr("cy", function (d) { return proj([d[4], d[3]])[1]; })
+      .attr("r", 9)
+      .attr("fill", function (d) { return REG[d[5]]; })
+      .on("click", function (e, d) { sel = C.indexOf(d); update(); });
+    dots.append("title").text(function (d) { return d[0]; });
+    update();
+  }).catch(function () {
+    $("cv-map").textContent = "The map could not be loaded. The list below still works.";
+  });
+})();
+</script>

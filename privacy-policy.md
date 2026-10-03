@@ -22,7 +22,7 @@ This site offers a language menu that uses **Google Translate**. When the menu l
 
 ## Other services
 
-The World Religion Map and World Hardship Map pages load a software library from **cdnjs** and map outlines from **jsDelivr**. The World Hardship Map also requests statistics from the **World Bank** (api.worldbank.org). These services may receive your IP address and browser details when a map loads.
+The World Religion Map, World Hardship Map and Civilizations pages load a software library from **cdnjs** and map outlines from **jsDelivr**. The World Hardship Map also requests statistics from the **World Bank** (api.worldbank.org). These services may receive your IP address and browser details when a map loads.
 
 ## Cookies
 
