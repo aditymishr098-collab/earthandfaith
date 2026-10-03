@@ -76,7 +76,7 @@ if ('serviceWorker' in navigator) {
       });
       var box = document.createElement('details');
       box.className = 'ef-toc';
-      if (window.innerWidth > 800) { box.open = true; }
+      box.open = true;
       var sum = document.createElement('summary');
       sum.textContent = 'In this post';
       box.appendChild(sum);
