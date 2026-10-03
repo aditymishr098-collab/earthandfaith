@@ -3,17 +3,25 @@
     <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
     <nav>
       <a href="{{ '/about/' | relative_url }}">About</a>
-      <a href="{{ '/topics/' | relative_url }}">Topics</a>
-      <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
-      <a href="{{ '/religion-map/' | relative_url }}">Religion Map</a>
-      <a href="{{ '/world-hardship-map/' | relative_url }}">Hardship Map</a>
-      <a href="{{ '/ask/' | relative_url }}">Ask</a>
       <a href="{{ '/contact/' | relative_url }}">Contact</a>
       <a href="{{ '/privacy-policy/' | relative_url }}">Privacy Policy</a>
       <a href="{{ '/disclaimer/' | relative_url }}">Disclaimer</a>
     </nav>
   </div>
 </footer>
+<style>
+#ef-progress { position: fixed; top: 0; left: 0; z-index: 100; width: 100%; height: 3px; background: transparent; pointer-events: none; }
+#ef-progress i { display: block; width: 0; height: 100%; background: var(--accent, #1f6f5c); }
+#ef-top { position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 90; width: 2.7rem; height: 2.7rem; padding: 0; font: inherit; font-size: 1.2rem; line-height: 1; color: #fff; background: var(--accent, #1f6f5c); border: 0; border-radius: 50%; cursor: pointer; opacity: 0; visibility: hidden; transition: opacity 0.2s; }
+#ef-top.show { opacity: 0.92; visibility: visible; }
+.ef-toc { margin: 1.5rem 0 2rem; padding: 0.9rem 1.2rem; border: 1px solid var(--line, #dde2dc); border-radius: 12px; font-size: 0.95rem; }
+.ef-toc summary { cursor: pointer; font-weight: 600; }
+.ef-toc ol { margin: 0.7rem 0 0; padding-left: 1.3rem; }
+.ef-toc li { margin-bottom: 0.3rem; }
+.post-content h2 { scroll-margin-top: 1rem; }
+</style>
+<div id="ef-progress" aria-hidden="true"><i></i></div>
+<button id="ef-top" type="button" aria-label="Back to top">&uarr;</button>
 <script>
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
@@ -29,5 +37,69 @@ function googleTranslateElementInit() {
   s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&hl=en';
   s.async = true;
   document.body.appendChild(s);
+})();
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
+(function () {
+  var m = document.getElementById('ef-menu');
+  if (m) {
+    document.addEventListener('click', function (e) { if (m.open && !m.contains(e.target)) { m.open = false; } });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { m.open = false; } });
+  }
+})();
+(function () {
+  var content = document.querySelector('.post-content');
+  var bar = document.querySelector('#ef-progress i');
+  var top = document.getElementById('ef-top');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (content) {
+    var heads = content.querySelectorAll('h2');
+    if (heads.length >= 3) {
+      var used = {};
+      var list = document.createElement('ol');
+      heads.forEach(function (h) {
+        var base = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
+        var id = base, n = 2;
+        while (used[id] || document.getElementById(id)) { id = base + '-' + n; n++; }
+        used[id] = true;
+        h.id = id;
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '#' + id;
+        a.textContent = h.textContent;
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+      var box = document.createElement('details');
+      box.className = 'ef-toc';
+      if (window.innerWidth > 800) { box.open = true; }
+      var sum = document.createElement('summary');
+      sum.textContent = 'In this post';
+      box.appendChild(sum);
+      box.appendChild(list);
+      content.insertBefore(box, content.firstChild);
+    }
+  }
+
+  function update() {
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    if (content && bar) {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? Math.min(100, (y / max) * 100) : 0) + '%';
+    }
+    if (top) { top.classList.toggle('show', y > 400); }
+  }
+  window.addEventListener('scroll', update, {passive: true});
+  window.addEventListener('resize', update);
+  update();
+  if (top) {
+    top.addEventListener('click', function () {
+      window.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'});
+    });
+  }
 })();
 </script>
