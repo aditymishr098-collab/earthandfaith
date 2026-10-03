@@ -1,0 +1,16 @@
+{
+  "name": "Earth and Faith",
+  "short_name": "Earth and Faith",
+  "description": "A personal blog about religion, science, reason and the questions we all ask.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#12332b",
+  "theme_color": "#12332b",
+  "lang": "en",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
