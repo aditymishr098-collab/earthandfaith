@@ -2,9 +2,6 @@
 layout: default
 ---
 <style>
-.ef-hero { padding: 1.2rem 0 1.4rem; }
-.ef-hero h1 { margin: 0 0 0.5rem; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.12; letter-spacing: -0.02em; }
-.ef-hero p { margin: 0; font-size: 1.1rem; color: var(--muted, #5d6b66); max-width: 34rem; }
 .ef-maps { display: grid; margin-top: 0.4rem; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin: 0 0 1.6rem; }
 .ef-map-card, .ef-map-card:visited { display: block; padding: 0.9rem 1rem; border: 1px solid var(--line, #dde2dc); border-radius: 12px; color: inherit; text-decoration: none; }
 .ef-map-card:hover { border-color: var(--accent, #1f6f5c); text-decoration: none; }
@@ -35,6 +32,10 @@ layout: default
 <div class="ef-maps">
   <a class="ef-map-card" href="{{ '/religion-map/' | relative_url }}"><b>Religion Map</b><span>Which faith leads in each country</span></a>
   <a class="ef-map-card" href="{{ '/world-hardship-map/' | relative_url }}"><b>Hardship Map</b><span>Hunger, poverty, conflict and violence</span></a>
+  <a class="ef-map-card" href="{{ '/civilizations-map/' | relative_url }}"><b>Civilizations</b><span>Slide through time: who lived where</span></a>
+  <a class="ef-map-card" href="{{ '/lost-faiths/' | relative_url }}"><b>Lost Faiths</b><span>Religions that faded, and those that survive</span></a>
+  <a class="ef-map-card" href="{{ '/compare-religions/' | relative_url }}"><b>Compare Religions</b><span>Pick two and see them side by side</span></a>
+  <a class="ef-map-card" href="{{ '/on-this-day/' | relative_url }}"><b>On This Day</b><span>Science, space and history by date</span></a>
 </div>
 <input class="ef-search" id="ef-q" type="search" placeholder="Search posts" aria-label="Search posts" autocomplete="off">
 <ul class="ef-list" id="ef-list">
