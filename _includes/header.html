@@ -13,6 +13,10 @@
           <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
           <a href="{{ '/religion-map/' | relative_url }}">Religion Map</a>
           <a href="{{ '/world-hardship-map/' | relative_url }}">Hardship Map</a>
+          <a href="{{ '/civilizations-map/' | relative_url }}">Civilizations</a>
+          <a href="{{ '/lost-faiths/' | relative_url }}">Lost Faiths</a>
+          <a href="{{ '/compare-religions/' | relative_url }}">Compare</a>
+          <a href="{{ '/on-this-day/' | relative_url }}">On This Day</a>
         </div>
       </details>
       <div id="ef-lang"></div>
@@ -24,6 +28,10 @@
     <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
     <a href="{{ '/religion-map/' | relative_url }}">Religion Map</a>
     <a href="{{ '/world-hardship-map/' | relative_url }}">Hardship Map</a>
+    <a href="{{ '/civilizations-map/' | relative_url }}">Civilizations</a>
+    <a href="{{ '/lost-faiths/' | relative_url }}">Lost Faiths</a>
+    <a href="{{ '/compare-religions/' | relative_url }}">Compare</a>
+    <a href="{{ '/on-this-day/' | relative_url }}">On This Day</a>
   </nav>
 </header>
 <style>
@@ -38,7 +46,7 @@
 .ef-menu summary { list-style: none; cursor: pointer; padding: 3px 8px; font-size: 12px; line-height: 1.4; font-family: inherit; color: var(--ink, #17211f); border: 1px solid var(--line, #dde2dc); border-radius: 999px; user-select: none; }
 .ef-menu summary::-webkit-details-marker { display: none; }
 .ef-menu[open] summary { border-color: var(--accent, #1f6f5c); color: var(--accent, #1f6f5c); }
-.ef-drop { position: absolute; right: 0; top: calc(100% + 0.4rem); z-index: 80; min-width: 10.5rem; padding: 0.4rem; background: var(--ef-bg, #f6f7f4); border: 1px solid var(--line, #dde2dc); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.ef-drop { max-height: 75vh; overflow-y: auto; position: absolute; right: 0; top: calc(100% + 0.4rem); z-index: 80; min-width: 10.5rem; padding: 0.4rem; background: var(--ef-bg, #f6f7f4); border: 1px solid var(--line, #dde2dc); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 .ef-drop a, .ef-drop a:visited { display: block; padding: 0.55rem 0.8rem; color: var(--ef-fg, #17211f) !important; border-radius: 8px; text-decoration: none; font-size: 0.95rem; }
 .ef-drop a:hover { background: var(--line, #dde2dc); }
 #ef-lang { font-size: 12px; line-height: 1; }
