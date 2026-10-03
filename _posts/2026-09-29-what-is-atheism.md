@@ -2,7 +2,7 @@
 layout: post
 title: "What Is Atheism? Meaning, Types and Common Myths"
 date: 2026-09-29
-tags: [Basics]
+tags: [Religion, Basics]
 ---
 
 Few words cause as much confusion as "atheism". Some people think it is a religion. Others think it means hating God, or believing in nothing at all. In this post I will explain what atheism actually means, what it does not mean, why people become atheists, and how believers respond.
