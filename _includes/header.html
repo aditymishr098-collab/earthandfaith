@@ -7,20 +7,20 @@
     <div class="ef-right">
       <details class="ef-menu" id="ef-menu">
         <summary aria-label="Menu">Menu <span aria-hidden="true">&#9662;</span></summary>
-        <nav class="ef-drop">
+        <div class="ef-drop" id="ef-drop">
           <a href="{{ '/topics/' | relative_url }}">Topics</a>
           <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
           <a href="{{ '/religion-map/' | relative_url }}">Religion Map</a>
           <a href="{{ '/world-hardship-map/' | relative_url }}">Hardship Map</a>
           <a href="{{ '/ask/' | relative_url }}">Ask</a>
-        </nav>
+        </div>
       </details>
       <div id="ef-lang"></div>
     </div>
   </div>
 </header>
 <style>
-.ef-header { min-height: 0; padding: 0; }
+.ef-header { min-height: 0; padding: 0; overflow: visible; position: relative; z-index: 60; }
 .ef-bar { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; flex-wrap: wrap; max-width: 760px; margin: 0 auto; padding: 0.7rem 1rem; }
 .ef-brand, .ef-brand:visited { display: flex; align-items: center; gap: 0.55rem; color: var(--ink, #17211f); font-family: var(--serif, Georgia, serif); font-size: 1.25rem; font-weight: 700; text-decoration: none; }
 .ef-brand img { display: block; }
@@ -29,13 +29,44 @@
 .ef-menu summary { list-style: none; cursor: pointer; padding: 0.3rem 0.85rem; font-size: 0.9rem; color: var(--ink, #17211f); border: 1px solid var(--line, #dde2dc); border-radius: 999px; user-select: none; }
 .ef-menu summary::-webkit-details-marker { display: none; }
 .ef-menu[open] summary { border-color: var(--accent, #1f6f5c); color: var(--accent, #1f6f5c); }
-.ef-drop { position: absolute; right: 0; top: calc(100% + 0.4rem); z-index: 80; min-width: 12rem; padding: 0.4rem; background: var(--bg, #f6f7f4); border: 1px solid var(--line, #dde2dc); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-.ef-drop a, .ef-drop a:visited { display: block; padding: 0.55rem 0.8rem; color: var(--ink, #17211f); border-radius: 8px; text-decoration: none; font-size: 0.95rem; }
+.ef-drop { position: absolute; right: 0; top: calc(100% + 0.4rem); z-index: 80; min-width: 12rem; padding: 0.4rem; background: var(--ef-bg, #f6f7f4); border: 1px solid var(--line, #dde2dc); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.ef-drop a, .ef-drop a:visited { display: block; padding: 0.55rem 0.8rem; color: var(--ef-fg, #17211f) !important; border-radius: 8px; text-decoration: none; font-size: 0.95rem; }
 .ef-drop a:hover { background: var(--line, #dde2dc); }
 #ef-lang { font-size: 12px; line-height: 1; }
 #ef-lang .goog-te-gadget { font-size: 0 !important; }
 #ef-lang .goog-te-gadget-simple { padding: 4px 8px !important; font-size: 12px !important; background: transparent !important; border: 1px solid var(--line, #dde2dc) !important; border-radius: 999px !important; }
 #ef-lang .goog-te-gadget-simple span, #ef-lang .goog-te-gadget-simple a { font-size: 12px !important; color: var(--ink, #17211f) !important; }
 #ef-lang .goog-te-gadget-icon { display: none !important; }
-@media (prefers-color-scheme: dark) { .ef-drop { background: #0f1614; } }
+.ef-brand { min-width: 0; }
+.ef-brand span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ef-right { flex-shrink: 0; }
+#ef-lang .goog-te-gadget-simple { white-space: nowrap; }
+@media (max-width: 600px) {
+  .ef-bar { flex-wrap: nowrap; gap: 0.4rem; padding: 0.5rem 0.7rem; }
+  .ef-brand { gap: 0.4rem; font-size: 1rem; }
+  .ef-brand img { width: 24px; height: 24px; }
+  .ef-right { gap: 0.35rem; }
+  .ef-menu summary { padding: 0.25rem 0.6rem; font-size: 0.8rem; }
+  #ef-lang .goog-te-gadget-simple { padding: 3px 6px !important; }
+  #ef-lang .goog-te-gadget-simple span, #ef-lang .goog-te-gadget-simple a { font-size: 11px !important; }
+  .ef-drop { min-width: 10.5rem; }
+}
+@media (max-width: 380px) { .ef-brand span { font-size: 0.9rem; } }
 </style>
+<script>
+(function () {
+  function paint() {
+    var d = document.getElementById('ef-drop');
+    if (!d) { return; }
+    var cs = getComputedStyle(document.body);
+    var bg = cs.backgroundColor;
+    if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') { bg = getComputedStyle(document.documentElement).backgroundColor; }
+    d.style.setProperty('--ef-bg', bg);
+    d.style.setProperty('--ef-fg', cs.color);
+  }
+  var m = document.getElementById('ef-menu');
+  if (m) { m.addEventListener('toggle', paint); }
+  paint();
+  document.addEventListener('DOMContentLoaded', paint);
+})();
+</script>
