@@ -1,95 +1,109 @@
 <header class="site-header ef-header">
-  <div class="ef-top-row">
+  <div class="ef-bar">
     <a class="ef-brand" href="{{ '/' | relative_url }}">
-      <img src="{{ '/logo.svg' | relative_url }}" alt="" width="30" height="30">
+      <img src="{{ '/logo.svg' | relative_url }}" alt="" width="28" height="28">
       <span>{{ site.title | escape }}</span>
     </a>
-    <div class="ef-right">
-      <details class="ef-menu" id="ef-menu">
-        <summary aria-label="Menu">Menu <span aria-hidden="true">&#9662;</span></summary>
-        <div class="ef-drop" id="ef-drop">
-          <a href="{{ '/' | relative_url }}">Home</a>
-          <a href="{{ '/topics/' | relative_url }}">Topics</a>
-          <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
+    <nav class="ef-nav" aria-label="Main">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/topics/' | relative_url }}">Topics</a>
+      <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
+      <details class="ef-dd">
+        <summary>Maps <span aria-hidden="true">&#9662;</span></summary>
+        <div class="ef-list">
           <a href="{{ '/religion-map/' | relative_url }}">Religion Map</a>
           <a href="{{ '/world-hardship-map/' | relative_url }}">Hardship Map</a>
           <a href="{{ '/civilizations-map/' | relative_url }}">Civilizations</a>
+        </div>
+      </details>
+      <details class="ef-dd">
+        <summary>Explore <span aria-hidden="true">&#9662;</span></summary>
+        <div class="ef-list">
           <a href="{{ '/lost-faiths/' | relative_url }}">Lost Faiths</a>
-          <a href="{{ '/compare-religions/' | relative_url }}">Compare</a>
+          <a href="{{ '/compare-religions/' | relative_url }}">Compare Religions</a>
+          <a href="{{ '/on-this-day/' | relative_url }}">On This Day</a>
+        </div>
+      </details>
+    </nav>
+    <div class="ef-right">
+      <details class="ef-dd ef-menu">
+        <summary aria-label="Menu">Menu <span aria-hidden="true">&#9662;</span></summary>
+        <div class="ef-list">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/topics/' | relative_url }}">Topics</a>
+          <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
+          <span class="ef-gh">Maps</span>
+          <a href="{{ '/religion-map/' | relative_url }}">Religion Map</a>
+          <a href="{{ '/world-hardship-map/' | relative_url }}">Hardship Map</a>
+          <a href="{{ '/civilizations-map/' | relative_url }}">Civilizations</a>
+          <span class="ef-gh">Explore</span>
+          <a href="{{ '/lost-faiths/' | relative_url }}">Lost Faiths</a>
+          <a href="{{ '/compare-religions/' | relative_url }}">Compare Religions</a>
           <a href="{{ '/on-this-day/' | relative_url }}">On This Day</a>
         </div>
       </details>
       <div id="ef-lang"></div>
     </div>
   </div>
-  <nav class="ef-side-nav" aria-label="Main">
-    <a href="{{ '/' | relative_url }}">Home</a>
-    <a href="{{ '/topics/' | relative_url }}">Topics</a>
-    <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
-    <a href="{{ '/religion-map/' | relative_url }}">Religion Map</a>
-    <a href="{{ '/world-hardship-map/' | relative_url }}">Hardship Map</a>
-    <a href="{{ '/civilizations-map/' | relative_url }}">Civilizations</a>
-    <a href="{{ '/lost-faiths/' | relative_url }}">Lost Faiths</a>
-    <a href="{{ '/compare-religions/' | relative_url }}">Compare</a>
-    <a href="{{ '/on-this-day/' | relative_url }}">On This Day</a>
-  </nav>
 </header>
 <style>
-.ef-header { position: relative; z-index: 60; min-height: 0; padding: 0; overflow: visible; border: 0 !important; border-bottom: 1px solid var(--line, #dde2dc) !important; }
-.ef-top-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.55rem 0.8rem; }
-.ef-brand, .ef-brand:visited { display: flex; align-items: center; gap: 0.5rem; min-width: 0; color: var(--ink, #17211f); font-family: var(--serif, Georgia, serif); font-size: 1.05rem; font-weight: 600; line-height: 1.2; text-decoration: none; }
-.ef-brand img { display: block; width: 24px; height: 24px; flex: none; }
+.ef-header { position: relative; z-index: 60; min-height: 0; padding: 0; overflow: visible; background: #12332b; border: 0 !important; color: #f3ead2; }
+.ef-bar { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; max-width: 1100px; margin: 0 auto; padding: 0.6rem 1rem; }
+.ef-brand, .ef-brand:visited { display: flex; align-items: center; gap: 0.5rem; min-width: 0; color: #f3ead2; font-family: var(--serif, Georgia, serif); font-size: 1.05rem; font-weight: 700; line-height: 1.2; text-decoration: none; }
+.ef-brand img { display: block; width: 26px; height: 26px; flex: none; }
 .ef-brand span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ef-nav { display: none; align-items: center; gap: 0.2rem; flex: 1; justify-content: center; }
+.ef-nav > a, .ef-nav > a:visited, .ef-dd > summary { display: block; padding: 0.4rem 0.75rem; font-size: 0.95rem; font-weight: 600; color: #f3ead2; border-radius: 8px; text-decoration: none; cursor: pointer; list-style: none; user-select: none; }
+.ef-dd > summary::-webkit-details-marker { display: none; }
+.ef-nav > a:hover, .ef-dd > summary:hover, .ef-dd[open] > summary { background: rgba(243,234,210,0.14); }
+.ef-nav > a.is-active, .ef-dd.is-active > summary { background: #e8b64a; color: #12332b; }
+.ef-dd { position: relative; }
+.ef-list { position: absolute; left: 0; top: calc(100% + 0.35rem); z-index: 80; min-width: 13rem; padding: 0.4rem; background: #1b4a3e; border: 1px solid rgba(243,234,210,0.2); border-radius: 12px; box-shadow: 0 10px 28px rgba(0,0,0,0.3); }
+.ef-list a, .ef-list a:visited { display: block; padding: 0.55rem 0.8rem; color: #f3ead2; border-radius: 8px; font-size: 0.95rem; text-decoration: none; }
+.ef-list a:hover { background: rgba(243,234,210,0.14); }
+.ef-list a.is-active { background: #e8b64a; color: #12332b; font-weight: 600; }
+.ef-gh { display: block; padding: 0.5rem 0.8rem 0.15rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #e8b64a; }
 .ef-right { display: flex; align-items: center; gap: 0.35rem; flex-shrink: 0; }
-.ef-side-nav { display: none; }
-.ef-menu { position: relative; }
-.ef-menu summary { list-style: none; cursor: pointer; padding: 3px 8px; font-size: 12px; line-height: 1.4; font-family: inherit; color: var(--ink, #17211f); border: 1px solid var(--line, #dde2dc); border-radius: 999px; user-select: none; }
-.ef-menu summary::-webkit-details-marker { display: none; }
-.ef-menu[open] summary { border-color: var(--accent, #1f6f5c); color: var(--accent, #1f6f5c); }
-.ef-drop { max-height: 75vh; overflow-y: auto; position: absolute; right: 0; top: calc(100% + 0.4rem); z-index: 80; min-width: 10.5rem; padding: 0.4rem; background: var(--ef-bg, #f6f7f4); border: 1px solid var(--line, #dde2dc); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-.ef-drop a, .ef-drop a:visited { display: block; padding: 0.55rem 0.8rem; color: var(--ef-fg, #17211f) !important; border-radius: 8px; text-decoration: none; font-size: 0.95rem; }
-.ef-drop a:hover { background: var(--line, #dde2dc); }
+.ef-menu > summary { padding: 3px 9px; font-size: 12px; line-height: 1.4; font-weight: 500; border: 1px solid rgba(243,234,210,0.45); border-radius: 999px; }
+.ef-menu .ef-list { left: auto; right: 0; min-width: 11.5rem; max-height: 75vh; overflow-y: auto; }
 #ef-lang { font-size: 12px; line-height: 1; }
 #ef-lang .goog-te-gadget { font-size: 0 !important; }
-#ef-lang .goog-te-gadget-simple { padding: 3px 8px !important; font-size: 12px !important; white-space: nowrap; background: transparent !important; border: 1px solid var(--line, #dde2dc) !important; border-radius: 999px !important; }
-#ef-lang .goog-te-gadget-simple span, #ef-lang .goog-te-gadget-simple a { font-size: 12px !important; color: var(--ink, #17211f) !important; }
+#ef-lang .goog-te-gadget-simple { padding: 3px 9px !important; font-size: 12px !important; white-space: nowrap; background: transparent !important; border: 1px solid rgba(243,234,210,0.45) !important; border-radius: 999px !important; }
+#ef-lang .goog-te-gadget-simple span, #ef-lang .goog-te-gadget-simple a { font-size: 12px !important; color: #f3ead2 !important; }
 #ef-lang .goog-te-gadget-icon { display: none !important; }
 @media (min-width: 901px) {
-  body { padding-left: 260px; }
-  .ef-header { position: fixed; top: 0; left: 0; bottom: 0; width: 260px; overflow-y: auto; border-bottom: 0 !important; border-right: 1px solid var(--line, #dde2dc) !important; background: rgba(127,127,127,0.07); }
-  .ef-top-row { flex-direction: column; align-items: flex-start; gap: 0.9rem; padding: 1.8rem 1.4rem 1rem; }
-  .ef-brand, .ef-brand:visited { font-size: 1.4rem; font-weight: 700; line-height: 1.15; }
-  .ef-brand img { width: 32px; height: 32px; }
-  .ef-brand span { white-space: normal; }
+  .ef-nav { display: flex; }
   .ef-menu { display: none; }
-  .ef-side-nav { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.6rem 1rem 2rem; }
-  .ef-side-nav a, .ef-side-nav a:visited { padding: 0.55rem 0.8rem; border-radius: 8px; color: var(--ink, #17211f); font-size: 1rem; text-decoration: none; }
-  .ef-side-nav a:hover { background: var(--line, #dde2dc); }
-  .ef-side-nav a.is-active { background: var(--accent, #1f6f5c); color: #fff; font-weight: 600; }
-  .site-footer .wrapper { padding-left: 15px; padding-right: 15px; }
+  .ef-bar { padding: 0.7rem 1.4rem; }
+  .ef-brand, .ef-brand:visited { font-size: 1.25rem; }
+  .ef-brand img { width: 30px; height: 30px; }
 }
 @media (max-width: 380px) { .ef-brand span { font-size: 0.92rem; } }
 </style>
 <script>
 (function () {
-  function paint() {
-    var d = document.getElementById('ef-drop');
-    if (!d) { return; }
-    var cs = getComputedStyle(document.body);
-    var bg = cs.backgroundColor;
-    if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') { bg = getComputedStyle(document.documentElement).backgroundColor; }
-    d.style.setProperty('--ef-bg', bg);
-    d.style.setProperty('--ef-fg', cs.color);
-  }
-  var m = document.getElementById('ef-menu');
-  if (m) { m.addEventListener('toggle', paint); }
-  paint();
-  document.addEventListener('DOMContentLoaded', paint);
-  var here = location.pathname.replace(/index\.html$/, '').replace(/\/?$/, '/');
-  var links = document.querySelectorAll('.ef-side-nav a');
+  var dds = document.querySelectorAll('.ef-header details');
+  function norm(p) { return p.replace(/index\.html$/, '').replace(/\/?$/, '/'); }
+  var here = norm(location.pathname);
+  var links = document.querySelectorAll('.ef-header a[href]');
   for (var i = 0; i < links.length; i++) {
-    var p = links[i].pathname.replace(/index\.html$/, '').replace(/\/?$/, '/');
-    if (p === here) { links[i].classList.add('is-active'); }
+    if (norm(links[i].pathname) === here) {
+      links[i].classList.add('is-active');
+      var box = links[i].closest('details');
+      if (box) { box.classList.add('is-active'); }
+    }
+  }
+  document.addEventListener('click', function (e) {
+    for (var j = 0; j < dds.length; j++) { if (dds[j].open && !dds[j].contains(e.target)) { dds[j].open = false; } }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { for (var k = 0; k < dds.length; k++) { dds[k].open = false; } }
+  });
+  for (var n = 0; n < dds.length; n++) {
+    dds[n].addEventListener('toggle', function () {
+      if (!this.open) { return; }
+      for (var m = 0; m < dds.length; m++) { if (dds[m] !== this) { dds[m].open = false; } }
+    });
   }
 })();
 </script>
