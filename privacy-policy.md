@@ -26,7 +26,7 @@ The World Religion Map page loads a software library from **cdnjs** and map outl
 
 ## Cookies
 
-This site does not set cookies of its own. The only cookie that may be used is the one Google Translate can set if you choose a language.
+This site does not set cookies of its own. The only cookie that may be used is the one Google Translate can set if you choose a language. "This site may save copies of pages in your browser so that it can work offline. This data stays on your device."
 
 ## Emails you send me
 
