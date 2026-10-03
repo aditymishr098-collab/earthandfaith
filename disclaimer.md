@@ -12,15 +12,19 @@ permalink: /disclaimer/
 
 ## Respect for people
 
-This blog discusses religion critically. The purpose is to question ideas, claims and practices, not to insult, mock or hate any person or community. If you believe a post crosses that line, please tell me through the [Contact](/contact/) page.
+This blog discusses religion critically. The purpose is to question ideas, claims and practices, not to insult, mock or hate any person or community. The same applies to posts about other topics, such as society, science and technology. If you believe a post crosses that line, please tell me through the [Contact](/contact/) page.
 
 ## Accuracy and sources
 
 I try to be accurate and to rely on reliable sources, but I am not perfect and some topics are disputed among scholars. Figures, dates and quotations may be incomplete or out of date. Please check important facts yourself. If you find a mistake, let me know and I will correct it.
 
+## News, science and technology posts
+
+Some posts describe current events, space missions, technology projects or scientific findings. These topics change quickly, and my posts reflect what was known at the time of writing. Details such as dates, costs, distances and status may be out of date by the time you read them. Please check official sources, such as space agencies, government bodies and published research, for the latest information.
+
 ## Not professional advice
 
-Nothing on this site is legal, medical, psychological, financial or religious advice. It is for information and discussion only. If you are struggling with your beliefs, your family or your wellbeing, please consider talking to a trusted person or a qualified professional.
+Nothing on this site is legal, medical, psychological, financial, engineering or religious advice. It is for information and discussion only. If you are struggling with your beliefs, your family or your wellbeing, please consider talking to a trusted person or a qualified professional.
 
 ## Maps, timelines and statistics
 
