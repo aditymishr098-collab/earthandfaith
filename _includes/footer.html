@@ -19,6 +19,15 @@
 .ef-toc ol { margin: 0.7rem 0 0; padding-left: 1.3rem; }
 .ef-toc li { margin-bottom: 0.3rem; }
 .post-content h2 { scroll-margin-top: 1rem; }
+.ef-print { margin: 1rem 0 0; padding: 0.35rem 1rem; font: inherit; font-size: 0.85rem; color: var(--muted, #5d6b66); background: transparent; border: 1px solid var(--line, #dde2dc); border-radius: 999px; cursor: pointer; }
+.ef-print:hover { color: var(--accent, #1f6f5c); border-color: var(--accent, #1f6f5c); }
+@media print {
+  .site-header, .site-footer, #ef-progress, #ef-top, .ef-toc, .ef-print, #ef-lang { display: none !important; }
+  body { background: #fff !important; color: #000 !important; font-size: 12pt; }
+  a, a:visited { color: #000 !important; text-decoration: underline; }
+  .post-content h2 { break-after: avoid; }
+  .post-content table, .post-content blockquote { break-inside: avoid; }
+}
 </style>
 <div id="ef-progress" aria-hidden="true"><i></i></div>
 <button id="ef-top" type="button" aria-label="Back to top">&uarr;</button>
@@ -43,6 +52,16 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');
   });
 }
+(function () {
+  var c = document.querySelector('.post-content');
+  if (!c || !window.print) { return; }
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'ef-print';
+  b.textContent = 'Print or save as PDF';
+  b.addEventListener('click', function () { window.print(); });
+  c.insertBefore(b, c.firstChild);
+})();
 (function () {
   var m = document.getElementById('ef-menu');
   if (m) {
