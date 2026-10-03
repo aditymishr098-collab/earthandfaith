@@ -1,54 +1,74 @@
 ---
 layout: page
-title: About
+title: About Us
 permalink: /about/
 ---
 
-Welcome to **Earth and Faith**.
+Hello, and welcome to **Earth and Faith**.
 
-This is a personal blog about religion, science, space, technology, history, society and the big questions that people everywhere have asked for thousands of years. Where do we come from? What is true, and how do we know? How should we live? Is there something beyond this world, or is this world all there is?
+My name is **Adity Mishra**. I am the person behind this website, and I want to tell you honestly who I am, why this place exists and what I hope it can do.
 
-## Why I started this blog
+## Why this website exists
 
-I believe questions are never dangerous. An idea that is true can survive any amount of questioning, and an idea that cannot survive questioning deserves a closer look. Yet in many places, and in many families, asking honest questions about religion is still difficult or even risky.
+I want the world to live better together. That is the whole idea.
 
-I started this blog to create a calm space where these questions can be asked openly and answered with evidence, history and clear thinking. I also want to share what I learn in simple language, so that anyone can read it, whether they have a university degree or have never read a book on the subject.
+I look around and I see people hurting each other because of religion, caste, colour, country or language. I see people hating others they have never met. I see nature being damaged so that a few people can show off, or make a little more money. None of this has to be the way things are.
+
+I cannot change the world alone, and I am not pretending I can. But I can do something small. I can write clearly, explain things in simple words, and ask honest questions in a calm way. If even a few readers leave a page a little kinder, a little more curious and a little less afraid of people who are different, then this website has done its job.
+
+## What I believe
+
+- **No violence.** No person should kill, hurt or frighten another person for their beliefs, their background or the way they look.
+- **No discrimination.** Every human being has equal worth, whatever their religion, caste, gender, nationality or skin colour.
+- **No hatred.** We can disagree strongly and still treat each other with respect. Hate has never solved a single problem.
+- **Care for nature.** The Earth is the only home we have. I do not want us to damage it for show, for fashion or for greed.
+- **Honesty over show.** I would rather be simple and truthful than loud and impressive.
+
+## How I came to this
+
+I do not follow any religion, and I enjoy asking questions about belief, science and history. But please do not misunderstand me. I do not hate religion and I do not look down on people of faith. Many believers are kind, generous and wise. What I question are **ideas**, and I try never to attack **people**. Behind every belief there is a human being who deserves respect.
 
 ## What you will find here
 
-- **Explainers:** plain-language guides to religions, beliefs and terms, such as what atheism, agnosticism and secular humanism actually mean.
-- **History:** where religions came from, how their texts were written and how they spread and changed.
-- **Science and reason:** what science can and cannot say about the universe, life and the human mind, and how to think clearly about big claims.
-- **Ethics and meaning:** how people find purpose and moral guidance, with or without religion.
-- **Science, space and technology:** how things work, what we have discovered, and the stories behind great missions and machines.
-- **History and society:** how people lived and believed in the past, and how the world is changing today.
-- **Myths and misunderstandings:** common wrong ideas about religion and about non-believers, and where they come from.
-- **Personal reflections and reader questions.**
+- **Explainers:** religions, beliefs and big words made simple.
+- **History:** ancient civilizations, how religions began, how they changed and how some faded away.
+- **Science and space:** how things work and the stories behind great discoveries and missions.
+- **Maps and tools:** interactive maps and pages that show the world as it is, including its hardships, so we can understand them and not look away.
+- **Society and people:** how people live and believe, and how the world is changing.
 
-## My approach
+## How this site is made
 
-I write from a secular and skeptical point of view, and the same approach applies to every topic on this blog, not only religion. That means I ask for evidence, I compare claims, and I am willing to say "I do not know". But I try to follow a few rules every time:
+I make this website with the help of AI tools, which I use to research, draft and build many things you see here. I am being open about this because I think you deserve to know. AI is a powerful helper, and I believe it should be used for something useful: sharing knowledge, building understanding and making people's lives a little better. I am responsible for what is published on this site. If you find a mistake, please tell me and I will fix it.
 
-1. **I criticize ideas, not people.** Behind every belief there is a human being who deserves respect.
-2. **I try to be fair.** When there are strong arguments on the other side, I include them.
-3. **I give sources.** Where possible, I point to original texts, historians and researchers so that you can check the facts yourself.
-4. **I fix mistakes.** If I get something wrong, I will correct it and, for important changes, say so in the post.
-5. **I welcome disagreement.** You do not have to agree with me. I only ask that you read with an open mind.
+## My promise to you
+
+1. **I criticize ideas, not people.**
+2. **I try to be fair.** If there is a strong argument on the other side, I will include it.
+3. **I do not track you.** This site has no advertising and no analytics. See the [Privacy Policy](/privacy-policy/).
+4. **I give sources** wherever I can, so you can check the facts yourself.
+5. **I fix my mistakes** and say so when the change is important.
+6. **I welcome disagreement.** You do not need to agree with me. I only ask that you read with an open mind.
 
 ## Why "Earth and Faith"?
 
-The name comes from two words that people often set against each other. *Earth* stands for the world we can observe, measure and share, which includes nature, science, space and history. *Faith* stands for the beliefs that give many people comfort, identity and meaning. The blog started with religion, and it now also explores the wider world, but the idea is the same: to look at how the two meet, where they disagree and what we can learn from both.
+*Earth* stands for the world we share and can observe: nature, science, space and history. *Faith* stands for the beliefs that give many people comfort, identity and meaning. People often set the two against each other. I would like to look at where they meet, where they differ and what we can learn from both.
 
-## Who this blog is for
+## Who this site is for
 
-This blog is for readers everywhere: believers, non-believers, former believers and the simply curious. If you are a person of faith, I hope you will find honest and respectful writing here. If you have doubts, I hope you will find that you are not alone.
+For everyone: believers, non-believers, former believers and the simply curious. If you have faith, I hope you will find respectful writing here. If you have doubts, I hope you will feel that you are not alone.
 
 ## Languages
 
-The original language of this blog is English. Visitors can read the site in many other languages using the language menu at the top of the page. These translations are produced automatically by Google Translate and may contain mistakes. When in doubt, the English text is the original.
+The site is written in English. You can read it in many other languages using the language menu at the top. These translations are done automatically by Google Translate and may contain mistakes. When in doubt, the English text is the original.
 
-## Get in touch
+## Let us talk
 
-I would love to hear from you: questions, corrections, ideas for future posts or your own story. You can use the [Contact](/contact/) page or the [Ask a Question](/ask/) page to write to me.
+I would really like to hear from you: questions, corrections, ideas for future posts or your own story.
 
-Thank you for reading.
+- **Email:** [contact@earthandfaith.online](mailto:contact@earthandfaith.online)
+- **Instagram:** [@adity_m09](https://www.instagram.com/adity_m09)
+- Or use the [Contact](/contact/) page or the [Ask a Question](/ask/) page.
+
+Thank you for reading, and thank you for caring about the world.
+
+**Adity Mishra**
