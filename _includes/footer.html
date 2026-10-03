@@ -13,22 +13,11 @@
     </nav>
   </div>
 </footer>
-<style>
-#ef-consent { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 50; max-width: 560px; margin: 0 auto; padding: 1rem 1.2rem; background: var(--code-bg, #eceee9); color: var(--ink, #17211f); border: 1px solid var(--line, #ccc); border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
-#ef-consent[hidden] { display: none; }
-#ef-consent p { margin: 0 0 0.7rem; }
-#ef-consent button { padding: 0.4rem 1.1rem; margin-right: 0.5rem; font: inherit; color: var(--ink, #17211f); background: transparent; border: 1px solid var(--line, #ccc); border-radius: 999px; cursor: pointer; }
-#ef-consent #ef-yes { color: #fff; background: var(--accent, #1f6f5c); border-color: var(--accent, #1f6f5c); }
-</style>
-<div id="ef-consent" hidden>
-  <p>This site uses Google Analytics cookies to count visits. Do you accept? See the <a href="{{ '/privacy-policy/' | relative_url }}">Privacy Policy</a>.</p>
-  <button id="ef-yes" type="button">Accept</button><button id="ef-no" type="button">Decline</button>
-</div>
 <script>
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
-includedLanguages: 'en,hi,hy,es,fr,de,ar,ru,zh-CN,bn,ur,ta,te,mr,gu,pa',
+    includedLanguages: 'en,hi,hy,es,fr,de,ar,ru,zh-CN,bn,ur,ta,te,mr,gu,pa',
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
     autoDisplay: false
   }, 'ef-lang');
@@ -39,29 +28,5 @@ includedLanguages: 'en,hi,hy,es,fr,de,ar,ru,zh-CN,bn,ur,ta,te,mr,gu,pa',
   s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&hl=en';
   s.async = true;
   document.body.appendChild(s);
-})();
-</script>
-<script>
-(function () {
-  var GA_ID = 'G-HH9XNNRV4L';
-  var box = document.getElementById('ef-consent');
-  function loadGA() {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-    document.head.appendChild(s);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () { window.dataLayer.push(arguments); };
-    gtag('js', new Date());
-    gtag('config', GA_ID);
-  }
-  function save(v) { try { localStorage.setItem('ef-consent', v); } catch (e) {} }
-  var c = null;
-  try { c = localStorage.getItem('ef-consent'); } catch (e) {}
-  if (c === 'yes') { loadGA(); return; }
-  if (c === 'no' || !box) { return; }
-  box.hidden = false;
-  document.getElementById('ef-yes').onclick = function () { save('yes'); box.hidden = true; loadGA(); };
-  document.getElementById('ef-no').onclick = function () { save('no'); box.hidden = true; };
 })();
 </script>
