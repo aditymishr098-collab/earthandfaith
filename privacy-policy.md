@@ -4,7 +4,7 @@ title: Privacy Policy
 permalink: /privacy-policy/
 ---
 
-*Last updated: September 30, 2026*
+*Last updated: October 3, 2026*
 
 Your privacy matters to me. This page explains what happens to your information when you visit **earthandfaith.online** ("this site").
 
@@ -22,11 +22,11 @@ This site offers a language menu that uses **Google Translate**. When the menu l
 
 ## Other services
 
-The World Religion Map page loads a software library from **cdnjs** and map outlines from **jsDelivr**. These services may receive your IP address and browser details when the map loads.
+The World Religion Map and World Hardship Map pages load a software library from **cdnjs** and map outlines from **jsDelivr**. The World Hardship Map also requests statistics from the **World Bank** (api.worldbank.org). These services may receive your IP address and browser details when a map loads.
 
 ## Cookies
 
-This site does not set cookies of its own. The only cookie that may be used is the one Google Translate can set if you choose a language. "This site may save copies of pages in your browser so that it can work offline. This data stays on your device."
+This site does not set cookies of its own. The only cookie that may be used is the one Google Translate can set if you choose a language.
 
 ## Emails you send me
 
