@@ -1,5 +1,5 @@
 <header class="site-header ef-header">
-  <div class="ef-bar">
+  <div class="ef-top-row">
     <a class="ef-brand" href="{{ '/' | relative_url }}">
       <img src="{{ '/logo.svg' | relative_url }}" alt="" width="30" height="30">
       <span>{{ site.title | escape }}</span>
@@ -8,6 +8,7 @@
       <details class="ef-menu" id="ef-menu">
         <summary aria-label="Menu">Menu <span aria-hidden="true">&#9662;</span></summary>
         <div class="ef-drop" id="ef-drop">
+          <a href="{{ '/' | relative_url }}">Home</a>
           <a href="{{ '/topics/' | relative_url }}">Topics</a>
           <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
           <a href="{{ '/religion-map/' | relative_url }}">Religion Map</a>
@@ -18,40 +19,50 @@
       <div id="ef-lang"></div>
     </div>
   </div>
+  <nav class="ef-side-nav" aria-label="Main">
+    <a href="{{ '/' | relative_url }}">Home</a>
+    <a href="{{ '/topics/' | relative_url }}">Topics</a>
+    <a href="{{ '/timeline/' | relative_url }}">Timeline</a>
+    <a href="{{ '/religion-map/' | relative_url }}">Religion Map</a>
+    <a href="{{ '/world-hardship-map/' | relative_url }}">Hardship Map</a>
+    <a href="{{ '/ask/' | relative_url }}">Ask</a>
+  </nav>
 </header>
 <style>
-.ef-header { min-height: 0; padding: 0; overflow: visible; position: relative; z-index: 60; }
-.ef-bar { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; flex-wrap: wrap; max-width: 760px; margin: 0 auto; padding: 0.7rem 1rem; }
-.ef-brand, .ef-brand:visited { display: flex; align-items: center; gap: 0.55rem; color: var(--ink, #17211f); font-family: var(--serif, Georgia, serif); font-size: 1.25rem; font-weight: 700; text-decoration: none; }
-.ef-brand img { display: block; }
-.ef-right { display: flex; align-items: center; gap: 0.6rem; }
+.ef-header { position: relative; z-index: 60; min-height: 0; padding: 0; overflow: visible; border: 0 !important; border-bottom: 1px solid var(--line, #dde2dc) !important; }
+.ef-top-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.55rem 0.8rem; }
+.ef-brand, .ef-brand:visited { display: flex; align-items: center; gap: 0.5rem; min-width: 0; color: var(--ink, #17211f); font-family: var(--serif, Georgia, serif); font-size: 1.05rem; font-weight: 600; line-height: 1.2; text-decoration: none; }
+.ef-brand img { display: block; width: 24px; height: 24px; flex: none; }
+.ef-brand span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ef-right { display: flex; align-items: center; gap: 0.35rem; flex-shrink: 0; }
+.ef-side-nav { display: none; }
 .ef-menu { position: relative; }
-.ef-menu summary { list-style: none; cursor: pointer; padding: 0.3rem 0.85rem; font-size: 0.9rem; color: var(--ink, #17211f); border: 1px solid var(--line, #dde2dc); border-radius: 999px; user-select: none; }
+.ef-menu summary { list-style: none; cursor: pointer; padding: 0.25rem 0.65rem; font-size: 0.82rem; color: var(--ink, #17211f); border: 1px solid var(--line, #dde2dc); border-radius: 999px; user-select: none; }
 .ef-menu summary::-webkit-details-marker { display: none; }
 .ef-menu[open] summary { border-color: var(--accent, #1f6f5c); color: var(--accent, #1f6f5c); }
-.ef-drop { position: absolute; right: 0; top: calc(100% + 0.4rem); z-index: 80; min-width: 12rem; padding: 0.4rem; background: var(--ef-bg, #f6f7f4); border: 1px solid var(--line, #dde2dc); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.ef-drop { position: absolute; right: 0; top: calc(100% + 0.4rem); z-index: 80; min-width: 10.5rem; padding: 0.4rem; background: var(--ef-bg, #f6f7f4); border: 1px solid var(--line, #dde2dc); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 .ef-drop a, .ef-drop a:visited { display: block; padding: 0.55rem 0.8rem; color: var(--ef-fg, #17211f) !important; border-radius: 8px; text-decoration: none; font-size: 0.95rem; }
 .ef-drop a:hover { background: var(--line, #dde2dc); }
 #ef-lang { font-size: 12px; line-height: 1; }
 #ef-lang .goog-te-gadget { font-size: 0 !important; }
-#ef-lang .goog-te-gadget-simple { padding: 4px 8px !important; font-size: 12px !important; background: transparent !important; border: 1px solid var(--line, #dde2dc) !important; border-radius: 999px !important; }
-#ef-lang .goog-te-gadget-simple span, #ef-lang .goog-te-gadget-simple a { font-size: 12px !important; color: var(--ink, #17211f) !important; }
+#ef-lang .goog-te-gadget-simple { padding: 3px 6px !important; font-size: 11px !important; white-space: nowrap; background: transparent !important; border: 1px solid var(--line, #dde2dc) !important; border-radius: 999px !important; }
+#ef-lang .goog-te-gadget-simple span, #ef-lang .goog-te-gadget-simple a { font-size: 11px !important; color: var(--ink, #17211f) !important; }
 #ef-lang .goog-te-gadget-icon { display: none !important; }
-.ef-brand { min-width: 0; }
-.ef-brand span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ef-right { flex-shrink: 0; }
-#ef-lang .goog-te-gadget-simple { white-space: nowrap; }
-@media (max-width: 600px) {
-  .ef-bar { flex-wrap: nowrap; gap: 0.4rem; padding: 0.5rem 0.7rem; }
-  .ef-brand { gap: 0.4rem; font-size: 1rem; }
-  .ef-brand img { width: 24px; height: 24px; }
-  .ef-right { gap: 0.35rem; }
-  .ef-menu summary { padding: 0.25rem 0.6rem; font-size: 0.8rem; }
-  #ef-lang .goog-te-gadget-simple { padding: 3px 6px !important; }
-  #ef-lang .goog-te-gadget-simple span, #ef-lang .goog-te-gadget-simple a { font-size: 11px !important; }
-  .ef-drop { min-width: 10.5rem; }
+@media (min-width: 901px) {
+  body { padding-left: 260px; }
+  .ef-header { position: fixed; top: 0; left: 0; bottom: 0; width: 260px; overflow-y: auto; border-bottom: 0 !important; border-right: 1px solid var(--line, #dde2dc) !important; background: rgba(127,127,127,0.07); }
+  .ef-top-row { flex-direction: column; align-items: flex-start; gap: 0.9rem; padding: 1.8rem 1.4rem 1rem; }
+  .ef-brand, .ef-brand:visited { font-size: 1.4rem; font-weight: 700; line-height: 1.15; }
+  .ef-brand img { width: 32px; height: 32px; }
+  .ef-brand span { white-space: normal; }
+  .ef-menu { display: none; }
+  .ef-side-nav { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.6rem 1rem 2rem; }
+  .ef-side-nav a, .ef-side-nav a:visited { padding: 0.55rem 0.8rem; border-radius: 8px; color: var(--ink, #17211f); font-size: 1rem; text-decoration: none; }
+  .ef-side-nav a:hover { background: var(--line, #dde2dc); }
+  .ef-side-nav a.is-active { background: var(--accent, #1f6f5c); color: #fff; font-weight: 600; }
+  .site-footer .wrapper { padding-left: 15px; padding-right: 15px; }
 }
-@media (max-width: 380px) { .ef-brand span { font-size: 0.9rem; } }
+@media (max-width: 380px) { .ef-brand span { font-size: 0.92rem; } }
 </style>
 <script>
 (function () {
@@ -68,5 +79,11 @@
   if (m) { m.addEventListener('toggle', paint); }
   paint();
   document.addEventListener('DOMContentLoaded', paint);
+  var here = location.pathname.replace(/index\.html$/, '').replace(/\/?$/, '/');
+  var links = document.querySelectorAll('.ef-side-nav a');
+  for (var i = 0; i < links.length; i++) {
+    var p = links[i].pathname.replace(/index\.html$/, '').replace(/\/?$/, '/');
+    if (p === here) { links[i].classList.add('is-active'); }
+  }
 })();
 </script>
