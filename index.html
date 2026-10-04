@@ -81,7 +81,7 @@ layout: default
   </aside>
 </section>
 <div class="ef-section">Recent posts</div>
-<input class="ef-search" id="ef-q" type="search" placeholder="Search posts" aria-label="Search posts" autocomplete="off">
+<input class="ef-search" id="ef-q" type="search" placeholder="Search posts (press Enter to search the whole site)" aria-label="Search posts" autocomplete="off">
 <ul class="ef-posts" id="ef-list">
 {% for post in site.posts offset: 1 %}
   <li class="ef-item">
@@ -141,6 +141,9 @@ layout: default
     if (scroll) { window.scrollTo(0, 0); }
   }
   box.addEventListener('input', function () { render(false); });
+  box.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && box.value.trim()) { window.location.href = "{{ '/search/' | relative_url }}?q=" + encodeURIComponent(box.value.trim()); }
+  });
   render(false);
 })();
 </script>

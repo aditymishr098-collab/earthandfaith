@@ -1,0 +1,26 @@
+---
+layout: null
+permalink: /search.json
+sitemap: false
+---
+[
+{%- assign first = true -%}
+{%- for p in site.posts -%}
+{%- assign c = p.content | split: "</script>" -%}{%- assign body = "" -%}
+{%- for part in c -%}{%- assign seg = part | split: "<script" | first -%}{%- assign body = body | append: " " | append: seg -%}{%- endfor -%}
+{%- assign c = body | split: "</style>" -%}{%- assign body = "" -%}
+{%- for part in c -%}{%- assign seg = part | split: "<style" | first -%}{%- assign body = body | append: " " | append: seg -%}{%- endfor -%}
+{%- unless first -%},{%- endunless -%}{%- assign first = false -%}
+{"t":{{ p.title | jsonify }},"u":{{ p.url | relative_url | jsonify }},"k":"Article","g":{{ p.tags | join: " " | jsonify }},"c":{{ body | strip_html | strip_newlines | normalize_whitespace | truncate: 20000 | jsonify }}}
+{%- endfor -%}
+{%- for p in site.pages -%}
+{%- if p.title and p.search != false and p.url != "/404.html" and p.url != "/search/" and p.url != "/search.json" and p.name != "README.md" -%}
+{%- assign c = p.content | split: "</script>" -%}{%- assign body = "" -%}
+{%- for part in c -%}{%- assign seg = part | split: "<script" | first -%}{%- assign body = body | append: " " | append: seg -%}{%- endfor -%}
+{%- assign c = body | split: "</style>" -%}{%- assign body = "" -%}
+{%- for part in c -%}{%- assign seg = part | split: "<style" | first -%}{%- assign body = body | append: " " | append: seg -%}{%- endfor -%}
+{%- unless first -%},{%- endunless -%}{%- assign first = false -%}
+{"t":{{ p.title | jsonify }},"u":{{ p.url | relative_url | jsonify }},"k":"Page","g":"","c":{{ body | strip_html | strip_newlines | normalize_whitespace | truncate: 20000 | jsonify }}}
+{%- endif -%}
+{%- endfor -%}
+]

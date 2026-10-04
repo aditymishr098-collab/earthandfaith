@@ -1,0 +1,93 @@
+---
+layout: page
+title: "Search"
+permalink: /search/
+search: false
+---
+<p>Search every article and page on this site: posts, the glossary, thinkers, questions and more. The search runs in your browser. Nothing you type is sent anywhere.</p>
+<style>
+#sr-q { width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font: inherit; font-size: 1.1rem; color: var(--ef-ink, inherit); background: transparent; border: 1px solid var(--ef-ink, #333); border-radius: 0; }
+#sr-q:focus { outline: 2px solid var(--ef-rust, #a8432a); outline-offset: 1px; }
+#sr-status { margin: 0.8rem 0; font-size: 0.9rem; color: var(--ef-muted, #666); }
+.sr-item { padding: 1rem 0; border-top: 1px solid var(--ef-rule, #ddd); }
+.sr-item a.sr-t { font-family: Georgia, serif; font-size: 1.25rem; font-weight: 700; line-height: 1.25; }
+.sr-kind { display: inline-block; margin-right: 0.5rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ef-rust, #a8432a); }
+.sr-snip { margin: 0.35rem 0 0; font-size: 0.95rem; line-height: 1.55; color: var(--ef-muted, #666); }
+.sr-snip mark, .sr-t mark { background: rgba(232,182,74,0.45); color: inherit; padding: 0 1px; }
+.sr-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0 0; }
+.sr-chips button { min-height: 44px; padding: 0.3rem 1rem; font: inherit; font-size: 0.9rem; color: inherit; background: transparent; border: 1px solid var(--ef-ink, #333); border-radius: 999px; cursor: pointer; }
+.sr-chips button.on { color: var(--ef-paper, #fff); background: var(--ef-ink, #222); }
+</style>
+<input id="sr-q" type="search" placeholder="Type a word, for example Egypt" aria-label="Search the whole site" autocomplete="off" autofocus>
+<div class="sr-chips" id="sr-chips" role="group" aria-label="Filter results">
+<button type="button" data-k="" class="on">All</button>
+<button type="button" data-k="Article">Articles</button>
+<button type="button" data-k="Page">Pages</button>
+</div>
+<div id="sr-status" role="status">Loading the search index...</div>
+<div id="sr-out"></div>
+<script>
+(function () {
+  var q = document.getElementById("sr-q"), out = document.getElementById("sr-out"), st = document.getElementById("sr-status");
+  var chips = document.querySelectorAll("#sr-chips button"), kind = "", data = null;
+  function clean(s) {
+    return s.replace(/!?\[([^\]]*)\]\([^)]*\)/g, "$1").replace(new RegExp("\\x7b\\x7b[^}]*\\x7d\\x7d|\\x7b%[^%]*%\\x7d","g"), " ").replace(/&[a-z#0-9]+;/gi, " ").replace(/[#*_>`|]+/g, " ").replace(/-{3,}/g, " ").replace(/\s+/g, " ").trim();
+  }
+  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
+  function mark(text, words) {
+    var html = esc(text);
+    words.forEach(function (w) {
+      if (!w) { return; }
+      var re = new RegExp("(" + esc(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+      html = html.replace(re, "<mark>$1</mark>");
+    });
+    return html;
+  }
+  function run() {
+    var raw = q.value.trim();
+    if (history.replaceState) { history.replaceState(null, "", raw ? "?q=" + encodeURIComponent(raw) : location.pathname); }
+    if (!data) { return; }
+    var words = raw.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!words.length) { out.innerHTML = ""; st.textContent = data.length + " items can be searched."; return; }
+    var res = [];
+    data.forEach(function (d) {
+      if (kind && d.k !== kind) { return; }
+      var tl = d.t.toLowerCase(), gl = d.g.toLowerCase(), cl = d.lc, score = 0, ok = true;
+      for (var i = 0; i < words.length; i++) {
+        var w = words[i], s = 0, ti = tl.indexOf(w);
+        if (ti > -1) { s += 10 + (ti === 0 ? 3 : 0); }
+        if (gl.indexOf(w) > -1) { s += 5; }
+        var ci = cl.indexOf(w);
+        if (ci > -1) { s += 1; var n = 0, p = ci; while (p > -1 && n < 8) { n++; p = cl.indexOf(w, p + w.length); } s += n * 0.3; }
+        if (s === 0) { ok = false; break; }
+        score += s;
+      }
+      if (ok) { res.push({d: d, score: score}); }
+    });
+    res.sort(function (a, b) { return b.score - a.score; });
+    st.textContent = res.length ? res.length + (res.length === 1 ? " result" : " results") : "Nothing found. Try a shorter or different word.";
+    out.innerHTML = res.slice(0, 40).map(function (r) {
+      var d = r.d, cl = d.cl, at = -1;
+      for (var i = 0; i < words.length && at < 0; i++) { at = cl.toLowerCase().indexOf(words[i]); }
+      var start = Math.max(0, at - 60), snip = cl.substr(start, 190);
+      if (start > 0) { snip = "..." + snip; }
+      if (start + 190 < cl.length) { snip += "..."; }
+      return '<div class="sr-item"><span class="sr-kind">' + d.k + '</span><a class="sr-t" href="' + esc(d.u) + '">' + mark(d.t, words) + '</a><p class="sr-snip">' + mark(snip, words) + '</p></div>';
+    }).join("");
+  }
+  chips.forEach(function (b) {
+    b.addEventListener("click", function () {
+      kind = b.getAttribute("data-k");
+      chips.forEach(function (x) { x.classList.toggle("on", x === b); });
+      run();
+    });
+  });
+  q.addEventListener("input", run);
+  var m = location.search.match(/[?&]q=([^&]*)/);
+  if (m) { try { q.value = decodeURIComponent(m[1].replace(/\+/g, " ")); } catch (e) {} }
+  fetch("{{ '/search.json' | relative_url }}").then(function (r) { return r.json(); }).then(function (j) {
+    j.forEach(function (d) { d.cl = clean(d.c); d.lc = d.cl.toLowerCase(); });
+    data = j; run();
+  }).catch(function () { st.textContent = "The search index could not be loaded. Please try again later."; });
+})();
+</script>
