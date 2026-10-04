@@ -4,7 +4,7 @@ title: Privacy Policy
 permalink: /privacy-policy/
 ---
 
-*Last updated: October 3, 2026*
+*Last updated: October 4, 2026*
 
 Your privacy matters to me. This page explains what happens to your information when you visit **earthandfaith.online** ("this site").
 
@@ -31,6 +31,10 @@ The Ask page has a form for sending a question without a name or email. The form
 ## Offline storage
 
 This site uses a small service worker that saves copies of pages in your browser so the site loads faster and works offline. This stays on your device, is not sent to me, and you can clear it in your browser settings.
+
+## Your display choice
+
+The light and dark mode button saves your choice (light or dark) in your browser's local storage, so the site remembers it on your next visit. This stays on your device, is not sent to me, and you can clear it in your browser settings.
 
 ## Cookies
 
