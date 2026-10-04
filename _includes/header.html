@@ -1,9 +1,11 @@
+<script>try{var t=localStorage.getItem("ef-theme");if(t==="dark"||t==="light"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}</script>
 {% assign ef_home = false %}{% if page.url == '/' %}{% assign ef_home = true %}{% endif %}
 <header class="site-header ef-header{% if ef_home %} ef-home{% endif %}">
   <div class="ef-top">
     <span class="ef-tag">A personal blog about belief, history and science</span>
     <div class="ef-right">
       <a class="ef-sbtn" href="{{ '/search/' | relative_url }}" aria-label="Search the site"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+      <button type="button" class="ef-sbtn ef-theme" id="ef-theme" aria-label="Switch between light and dark mode" title="Light / dark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg></button>
       <details class="ef-dd ef-menu">
         <summary aria-label="Menu">Menu <span aria-hidden="true">&#9662;</span></summary>
         <div class="ef-list">
@@ -63,7 +65,9 @@
 </header>
 <style>
 :root { --ef-paper: #f3eee2; --ef-ink: #1c1b18; --ef-muted: #6b655a; --ef-rule: #cfc8b6; --ef-rust: #a8432a; --ef-soft: #e9e2d0; }
-@media (prefers-color-scheme: dark) { :root { --ef-paper: #1a1813; --ef-ink: #efe9d8; --ef-muted: #a39b88; --ef-rule: #3a362b; --ef-rust: #e38a6a; --ef-soft: #26231b; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ef-paper: #1a1813; --ef-ink: #efe9d8; --ef-muted: #a39b88; --ef-rule: #3a362b; --ef-rust: #e38a6a; --ef-soft: #26231b; } }
+:root[data-theme="dark"] { --ef-paper: #1a1813; --ef-ink: #efe9d8; --ef-muted: #a39b88; --ef-rule: #3a362b; --ef-rust: #e38a6a; --ef-soft: #26231b; }
+.ef-theme { padding: 0; background: transparent; font: inherit; cursor: pointer; }
 html body { background: var(--ef-paper); color: var(--ef-ink); overflow-x: hidden; }
 .page-content a, .post-content a { color: var(--ef-rust); }
 .ef-header { display: block !important; width: 100%; box-sizing: border-box; position: relative; z-index: 60; min-height: 0; padding: 0; overflow: visible; background: var(--ef-paper); border: 0 !important; color: var(--ef-ink); }
@@ -107,6 +111,16 @@ html body { background: var(--ef-paper); color: var(--ef-ink); overflow-x: hidde
 </style>
 <script>
 (function () {
+  var tb = document.getElementById('ef-theme');
+  if (tb) {
+    tb.addEventListener('click', function () {
+      var root = document.documentElement, cur = root.getAttribute('data-theme');
+      if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+      var next = cur === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('ef-theme', next); } catch (e) {}
+    });
+  }
   var dds = document.querySelectorAll('.ef-header details');
   function norm(p) { return p.replace(/index\.html$/, '').replace(/\/?$/, '/'); }
   var here = norm(location.pathname);
