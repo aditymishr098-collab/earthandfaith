@@ -1,7 +1,6 @@
 {% assign ef_home = false %}{% if page.url == '/' %}{% assign ef_home = true %}{% endif %}
 <header class="site-header ef-header{% if ef_home %} ef-home{% endif %}">
   <div class="ef-top">
-    <span class="ef-dateline">{{ site.time | date: "%A, %-d %B %Y" }}</span>
     <span class="ef-tag">A personal blog about belief, history and science</span>
     <div class="ef-right">
       <details class="ef-dd ef-menu">
@@ -59,27 +58,20 @@
     </details>
   </nav>
 </header>
-<nav class="ef-tabs" aria-label="Quick links">
-  <a href="{{ '/' | relative_url }}"><i></i><span>Home</span></a>
-  <a href="{{ '/topics/' | relative_url }}"><i></i><span>Topics</span></a>
-  <a href="{{ '/timeline/' | relative_url }}"><i></i><span>Timeline</span></a>
-  <a href="{{ '/ask/' | relative_url }}"><i></i><span>Ask</span></a>
-  <button type="button" id="ef-more"><i></i><span>Menu</span></button>
-</nav>
 <style>
 :root { --ef-paper: #f3eee2; --ef-ink: #1c1b18; --ef-muted: #6b655a; --ef-rule: #cfc8b6; --ef-rust: #a8432a; --ef-soft: #e9e2d0; }
 @media (prefers-color-scheme: dark) { :root { --ef-paper: #1a1813; --ef-ink: #efe9d8; --ef-muted: #a39b88; --ef-rule: #3a362b; --ef-rust: #e38a6a; --ef-soft: #26231b; } }
-html body { background: var(--ef-paper); color: var(--ef-ink); }
+html body { background: var(--ef-paper); color: var(--ef-ink); overflow-x: hidden; }
 .page-content a, .post-content a { color: var(--ef-rust); }
-.ef-header { position: relative; z-index: 60; min-height: 0; padding: 0; overflow: visible; background: var(--ef-paper); border: 0 !important; color: var(--ef-ink); }
-.ef-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; max-width: 1180px; margin: 0 auto; padding: 0.55rem 1rem 0; font-size: 0.82rem; color: var(--ef-muted); }
+.ef-header { display: block !important; width: 100%; box-sizing: border-box; position: relative; z-index: 60; min-height: 0; padding: 0; overflow: visible; background: var(--ef-paper); border: 0 !important; color: var(--ef-ink); }
+.ef-top { box-sizing: border-box; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; max-width: 1180px; margin: 0 auto; padding: 0.55rem 1rem 0; font-size: 0.82rem; color: var(--ef-muted); }
 .ef-tag { display: none; }
 .ef-right { display: flex; align-items: center; gap: 0.4rem; margin-left: auto; }
-.ef-mast { max-width: 1180px; margin: 0.3rem auto 0; padding: 0.3rem 1rem 0.5rem; text-align: center; }
+.ef-mast { box-sizing: border-box; width: 100%; max-width: 1180px; margin: 0.3rem auto 0; padding: 0.3rem 1rem 0.5rem; text-align: center; }
 .ef-mast::after { content: ""; display: block; margin-top: 0.5rem; border-top: 3px double var(--ef-ink); }
-.ef-brand, .ef-brand:visited { display: inline-block; color: var(--ef-ink) !important; font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; text-decoration: none; }
+.ef-brand, .ef-brand:visited { display: inline-block; max-width: 100%; white-space: normal; color: var(--ef-ink) !important; font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; text-decoration: none; }
 .ef-home .ef-brand { font-size: 2.4rem; }
-.ef-nav { display: none; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.2rem 1.4rem; max-width: 1180px; margin: 0 auto; padding: 0.2rem 1rem 0.55rem; border-bottom: 1px solid var(--ef-ink); }
+.ef-nav { box-sizing: border-box; width: 100%; display: none; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.2rem 1.4rem; max-width: 1180px; margin: 0 auto; padding: 0.2rem 1rem 0.55rem; border-bottom: 1px solid var(--ef-ink); }
 .ef-nav > a, .ef-nav > a:visited, .ef-dd > summary { display: block; padding: 0.45rem 0.2rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ef-ink); text-decoration: none; cursor: pointer; list-style: none; user-select: none; border-bottom: 2px solid transparent; }
 .ef-dd > summary::-webkit-details-marker { display: none; }
 .ef-nav > a:hover, .ef-dd > summary:hover, .ef-dd[open] > summary { color: var(--ef-rust); }
@@ -90,14 +82,13 @@ html body { background: var(--ef-paper); color: var(--ef-ink); }
 .ef-list a:hover { background: var(--ef-soft); }
 .ef-list a.is-active { color: var(--ef-rust) !important; font-weight: 700; }
 .ef-gh { display: block; padding: 0.55rem 0.8rem 0.15rem; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ef-rust); font-weight: 700; }
-.ef-menu > summary { padding: 3px 11px; font-size: 12px; line-height: 1.4; font-weight: 600; letter-spacing: 0.04em; text-transform: none; border: 1px solid var(--ef-ink); border-radius: 999px; color: var(--ef-ink); cursor: pointer; list-style: none; }
+.ef-menu > summary { white-space: nowrap; padding: 3px 11px; font-size: 12px; line-height: 1.4; font-weight: 600; letter-spacing: 0.04em; text-transform: none; border: 1px solid var(--ef-ink); border-radius: 999px; color: var(--ef-ink); cursor: pointer; list-style: none; }
 .ef-menu .ef-list { left: auto; right: 0; min-width: 12rem; max-height: 70vh; overflow-y: auto; }
 #ef-lang { font-size: 12px; line-height: 1; }
 #ef-lang .goog-te-gadget { font-size: 0 !important; }
 #ef-lang .goog-te-gadget-simple { padding: 3px 9px !important; font-size: 12px !important; white-space: nowrap; background: transparent !important; border: 1px solid var(--ef-ink) !important; border-radius: 999px !important; }
 #ef-lang .goog-te-gadget-simple span, #ef-lang .goog-te-gadget-simple a { font-size: 12px !important; color: var(--ef-ink) !important; }
 #ef-lang .goog-te-gadget-icon { display: none !important; }
-.ef-tabs { display: none; }
 @media (min-width: 901px) {
   .ef-tag { display: inline; }
   .ef-nav { display: flex; }
@@ -107,14 +98,6 @@ html body { background: var(--ef-paper); color: var(--ef-ink); }
   .ef-brand, .ef-brand:visited { font-size: 2.6rem; }
   .ef-home .ef-brand { font-size: 4.4rem; }
 }
-@media (max-width: 900px) {
-  body { padding-bottom: 4.4rem; }
-  .ef-tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 95; display: flex; justify-content: space-around; height: 3.8rem; background: var(--ef-ink); border-top: 1px solid var(--ef-ink); }
-  .ef-tabs a, .ef-tabs button { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; min-height: 44px; padding: 0; font: inherit; font-size: 0.72rem; color: var(--ef-paper) !important; background: transparent; border: 0; text-decoration: none; cursor: pointer; }
-  .ef-tabs i { display: block; width: 1.4rem; height: 3px; background: transparent; }
-  .ef-tabs a.is-active i { background: #e5c15a; }
-  #ef-top { bottom: 4.9rem !important; }
-}
 @media (max-width: 380px) { .ef-brand, .ef-brand:visited { font-size: 1.6rem; } .ef-home .ef-brand { font-size: 2rem; } }
 </style>
 <script>
@@ -122,7 +105,7 @@ html body { background: var(--ef-paper); color: var(--ef-ink); }
   var dds = document.querySelectorAll('.ef-header details');
   function norm(p) { return p.replace(/index\.html$/, '').replace(/\/?$/, '/'); }
   var here = norm(location.pathname);
-  var links = document.querySelectorAll('.ef-header a[href], .ef-tabs a[href]');
+  var links = document.querySelectorAll('.ef-header a[href]');
   for (var i = 0; i < links.length; i++) {
     if (norm(links[i].pathname) === here) {
       links[i].classList.add('is-active');
@@ -140,14 +123,6 @@ html body { background: var(--ef-paper); color: var(--ef-ink); }
     dds[n].addEventListener('toggle', function () {
       if (!this.open) { return; }
       for (var m = 0; m < dds.length; m++) { if (dds[m] !== this) { dds[m].open = false; } }
-    });
-  }
-  var more = document.getElementById('ef-more'), menu = document.querySelector('.ef-menu');
-  if (more && menu) {
-    more.addEventListener('click', function (e) {
-      e.stopPropagation();
-      window.scrollTo(0, 0);
-      menu.open = !menu.open;
     });
   }
 })();
