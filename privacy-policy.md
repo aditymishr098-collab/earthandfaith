@@ -24,6 +24,10 @@ This site offers a language menu that uses **Google Translate**. When the menu l
 
 The World Religion Map, World Hardship Map and Civilizations pages load a software library from **cdnjs** and map outlines from **jsDelivr**. The World Hardship Map also requests statistics from the **World Bank** (api.worldbank.org). These services may receive your IP address and browser details when a map loads.
 
+## Anonymous question form
+
+The Ask page has a form for sending a question without a name or email. The form is run by an outside service, **Web3Forms**, which passes your message to my email inbox. I do not ask for any personal details, and I do not see your name. The service may see technical information such as your IP address when you send the form, and I do not receive or store it. See the Web3Forms privacy policy on their website (web3forms.com) for how they handle it. Do not write personal details in your question. If you do, I will remove them before publishing anything. Questions and answers I choose to publish appear without any name.
+
 ## Offline storage
 
 This site uses a small service worker that saves copies of pages in your browser so the site loads faster and works offline. This stays on your device, is not sent to me, and you can clear it in your browser settings.
