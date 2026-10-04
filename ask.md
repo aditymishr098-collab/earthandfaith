@@ -4,44 +4,55 @@ title: Ask a Question
 permalink: /ask/
 ---
 {% comment %}
-To switch on the community chat: paste your Telegram invite link between the quotes below, save, and commit.
-Example: {% assign community = "https://t.me/+AbCdEfGhIjK" %}
-Leave it empty and the community section stays hidden.
+To switch the anonymous form on: get a free access key at web3forms.com, paste it between the quotes below, save and commit.
+Leave it empty and only the email option shows.
 {% endcomment %}
-{% assign community = "https://t.me/earthandfaithcommunity" %}
+{% assign w3key = "51d7bf24-0b4c-40c7-b087-2279f15408e3" %}
 
-Do you have a question about religion, belief, science or how we know what we know? Send it to me by email. I read every question, and the best ones may become a future post on this blog. Answers to common questions are collected on the [Questions and Answers](/questions/) page.
+Do you have a question about religion, belief, science or how we know what we know? Ask it here. **You do not need to give a name or an email.** I read every question, and the best ones are answered on the [Questions and Answers](/questions/) page or become a full post.
 
-**Email your question to:** [contact@earthandfaith.online](mailto:contact@earthandfaith.online?subject=My%20question%20for%20Earth%20and%20Faith)
+{% if w3key != "" %}
+<form id="ask-form" style="margin:1.2rem 0;">
+<input type="hidden" name="access_key" value="{{ w3key }}">
+<input type="hidden" name="subject" value="New question for Earth and Faith">
+<input type="hidden" name="from_name" value="Anonymous reader">
+<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+<label for="ask-q" style="display:block;font-weight:700;margin-bottom:0.4rem;">Your question</label>
+<textarea id="ask-q" name="message" required minlength="10" maxlength="1500" rows="6" placeholder="Write your question here. Please do not include your name, phone number or other personal details." style="width:100%;box-sizing:border-box;padding:0.7rem 0.9rem;font:inherit;border:1px solid #c9d1cc;border-radius:10px;"></textarea>
+<p id="ask-count" style="font-size:0.85rem;margin:0.3rem 0 0.8rem;opacity:0.7;">0 / 1500</p>
+<button type="submit" id="ask-btn" style="padding:0.6rem 1.3rem;border:0;border-radius:10px;background:#1f6f5c;color:#fff;font:inherit;font-weight:700;cursor:pointer;">Send my question</button>
+<p id="ask-msg" role="status" style="margin-top:0.8rem;font-weight:600;"></p>
+</form>
+<script>
+(function () {
+  var f = document.getElementById("ask-form"), q = document.getElementById("ask-q"), c = document.getElementById("ask-count"), m = document.getElementById("ask-msg"), b = document.getElementById("ask-btn");
+  q.addEventListener("input", function () { c.textContent = q.value.length + " / 1500"; });
+  f.addEventListener("submit", function (e) {
+    e.preventDefault();
+    b.disabled = true; m.textContent = "Sending...";
+    var o = {}; new FormData(f).forEach(function (v, k) { o[k] = v; });
+    fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(o) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.success) { m.textContent = "Thank you. Your question was sent. If I answer it, it will appear on the Questions page."; f.reset(); c.textContent = "0 / 1500"; }
+        else { m.textContent = "Sorry, it could not be sent. Please try again later or use email."; }
+        b.disabled = false;
+      })
+      .catch(function () { m.textContent = "Sorry, it could not be sent. Please check your internet and try again."; b.disabled = false; });
+  });
+})();
+</script>
+{% endif %}
 
 ## Before you send
 
-- I cannot answer every question, and answers may take some time.
-- Please be respectful. Abusive or hateful messages will not be answered.
-- If I use your question in a post, I will not use your name or email without your permission.
+- **Your question is sent without a name.** I do not ask for your name or email, and I do not see who you are. If you put a name or contact detail inside the question, I will remove it before anything is published.
+- By sending it, you agree that I may publish your question and my answer on this site, without any name.
+- I cannot answer every question, and answers may take some time. I cannot reply to you personally, because I do not know who you are.
+- Please be respectful. Abusive, hateful or threatening messages will be deleted.
 - I do not give medical, legal or personal advice.
-- This site has no form and no tracking. Your email goes straight to my inbox. See the [Privacy Policy](/privacy-policy/) for details.
+- The form is run by an outside service, which may see your IP address when you send. I do not store it. See the [Privacy Policy](/privacy-policy/) for details.
 
-{% if community != "" %}
-## Prefer to talk with other readers?
+## Want a personal reply?
 
-There is an optional community chat on Telegram where readers discuss these questions with each other. It is **not** part of this website. It runs on Telegram, and Telegram's own rules and privacy policy apply there.
-
-<p><a href="{{ community }}" rel="noopener" style="display:inline-block;padding:0.55rem 1.1rem;border-radius:10px;background:#1f6f5c;color:#fff;font-weight:700;text-decoration:none;">Join the community chat</a></p>
-
-### Rules of the chat
-
-1. **Criticise ideas, never people.** No insults, no hate, no mocking anyone for their religion, caste, gender, country or lack of belief.
-2. **No threats or calls for violence.** Anyone who does this is removed at once.
-3. **Protect your privacy and others'.** Do not share your phone number, address or workplace, and never post private details about anyone else.
-4. **No spam, selling or recruiting** for any religion, group or party.
-5. **Be honest.** Say &quot;I don't know&quot; when you don't. Ask for sources and give them.
-6. **Be kind to people who are unsure or hurting.** Some readers are struggling with family or faith. Do not push anyone to leave or to stay.
-7. **Moderators can delete messages and remove people** without a long discussion. If you disagree, write to me by email.
-
-### Staying anonymous
-
-Telegram is not fully anonymous. Before you join, set a username and hide your phone number in Telegram's privacy settings, and do not use your real name or photo if you want to stay private. Group admins can see usernames of members. Please do not post anything you would not want others to read.
-
-You must be at least 16 to join. Opinions in the chat belong to the people who write them, not to me.
-{% endif %}
+If you would like me to answer you directly, email me at [contact@earthandfaith.online](mailto:contact@earthandfaith.online?subject=My%20question%20for%20Earth%20and%20Faith). Then I will know your email address, as explained in the [Privacy Policy](/privacy-policy/).
