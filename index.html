@@ -81,7 +81,6 @@ layout: default
   </aside>
 </section>
 <div class="ef-section">Recent posts</div>
-<input class="ef-search" id="ef-q" type="search" placeholder="Search posts (press Enter to search the whole site)" aria-label="Search posts" autocomplete="off">
 <ul class="ef-posts" id="ef-list">
 {% for post in site.posts offset: 1 %}
   <li class="ef-item">
@@ -91,37 +90,14 @@ layout: default
   </li>
 {% endfor %}
 </ul>
-<div class="ef-empty" id="ef-empty">No posts match your search.</div>
 <div class="ef-pager" id="ef-pager"></div>
 <script>
 (function () {
   var PER = 6;
   var items = Array.prototype.slice.call(document.querySelectorAll('#ef-list .ef-item'));
-  var lead = document.getElementById('ef-lead');
   var pager = document.getElementById('ef-pager');
-  var empty = document.getElementById('ef-empty');
-  var box = document.getElementById('ef-q');
   var page = 1;
   function render(scroll) {
-    var q = box.value.trim().toLowerCase();
-    var shown = 0;
-    if (q) {
-      items.forEach(function (li) {
-        var hit = li.textContent.toLowerCase().indexOf(q) !== -1;
-        li.hidden = !hit;
-        if (hit) { shown++; }
-      });
-      if (lead) {
-        var lh = lead.textContent.toLowerCase().indexOf(q) !== -1;
-        lead.style.display = lh ? '' : 'none';
-        if (lh) { shown++; }
-      }
-      empty.style.display = shown ? 'none' : 'block';
-      pager.innerHTML = '';
-      return;
-    }
-    if (lead) { lead.style.display = ''; }
-    empty.style.display = 'none';
     var pages = Math.max(1, Math.ceil(items.length / PER));
     if (page > pages) { page = pages; }
     items.forEach(function (li, i) { li.hidden = !(i >= (page - 1) * PER && i < page * PER); });
@@ -140,10 +116,6 @@ layout: default
     }
     if (scroll) { window.scrollTo(0, 0); }
   }
-  box.addEventListener('input', function () { render(false); });
-  box.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && box.value.trim()) { window.location.href = "{{ '/search/' | relative_url }}?q=" + encodeURIComponent(box.value.trim()); }
-  });
   render(false);
 })();
 </script>
