@@ -1,0 +1,88 @@
+---
+layout: page
+title: "Religion, Country by Country"
+permalink: /religion-by-country/
+---
+<p>A series that looks at one country at a time: how religion arrived there, what was done in its name, what people claim about it, and where things stand today. Each article follows the same plan so that countries can be compared fairly. I go through the countries in the order of their international phone codes, so that I do not pick only the easy ones.</p>
+<style>
+#cb-count { margin: 1rem 0 0.4rem; font-weight: 700; }
+#cb-bar { height: 0.55rem; background: rgba(127,127,127,0.2); border-radius: 999px; overflow: hidden; }
+#cb-bar i { display: block; height: 100%; background: #a8432a; }
+#cb-map { min-height: 160px; margin-top: 1rem; }
+#cb-map path { stroke: rgba(128,128,128,0.45); stroke-width: 0.5; }
+#cb-map path.cb-done { cursor: pointer; stroke-width: 0.8; }
+#cb-map path.cb-done:hover { stroke: var(--ef-ink, #000); stroke-width: 1.6; }
+#cb-info { min-height: 1.8rem; margin: 0.6rem 0 1.4rem; }
+.cb-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-size: 0.85rem; }
+.cb-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.cb-legend i { display: inline-block; width: 0.85rem; height: 0.85rem; border-radius: 50%; }
+.cb-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+.cb-card { padding: 1rem 1.2rem; border: 1px solid var(--line, #dde2dc); border-radius: 12px; }
+.cb-card b { display: block; font-size: 1.1rem; }
+.cb-card span { display: block; font-size: 0.85rem; color: var(--muted, #5d6b66); }
+@media (max-width: 700px) { .cb-list { grid-template-columns: minmax(0, 1fr); } }
+</style>
+
+{% assign done = 0 %}{% for p in site.posts %}{% if p.iso %}{% assign done = done | plus: 1 %}{% endif %}{% endfor %}
+<div id="cb-count">{{ done }} of 195 countries written</div>
+<div id="cb-bar" aria-hidden="true"><i style="width: {{ done | times: 100.0 | divided_by: 195 }}%"></i></div>
+<div class="cb-legend" style="margin-top:0.8rem;"><span><i style="background:#a8432a"></i>Article published (tap to read)</span><span><i style="background:#c9ced2"></i>Not written yet</span></div>
+<div id="cb-map">Loading map...</div>
+<div id="cb-info" role="status">Tap a red country to open its article.</div>
+
+<h2>Published so far</h2>
+{% if done == 0 %}<p>The first article is coming soon.</p>{% endif %}
+<ul class="cb-list">
+{% for p in site.posts %}{% if p.iso %}
+<li class="cb-card"><a href="{{ p.url | relative_url }}"><b>{{ p.country }}</b></a><span>{{ p.title | escape }}</span><span>{{ p.date | date: "%-d %B %Y" }}</span></li>
+{% endif %}{% endfor %}
+</ul>
+
+<h2>Every article follows the same plan</h2>
+<ol>
+<li><strong>The people before.</strong> Which beliefs were there before the big religions arrived.</li>
+<li><strong>How the religions arrived.</strong> By trade, conquest, missionaries or local reformers.</li>
+<li><strong>What was done in religion's name.</strong> Wars, persecutions and massacres, with death-toll estimates and a note on how big religion's role really was.</li>
+<li><strong>Claims and evidence.</strong> Popular claims about the country's religious past, checked with the same standard for every faith.</li>
+<li><strong>Where things stand today.</strong> Current numbers from sources such as the Pew Research Center.</li>
+</ol>
+<p>Death tolls are estimates and historians often disagree. I say so in each article, and I list the sources. If you want a particular country sooner, or if you find a mistake, please write through the <a href="{{ '/contact/' | relative_url }}">Contact</a> page.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+(function () {
+  var DONE = [{% for p in site.posts %}{% if p.iso %}{id: {{ p.iso | jsonify }}, name: {{ p.country | jsonify }}, url: {{ p.url | relative_url | jsonify }}},{% endif %}{% endfor %}];
+  var byId = {};
+  DONE.forEach(function (r) { byId[r.id] = r; });
+  var info = document.getElementById("cb-info");
+  var mapBox = document.getElementById("cb-map");
+  if (!window.d3) { mapBox.textContent = "The map could not be loaded. The list below has the same articles."; return; }
+  d3.json("https://cdn.jsdelivr.net/gh/johan/world.geo.json@master/countries.geo.json").then(function (geo) {
+    geo.features = geo.features.filter(function (f) { return f.id !== "ATA" && f.geometry; });
+    geo.features.forEach(function (f) {
+      var gm = f.geometry;
+      var polys = gm.type === "Polygon" ? [gm.coordinates] : gm.type === "MultiPolygon" ? gm.coordinates : [];
+      polys.forEach(function (rings) {
+        rings.forEach(function (ring, i) {
+          var big = d3.geoArea({type: "Polygon", coordinates: [ring]}) > 2 * Math.PI;
+          if ((i === 0 && big) || (i > 0 && !big)) { ring.reverse(); }
+        });
+      });
+    });
+    var w = 960, h = 500;
+    var path = d3.geoPath(d3.geoNaturalEarth1().fitSize([w, h], geo));
+    mapBox.innerHTML = "";
+    var svg = d3.select(mapBox).append("svg").attr("viewBox", "0 0 " + w + " " + h).attr("role", "img").attr("aria-label", "World map; countries with a published article are red").style("width", "100%").style("height", "auto");
+    svg.selectAll("path").data(geo.features).join("path").attr("d", path)
+      .attr("class", function (d) { return byId[d.id] ? "cb-done" : ""; })
+      .attr("fill", function (d) { return byId[d.id] ? "#a8432a" : "#c9ced2"; })
+      .on("mouseover", function (e, d) {
+        var r = byId[d.id];
+        info.textContent = r ? r.name + ": article published. Tap to read." : (d.properties.name || "") + ": not written yet";
+      })
+      .on("click", function (e, d) { var r = byId[d.id]; if (r) { window.location.href = r.url; } else { info.textContent = (d.properties.name || "") + ": not written yet"; } });
+  }).catch(function () {
+    mapBox.textContent = "The map could not be loaded. The list below has the same articles.";
+  });
+})();
+</script>
