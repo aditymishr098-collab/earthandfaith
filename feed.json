@@ -1,0 +1,12 @@
+---
+layout: null
+permalink: /feed.json
+sitemap: false
+search: false
+---
+{"version":1,"generated":{{ site.time | date_to_xmlschema | jsonify }},"posts":[
+{%- for p in site.posts -%}
+{%- unless forloop.first -%},{%- endunless -%}
+{"id":{{ p.url | jsonify }},"title":{{ p.title | jsonify }},"url":{{ p.url | jsonify }},"date":{{ p.date | date_to_xmlschema | jsonify }},"tags":{{ p.tags | jsonify }},"country":{{ p.country | default: "" | jsonify }},"summary":{{ p.excerpt | strip_html | strip_newlines | normalize_whitespace | truncatewords: 45 | jsonify }},"html":{{ p.content | jsonify }}}
+{%- endfor -%}
+]}
