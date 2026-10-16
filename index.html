@@ -2,88 +2,94 @@
 layout: default
 ---
 <style>
-.wrapper { max-width: 1180px !important; }
-.ef-lead { display: flex; flex-wrap: wrap; gap: 2rem 2.2rem; margin: 1.6rem 0 0; }
-.ef-story { flex: 2 1 560px; min-width: 0; }
-.ef-kicker { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ef-rust); }
-.ef-story h1 { margin: 0.5rem 0 0.8rem; font-family: Georgia, 'Times New Roman', serif; font-size: 2.9rem; font-weight: 800; line-height: 1.08; letter-spacing: -0.015em; }
-.ef-story h1 a, .ef-story h1 a:visited { color: var(--ef-ink) !important; text-decoration: none; }
-.ef-story h1 a:hover { color: var(--ef-rust) !important; }
-.ef-story p { margin: 0 0 1rem; font-size: 1.2rem; line-height: 1.55; color: var(--ef-ink); opacity: 0.85; }
-.ef-more-link, .ef-more-link:visited { display: inline-block; padding: 0.4rem 0; font-weight: 700; color: var(--ef-ink) !important; border-bottom: 2px solid var(--ef-rust); text-decoration: none; }
-.ef-tools { flex: 1 1 300px; min-width: 0; padding-left: 1.8rem; border-left: 1px solid var(--ef-ink); }
-.ef-tools h2 { margin: 0 0 0.3rem; font-family: Georgia, serif; font-size: 1.35rem; font-weight: 800; }
-.ef-tool, .ef-tool:visited { display: flex; gap: 0.8rem; align-items: baseline; padding: 0.6rem 0; border-top: 1px solid var(--ef-rule); color: var(--ef-ink) !important; text-decoration: none; }
-.ef-tool:hover b { color: var(--ef-rust); }
-.ef-tool i { flex: none; width: 1.4rem; font-family: Georgia, serif; font-style: normal; font-weight: 800; color: var(--ef-rust); }
-.ef-tool b { display: block; font-weight: 700; }
-.ef-tool span { display: block; font-size: 0.86rem; line-height: 1.35; color: var(--ef-muted); }
-.ef-section { margin: 2.4rem 0 0.4rem; padding-top: 0.35rem; border-top: 3px double var(--ef-ink); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ef-muted); }
-.ef-search { display: block; width: 100%; box-sizing: border-box; margin: 0.6rem 0 1rem; padding: 0.7rem 1rem; font: inherit; font-size: 1rem; color: var(--ef-ink); background: transparent; border: 1px solid var(--ef-ink); border-radius: 0; }
-.ef-search:focus { outline: 2px solid var(--ef-rust); outline-offset: 1px; }
-.ef-posts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
-.ef-item { padding: 1.1rem 1.4rem 1.2rem 0; margin-right: 1.4rem; border-right: 1px solid var(--ef-rule); border-bottom: 1px solid var(--ef-rule); }
-.ef-item:nth-child(3n) { border-right: 0; margin-right: 0; padding-right: 0; }
+.page-content > .wrapper { max-width: 1180px; width: calc(100% - 24px); padding: 0; margin-top: 0; background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.ef-hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 2.2rem; align-items: center; margin-top: 1.4rem; padding: 3rem 3.2rem; border-radius: 30px; }
+.ef-kicker { font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ef-rust); }
+.ef-hero h1 { margin: .8rem 0 1rem; font-family: Georgia, 'Times New Roman', serif; font-size: 3.6rem; font-weight: 800; line-height: 1.04; letter-spacing: -.015em; }
+.ef-hero h1 em { font-style: normal; color: var(--ef-rust); }
+.ef-hero p { margin: 0; font-size: 1.12rem; line-height: 1.6; color: var(--ef-muted); }
+.ef-btn, .ef-btn:visited { display: inline-block; margin-top: 1.5rem; padding: .85rem 1.6rem; border-radius: 999px; background: var(--ef-btn); color: var(--ef-btntxt) !important; font-weight: 700; text-decoration: none; }
+.ef-lead { padding: 1.6rem; border-radius: 22px; background: var(--ef-glass2); border: 1px solid var(--ef-edge); }
+.ef-lead h3 { margin: .5rem 0 .6rem; font-family: Georgia, serif; font-size: 1.7rem; line-height: 1.15; }
+.ef-lead h3 a, .ef-lead h3 a:visited { color: var(--ef-ink) !important; text-decoration: none; }
+.ef-lead h3 a:hover { color: var(--ef-rust) !important; }
+.ef-lead p { font-size: .95rem; }
+.ef-section { margin: 2.4rem .4rem .8rem; font-size: .78rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--ef-muted); }
+.ef-tools-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .9rem; }
+.ef-tool, .ef-tool:visited { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; min-height: 120px; padding: 1.2rem; border-radius: 22px; color: var(--ef-ink) !important; text-decoration: none; }
+.ef-tool:hover { transform: translateY(-2px); }
+.ef-tool .d { width: 28px; height: 28px; border-radius: 50%; background: #2f6f5c; }
+.ef-tool:nth-child(4n+2) .d { background: #b4781a; }
+.ef-tool:nth-child(4n+3) .d { background: #a8432a; }
+.ef-tool:nth-child(4n) .d { background: #3a6ea5; }
+.ef-tool b { display: block; font-family: Georgia, serif; font-size: 1.3rem; line-height: 1.15; }
+.ef-tool span.s { display: block; margin-top: 3px; font-size: .84rem; line-height: 1.35; color: var(--ef-muted); }
+.ef-posts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; }
+.ef-item { padding: 1.4rem; border-radius: 22px; }
 .ef-item[hidden] { display: none; }
-.ef-pill { margin-right: 0.5rem; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ef-rust); }
-.ef-date { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ef-muted); }
-.ef-item h3 { margin: 0.5rem 0 0.4rem; font-family: Georgia, serif; font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
+.ef-pill { margin-right: .5rem; font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ef-rust); }
+.ef-date { font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ef-muted); }
+.ef-item h3 { margin: .6rem 0 .5rem; font-family: Georgia, serif; font-size: 1.35rem; font-weight: 700; line-height: 1.2; }
 .ef-item h3 a, .ef-item h3 a:visited { color: var(--ef-ink) !important; text-decoration: none; }
 .ef-item h3 a:hover { color: var(--ef-rust) !important; }
-.ef-item p { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--ef-muted); }
-.ef-empty { display: none; padding: 1.2rem 0; color: var(--ef-muted); }
-.ef-pager { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.4rem; }
-.ef-pager button { min-width: 2.6rem; min-height: 44px; padding: 0.3rem 0.8rem; font: inherit; color: var(--ef-ink); background: transparent; border: 1px solid var(--ef-ink); border-radius: 0; cursor: pointer; }
-.ef-pager button:hover { color: var(--ef-rust); border-color: var(--ef-rust); }
-.ef-pager button.cur { color: var(--ef-paper); background: var(--ef-ink); }
+.ef-item p { margin: 0; font-size: .95rem; line-height: 1.55; color: var(--ef-muted); }
+.ef-pager { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.4rem; }
+.ef-pager button { min-width: 2.8rem; min-height: 44px; padding: .3rem .8rem; font: inherit; color: var(--ef-ink); background: var(--ef-glass2); border: 1px solid var(--ef-edge); border-radius: 999px; cursor: pointer; }
+.ef-pager button:hover { color: var(--ef-rust); }
+.ef-pager button.cur { color: var(--ef-btntxt); background: var(--ef-btn); }
 @media (max-width: 1000px) {
+  .ef-hero { grid-template-columns: 1fr; padding: 2rem 1.6rem; }
+  .ef-hero h1 { font-size: 2.8rem; }
+  .ef-tools-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ef-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ef-item:nth-child(3n) { border-right: 1px solid var(--ef-rule); margin-right: 1.4rem; padding-right: 1.4rem; }
-  .ef-item:nth-child(2n) { border-right: 0; margin-right: 0; padding-right: 0; }
 }
 @media (max-width: 700px) {
-  .ef-story h1 { font-size: 1.95rem; }
-  .ef-story p { font-size: 1.05rem; }
-  .ef-tools { padding-left: 0; border-left: 0; }
-  .ef-tools-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1rem; }
-  .ef-tool { min-height: 44px; align-items: center; }
-  .ef-tool span { display: none; }
-  .ef-tool i { display: none; }
+  .ef-hero { margin-top: 1rem; padding: 1.6rem 1.3rem; gap: 1.3rem; border-radius: 26px; }
+  .ef-hero h1 { font-size: 2.3rem; }
+  .ef-hero p { font-size: 1rem; }
+  .ef-lead h3 { font-size: 1.35rem; }
+  .ef-tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+  .ef-tool { min-height: 100px; padding: 1rem; }
+  .ef-tool b { font-size: 1.05rem; }
+  .ef-tool span.s { display: none; }
   .ef-posts { grid-template-columns: minmax(0, 1fr); }
-  .ef-item, .ef-item:nth-child(3n), .ef-item:nth-child(2n) { border-right: 0; margin-right: 0; padding-right: 0; }
 }
 </style>
 {% assign lead = site.posts.first %}
-<section class="ef-lead" aria-label="Top story and tools">
+<section class="ef-hero ef-g" aria-label="Welcome and latest article">
+  <div>
+    <div class="ef-kicker">Belief, history, science and nature</div>
+    <h1>Understand the world <em>in plain words.</em></h1>
+    <p>Maps, timelines and honest articles. No ads, no tracking, and ideas questioned, never people.</p>
+    {% if lead %}<a class="ef-btn" href="{{ lead.url | relative_url }}">Start reading</a>{% endif %}
+  </div>
   {% if lead %}
-  <article class="ef-story" id="ef-lead">
-    <div class="ef-kicker">{% if lead.tags.size > 0 %}{{ lead.tags | join: " · " }} · {% endif %}{{ lead.date | date: "%-d %B" }}</div>
-    <h1><a href="{{ lead.url | relative_url }}">{{ lead.title | escape }}</a></h1>
-    <p>{{ lead.excerpt | strip_html | strip_newlines | truncatewords: 42 }}</p>
-    <a class="ef-more-link" href="{{ lead.url | relative_url }}">Read the full article</a>
+  <article class="ef-lead" id="ef-lead">
+    <div class="ef-kicker">Latest{% if lead.tags.size > 0 %} &middot; {{ lead.tags | join: " &middot; " }}{% endif %}</div>
+    <h3><a href="{{ lead.url | relative_url }}">{{ lead.title | escape }}</a></h3>
+    <p>{{ lead.excerpt | strip_html | strip_newlines | truncatewords: 34 }}</p>
   </article>
   {% endif %}
-  <aside class="ef-tools">
-    <h2>Maps and tools</h2>
-    <div class="ef-tools-grid">
-      <a class="ef-tool" href="{{ '/religion-map/' | relative_url }}"><i>1</i><div><b>Religion Map</b><span>Which faith leads in each country</span></div></a>
-      <a class="ef-tool" href="{{ '/world-hardship-map/' | relative_url }}"><i>2</i><div><b>Hardship Map</b><span>Hunger, poverty, conflict and violence</span></div></a>
-      <a class="ef-tool" href="{{ '/civilizations-map/' | relative_url }}"><i>3</i><div><b>Civilizations Map</b><span>Slide through time: who lived where</span></div></a>
-      <a class="ef-tool" href="{{ '/lost-faiths/' | relative_url }}"><i>4</i><div><b>Lost Faiths</b><span>Religions that faded, and those that survive</span></div></a>
-      <a class="ef-tool" href="{{ '/compare-religions/' | relative_url }}"><i>5</i><div><b>Compare Religions</b><span>Pick two and see them side by side</span></div></a>
-      <a class="ef-tool" href="{{ '/on-this-day/' | relative_url }}"><i>6</i><div><b>On This Day</b><span>Science, space and history by date</span></div></a>
-      <a class="ef-tool" href="{{ '/nature/' | relative_url }}"><i>7</i><div><b>Nature</b><span>Forests, glaciers and species at risk</span></div></a>
-      <a class="ef-tool" href="{{ '/thinkers/' | relative_url }}"><i>8</i><div><b>Thinkers</b><span>People who questioned belief</span></div></a>
-      <a class="ef-tool" href="{{ '/glossary/' | relative_url }}"><i>9</i><div><b>Glossary</b><span>50 words, plainly explained</span></div></a>
-      <a class="ef-tool" href="{{ '/questions/' | relative_url }}"><i>10</i><div><b>Questions</b><span>Common questions, honest answers</span></div></a>
-      <a class="ef-tool" href="{{ '/religion-by-country/' | relative_url }}"><i>11</i><div><b>Country Series</b><span>Religion, one country at a time</span></div></a>
-    </div>
-  </aside>
 </section>
+<div class="ef-section">Maps and tools</div>
+<div class="ef-tools-grid">
+      <a class="ef-tool ef-g" href="{{ '/religion-map/' | relative_url }}"><span class="d"></span><div><b>Religion Map</b><span class="s">Which faith leads in each country</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/world-hardship-map/' | relative_url }}"><span class="d"></span><div><b>Hardship Map</b><span class="s">Hunger, poverty, conflict and violence</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/civilizations-map/' | relative_url }}"><span class="d"></span><div><b>Civilizations Map</b><span class="s">Slide through time: who lived where</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/lost-faiths/' | relative_url }}"><span class="d"></span><div><b>Lost Faiths</b><span class="s">Religions that faded, and those that survive</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/compare-religions/' | relative_url }}"><span class="d"></span><div><b>Compare Religions</b><span class="s">Pick two and see them side by side</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/on-this-day/' | relative_url }}"><span class="d"></span><div><b>On This Day</b><span class="s">Science, space and history by date</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/nature/' | relative_url }}"><span class="d"></span><div><b>Nature</b><span class="s">Forests, glaciers and species at risk</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/thinkers/' | relative_url }}"><span class="d"></span><div><b>Thinkers</b><span class="s">People who questioned belief</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/glossary/' | relative_url }}"><span class="d"></span><div><b>Glossary</b><span class="s">50 words, plainly explained</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/questions/' | relative_url }}"><span class="d"></span><div><b>Questions</b><span class="s">Common questions, honest answers</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/religion-by-country/' | relative_url }}"><span class="d"></span><div><b>Country Series</b><span class="s">Religion, one country at a time</span></div></a>
+      <a class="ef-tool ef-g" href="{{ '/ask/' | relative_url }}"><span class="d"></span><div><b>Ask a Question</b><span class="s">Send one, anonymously if you like</span></div></a>
+</div>
 <div class="ef-section">Recent posts</div>
 <ul class="ef-posts" id="ef-list">
 {% for post in site.posts offset: 1 %}
-  <li class="ef-item">
+  <li class="ef-item ef-g">
     <div>{% if post.tags.size > 0 %}<span class="ef-pill">{{ post.tags[0] }}</span>{% endif %}<span class="ef-date">{{ post.date | date: "%b %-d, %Y" }}</span></div>
     <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
     <p>{{ post.excerpt | strip_html | strip_newlines | truncatewords: 30 }}</p>
