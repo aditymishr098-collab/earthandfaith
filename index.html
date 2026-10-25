@@ -2,103 +2,122 @@
 layout: default
 ---
 <style>
-.page-content > .wrapper { max-width: 1180px; width: calc(100% - 28px); padding: 0; margin-top: 0; background: none; border: 0; box-shadow: none; animation: none; }
-.ef-hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 2.4rem; align-items: center; margin-top: 1.6rem; padding: 3.2rem 3.4rem; border-radius: 30px; }
-.ef-kicker { font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ef-rust); }
-.ef-hero h1 { margin: .8rem 0 1rem; font-family: Georgia, 'Times New Roman', serif; font-size: 3.6rem; font-weight: 800; line-height: 1.04; letter-spacing: -.015em; }
-.ef-hero h1 em { font-style: normal; color: var(--ef-rust); }
-.ef-hero p { margin: 0; font-size: 1.12rem; line-height: 1.6; color: var(--ef-muted); }
-.ef-btn, .ef-btn:visited { display: inline-block; margin-top: 1.5rem; padding: .9rem 1.9rem; border-radius: 999px; background: var(--ef-btn); color: var(--ef-btntxt) !important; font-weight: 700; text-decoration: none; box-shadow: 6px 6px 14px var(--ef-lo), -5px -5px 12px var(--ef-hi); transition: all .25s; }
-.ef-btn:hover { transform: translateY(-3px); }
-.ef-btn:active { transform: scale(.97); box-shadow: inset 3px 3px 7px rgba(0,0,0,.35); }
-.ef-lead { padding: 1.8rem; border-radius: 24px; box-shadow: inset 6px 6px 12px var(--ef-lo), inset -6px -6px 12px var(--ef-hi); }
-.ef-lead h3 { margin: .5rem 0 .6rem; font-family: Georgia, serif; font-size: 1.7rem; line-height: 1.15; }
-.ef-lead h3 a, .ef-lead h3 a:visited { color: var(--ef-ink) !important; text-decoration: none; }
-.ef-lead h3 a:hover { color: var(--ef-rust) !important; }
-.ef-lead p { font-size: .95rem; }
-.ef-section { margin: 2.6rem .5rem 1.1rem; font-size: .78rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--ef-muted); }
-.ef-tools-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.4rem; }
-.ef-tool, .ef-tool:visited { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; min-height: 130px; padding: 1.3rem; border-radius: 24px; color: var(--ef-ink) !important; text-decoration: none; box-shadow: 7px 7px 15px var(--ef-lo), -7px -7px 15px var(--ef-hi); }
-.ef-tool:hover, .ef-item:hover { transform: translateY(-4px); box-shadow: 12px 14px 26px var(--ef-lo), -10px -10px 22px var(--ef-hi); }
-.ef-tool:active, .ef-item:active { transform: none; box-shadow: inset 5px 5px 10px var(--ef-lo), inset -5px -5px 10px var(--ef-hi); }
-.ef-tool .d { width: 32px; height: 32px; border-radius: 50%; background: #2f6f5c; box-shadow: inset 3px 3px 6px rgba(0,0,0,.25), inset -2px -2px 5px rgba(255,255,255,.3); transition: transform .35s cubic-bezier(.5,1.6,.4,1); }
-.ef-tool:hover .d { transform: scale(1.18) rotate(8deg); }
-.ef-tool:nth-child(4n+2) .d { background: #b4781a; }
-.ef-tool:nth-child(4n+3) .d { background: #a8432a; }
-.ef-tool:nth-child(4n) .d { background: #3a6ea5; }
+.page-content > .wrapper { max-width: 1180px; width: calc(100% - 32px); padding: 0; margin: 0 auto; background: none; border: 0; animation: none; }
+#ef-sky { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+.ef-up { opacity: 0; animation: ef-up .8s cubic-bezier(.2,.8,.2,1) forwards; }
+.ef-hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; padding: 3rem 0 1.5rem; }
+.ef-kicker { display: inline-flex; align-items: center; gap: 10px; font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--ef-acc2); }
+.ef-kicker::before { content: ""; width: 34px; height: 2px; background: var(--ef-acc2); }
+.ef-hero h1 { margin: 1.2rem 0 1.2rem; font-family: Georgia, 'Times New Roman', serif; font-size: 4.6rem; font-weight: 800; line-height: 1.02; letter-spacing: -.025em; }
+.ef-hero h1 em { font-style: italic; background: linear-gradient(90deg, var(--ef-rust), var(--ef-acc3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ef-hero p { margin: 0; max-width: 520px; font-size: 1.15rem; line-height: 1.6; color: var(--ef-muted); }
+.ef-cta { display: flex; gap: .8rem; margin-top: 1.8rem; flex-wrap: wrap; }
+.ef-b1, .ef-b1:visited, .ef-b2, .ef-b2:visited { padding: .95rem 1.7rem; border-radius: 14px; font-weight: 700; text-decoration: none; transition: all .25s; }
+.ef-b1, .ef-b1:visited { background: var(--ef-btn); color: var(--ef-btntxt) !important; }
+.ef-b1:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -8px var(--ef-rust); }
+.ef-b2, .ef-b2:visited { color: var(--ef-ink) !important; background: var(--ef-card); border: 1px solid var(--ef-line); }
+.ef-b2:hover { transform: translateY(-3px); border-color: var(--ef-rust); }
+.ef-orb { max-width: 440px; width: 100%; margin: auto; aspect-ratio: 1; }
+.ef-orb svg { width: 100%; height: 100%; overflow: visible; }
+.ef-ring { fill: none; stroke: var(--ef-line); stroke-width: 1.2; stroke-dasharray: 3 7; }
+.ef-o1, .ef-o2, .ef-o3 { transform-origin: 200px 200px; animation: ef-spin 26s linear infinite; }
+.ef-o2 { animation-duration: 44s; animation-direction: reverse; }
+.ef-o3 { animation-duration: 70s; }
+@keyframes ef-spin { to { transform: rotate(360deg); } }
+.ef-globe { transform-origin: 200px 200px; animation: ef-float 7s ease-in-out infinite; }
+@keyframes ef-float { 50% { transform: translateY(-8px); } }
+.ef-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 1.6rem; background: var(--ef-line); border: 1px solid var(--ef-line); border-radius: 20px; overflow: hidden; }
+.ef-stats div { background: var(--ef-bg2); padding: 1.3rem 1.5rem; }
+.ef-stats b { display: block; font-family: Georgia, serif; font-size: 2.6rem; line-height: 1; color: var(--ef-rust); }
+.ef-stats span { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--ef-muted); }
+.ef-section { display: flex; align-items: center; gap: 1rem; margin: 3.4rem 0 1.2rem; font-family: Georgia, serif; font-size: 2.2rem; font-weight: 700; }
+.ef-section::after { content: ""; flex: 1; height: 1px; background: var(--ef-line); }
+.ef-tools-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.ef-tool, .ef-tool:visited { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; min-height: 160px; padding: 1.3rem; border-radius: 20px; background: var(--ef-card); color: var(--ef-ink) !important; text-decoration: none; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.ef-tool::before { content: ""; position: absolute; inset: 0; border-radius: 20px; padding: 1px; pointer-events: none; background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), var(--ef-rust), transparent 65%), var(--ef-line); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.ef-tool:hover { transform: translateY(-6px); }
+.ef-tool .n { font-family: Georgia, serif; font-size: .95rem; letter-spacing: .1em; color: var(--ef-acc2); }
+.ef-tool .gl { position: absolute; right: 16px; top: 14px; opacity: .22; color: var(--ef-ink); transition: all .5s; }
+.ef-tool:hover .gl { opacity: .8; color: var(--ef-rust); transform: rotate(14deg) scale(1.2); }
 .ef-tool b { display: block; font-family: Georgia, serif; font-size: 1.3rem; line-height: 1.15; }
 .ef-tool span.s { display: block; margin-top: 3px; font-size: .84rem; line-height: 1.35; color: var(--ef-muted); }
-.ef-posts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
-.ef-item { padding: 1.5rem; border-radius: 24px; box-shadow: 7px 7px 15px var(--ef-lo), -7px -7px 15px var(--ef-hi); }
+.ef-posts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
+.ef-item { position: relative; padding: 1.7rem; border-radius: 22px; background: var(--ef-card); border: 1px solid var(--ef-line); overflow: hidden; transition: transform .35s, border-color .35s; }
+.ef-item::after { content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--ef-rust), var(--ef-acc3)); transition: width .5s; }
+.ef-item:hover { transform: translateY(-6px); border-color: var(--ef-rust); }
+.ef-item:hover::after { width: 100%; }
 .ef-item[hidden] { display: none; }
-.ef-pill { margin-right: .5rem; font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ef-rust); }
+.ef-pill { margin-right: .5rem; font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ef-acc2); }
 .ef-date { font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ef-muted); }
-.ef-item h3 { margin: .6rem 0 .5rem; font-family: Georgia, serif; font-size: 1.35rem; font-weight: 700; line-height: 1.2; }
+.ef-item h3 { margin: .7rem 0 .5rem; font-family: Georgia, serif; font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
 .ef-item h3 a, .ef-item h3 a:visited { color: var(--ef-ink) !important; text-decoration: none; }
+.ef-item h3 a::after { content: ""; position: absolute; inset: 0; }
 .ef-item h3 a:hover { color: var(--ef-rust) !important; }
 .ef-item p { margin: 0; font-size: .95rem; line-height: 1.55; color: var(--ef-muted); }
-.ef-pager { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.6rem; }
-.ef-pager button { width: 46px; height: 46px; padding: 0; font: inherit; font-weight: 700; color: var(--ef-ink); background: var(--ef-paper); border: 0; border-radius: 50%; cursor: pointer; box-shadow: 5px 5px 11px var(--ef-lo), -5px -5px 11px var(--ef-hi); transition: all .2s; }
-.ef-pager button:hover { color: var(--ef-rust); transform: translateY(-2px); }
-.ef-pager button.cur { color: var(--ef-rust); transform: none; box-shadow: inset 4px 4px 8px var(--ef-lo), inset -4px -4px 8px var(--ef-hi); }
-.ef-hero, .ef-section, .ef-tool, .ef-item, .ef-pager { animation: ef-up .7s cubic-bezier(.2,.7,.2,1) both; }
-.ef-hero { animation-delay: .1s; }
-.ef-tool:nth-child(1) { animation-delay: .25s; } .ef-tool:nth-child(2) { animation-delay: .31s; } .ef-tool:nth-child(3) { animation-delay: .37s; } .ef-tool:nth-child(4) { animation-delay: .43s; } .ef-tool:nth-child(5) { animation-delay: .49s; } .ef-tool:nth-child(6) { animation-delay: .55s; } .ef-tool:nth-child(7) { animation-delay: .61s; } .ef-tool:nth-child(8) { animation-delay: .67s; } .ef-tool:nth-child(n+9) { animation-delay: .73s; }
-.ef-item:nth-child(3n+1) { animation-delay: .5s; } .ef-item:nth-child(3n+2) { animation-delay: .6s; } .ef-item:nth-child(3n) { animation-delay: .7s; }
+.ef-pager { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+.ef-pager button { width: 46px; height: 46px; padding: 0; font: inherit; font-weight: 700; color: var(--ef-ink); background: var(--ef-card); border: 1px solid var(--ef-line); border-radius: 12px; cursor: pointer; transition: all .25s; }
+.ef-pager button:hover { color: var(--ef-rust); border-color: var(--ef-rust); transform: translateY(-2px); }
+.ef-pager button.cur { color: var(--ef-btntxt); background: var(--ef-btn); border-color: var(--ef-btn); }
+@media (prefers-reduced-motion: reduce) { .ef-up { opacity: 1; animation: none; } }
 @media (max-width: 1000px) {
-  .ef-hero { grid-template-columns: 1fr; padding: 2rem 1.7rem; }
-  .ef-hero h1 { font-size: 2.8rem; }
+  .ef-hero { grid-template-columns: 1fr; padding-top: 1.5rem; }
+  .ef-orb { max-width: 300px; order: -1; }
+  .ef-hero h1 { font-size: 3.2rem; }
   .ef-tools-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ef-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 700px) {
-  .ef-hero { margin-top: 1.1rem; padding: 1.7rem 1.4rem; gap: 1.4rem; border-radius: 28px; }
-  .ef-hero h1 { font-size: 2.3rem; }
+  .ef-hero h1 { font-size: 2.5rem; }
   .ef-hero p { font-size: 1rem; }
-  .ef-lead { padding: 1.4rem; }
-  .ef-lead h3 { font-size: 1.35rem; }
-  .ef-tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-  .ef-tool { min-height: 104px; padding: 1.1rem; }
+  .ef-cta { flex-direction: column; }
+  .ef-b1, .ef-b2 { text-align: center; }
+  .ef-stats { grid-template-columns: 1fr 1fr; }
+  .ef-stats b { font-size: 2.1rem; }
+  .ef-stats div { padding: 1rem; }
+  .ef-section { font-size: 1.7rem; margin-top: 2.6rem; }
+  .ef-tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+  .ef-tool { min-height: 120px; padding: 1rem; }
   .ef-tool b { font-size: 1.05rem; }
   .ef-tool span.s { display: none; }
-  .ef-posts { grid-template-columns: minmax(0, 1fr); gap: 1.1rem; }
+  .ef-posts { grid-template-columns: minmax(0, 1fr); }
 }
 </style>
 {% assign lead = site.posts.first %}
-<section class="ef-hero ef-g" aria-label="Welcome and latest article">
+<canvas id="ef-sky" aria-hidden="true"></canvas>
+<section class="ef-hero" aria-label="Welcome">
   <div>
-    <div class="ef-kicker">Belief, history, science and nature</div>
-    <h1>Understand the world <em>in plain words.</em></h1>
-    <p>Maps, timelines and honest articles. No ads, no tracking, and ideas questioned, never people.</p>
-    {% if lead %}<a class="ef-btn" href="{{ lead.url | relative_url }}">Start reading</a>{% endif %}
+    <div class="ef-kicker ef-up" style="animation-delay:.1s">Belief &middot; History &middot; Science &middot; Nature</div>
+    <h1 class="ef-up" style="animation-delay:.2s">Understand the world <em>in plain words.</em></h1>
+    <p class="ef-up" style="animation-delay:.35s">Maps, timelines and honest articles. No ads, no tracking, and ideas questioned, never people.</p>
+    <div class="ef-cta ef-up" style="animation-delay:.5s">
+      {% if lead %}<a class="ef-b1" href="{{ lead.url | relative_url }}">Start reading</a>{% endif %}
+      <a class="ef-b2" href="{{ '/religion-map/' | relative_url }}">Open the maps</a>
+    </div>
   </div>
-  {% if lead %}
-  <article class="ef-lead" id="ef-lead">
-    <div class="ef-kicker">Latest{% if lead.tags.size > 0 %} &middot; {{ lead.tags | join: " &middot; " }}{% endif %}</div>
-    <h3><a href="{{ lead.url | relative_url }}">{{ lead.title | escape }}</a></h3>
-    <p>{{ lead.excerpt | strip_html | strip_newlines | truncatewords: 34 }}</p>
-  </article>
-  {% endif %}
+  <div class="ef-orb ef-up" style="animation-delay:.3s" aria-hidden="true"><svg viewBox="0 0 400 400"><circle class="ef-ring" cx="200" cy="200" r="190"/><circle class="ef-ring" cx="200" cy="200" r="145"/><circle class="ef-ring" cx="200" cy="200" r="102"/>
+    <g class="ef-o3"><circle cx="200" cy="10" r="9" fill="var(--ef-acc3)"/></g><g class="ef-o2"><circle cx="345" cy="200" r="7" fill="var(--ef-acc2)"/><circle cx="55" cy="200" r="4" fill="var(--ef-ink)"/></g><g class="ef-o1"><circle cx="200" cy="98" r="6" fill="var(--ef-rust)"/></g>
+    <g class="ef-globe"><circle cx="200" cy="200" r="64" fill="var(--ef-bg2)" stroke="var(--ef-acc2)" stroke-width="2"/><path d="M136 200h128M200 136c-34 28-34 100 0 128M200 136c34 28 34 100 0 128" fill="none" stroke="var(--ef-acc2)" stroke-width="1.6" opacity=".8"/><ellipse cx="200" cy="170" rx="50" ry="8" fill="none" stroke="var(--ef-acc2)" opacity=".5"/><ellipse cx="200" cy="232" rx="50" ry="8" fill="none" stroke="var(--ef-acc2)" opacity=".5"/></g></svg></div>
 </section>
-<div class="ef-section">Maps and tools</div>
+<div class="ef-stats ef-up" style="animation-delay:.7s"><div><b data-n="12">12</b><span>Maps and tools</span></div><div><b data-n="3">3</b><span>Interactive maps</span></div><div><b data-n="50">50</b><span>Glossary words</span></div><div><b data-n="0">0</b><span>Ads or trackers</span></div></div>
+<h2 class="ef-section">Maps and tools</h2>
 <div class="ef-tools-grid">
-      <a class="ef-tool ef-g" href="{{ '/religion-map/' | relative_url }}"><span class="d"></span><div><b>Religion Map</b><span class="s">Which faith leads in each country</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/world-hardship-map/' | relative_url }}"><span class="d"></span><div><b>Hardship Map</b><span class="s">Hunger, poverty, conflict and violence</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/civilizations-map/' | relative_url }}"><span class="d"></span><div><b>Civilizations Map</b><span class="s">Slide through time: who lived where</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/lost-faiths/' | relative_url }}"><span class="d"></span><div><b>Lost Faiths</b><span class="s">Religions that faded, and those that survive</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/compare-religions/' | relative_url }}"><span class="d"></span><div><b>Compare Religions</b><span class="s">Pick two and see them side by side</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/on-this-day/' | relative_url }}"><span class="d"></span><div><b>On This Day</b><span class="s">Science, space and history by date</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/nature/' | relative_url }}"><span class="d"></span><div><b>Nature</b><span class="s">Forests, glaciers and species at risk</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/thinkers/' | relative_url }}"><span class="d"></span><div><b>Thinkers</b><span class="s">People who questioned belief</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/glossary/' | relative_url }}"><span class="d"></span><div><b>Glossary</b><span class="s">50 words, plainly explained</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/questions/' | relative_url }}"><span class="d"></span><div><b>Questions</b><span class="s">Common questions, honest answers</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/religion-by-country/' | relative_url }}"><span class="d"></span><div><b>Country Series</b><span class="s">Religion, one country at a time</span></div></a>
-      <a class="ef-tool ef-g" href="{{ '/ask/' | relative_url }}"><span class="d"></span><div><b>Ask a Question</b><span class="s">Send one, anonymously if you like</span></div></a>
+      <a class="ef-tool" href="{{ '/religion-map/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="14" r="10"/><path d="M4 14h20M14 4c4 3 4 17 0 20M14 4c-4 3-4 17 0 20"/></svg><span class="n">01</span><div><b>Religion Map</b><span class="s">Which faith leads in each country</span></div></a>
+      <a class="ef-tool" href="{{ '/world-hardship-map/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3c1 5 7 7 7 14a7 7 0 0 1-14 0c0-3 2-4 3-6 1 2 2 2 2 0 0-2 1-5 2-8z"/></svg><span class="n">02</span><div><b>Hardship Map</b><span class="s">Hunger, poverty, conflict and violence</span></div></a>
+      <a class="ef-tool" href="{{ '/civilizations-map/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8l10-5 10 5M6 10v12M12 10v12M16 10v12M22 10v12M3 24h22"/></svg><span class="n">03</span><div><b>Civilizations Map</b><span class="s">Slide through time: who lived where</span></div></a>
+      <a class="ef-tool" href="{{ '/lost-faiths/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 18A9 9 0 0 1 10 5a9 9 0 1 0 10 13z"/></svg><span class="n">04</span><div><b>Lost Faiths</b><span class="s">Religions that faded, and those that survive</span></div></a>
+      <a class="ef-tool" href="{{ '/compare-religions/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4v20M6 24h16M5 9h18M5 9l-3 8a4 4 0 0 0 6 0zM23 9l-3 8a4 4 0 0 0 6 0z"/></svg><span class="n">05</span><div><b>Compare Religions</b><span class="s">Pick two and see them side by side</span></div></a>
+      <a class="ef-tool" href="{{ '/on-this-day/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="20" height="18" rx="3"/><path d="M4 12h20M9 3v5M19 3v5"/></svg><span class="n">06</span><div><b>On This Day</b><span class="s">Science, space and history by date</span></div></a>
+      <a class="ef-tool" href="{{ '/nature/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 23C5 11 12 5 24 4c0 12-6 19-18 19zM5 23l9-9"/></svg><span class="n">07</span><div><b>Nature</b><span class="s">Forests, glaciers and species at risk</span></div></a>
+      <a class="ef-tool" href="{{ '/thinkers/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 17a7 7 0 1 1 10 0c-1 1-1 3-1 4h-8c0-1 0-3-1-4zM10 25h8"/></svg><span class="n">08</span><div><b>Thinkers</b><span class="s">People who questioned belief</span></div></a>
+      <a class="ef-tool" href="{{ '/glossary/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h8a3 3 0 0 1 3 3v16a3 3 0 0 0-3-3H4zM24 5h-8a3 3 0 0 0-3 3v16a3 3 0 0 1 3-3h8z"/></svg><span class="n">09</span><div><b>Glossary</b><span class="s">50 words, plainly explained</span></div></a>
+      <a class="ef-tool" href="{{ '/questions/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="14" r="10"/><path d="M11 11a3 3 0 1 1 4 3c-1 .6-1 1.5-1 2.5M14 20v.5"/></svg><span class="n">10</span><div><b>Questions</b><span class="s">Common questions, honest answers</span></div></a>
+      <a class="ef-tool" href="{{ '/religion-by-country/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 25s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13z"/><circle cx="14" cy="12" r="3"/></svg><span class="n">11</span><div><b>Country Series</b><span class="s">Religion, one country at a time</span></div></a>
+      <a class="ef-tool" href="{{ '/ask/' | relative_url }}"><svg class="gl" width="34" height="34" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 23l1-5L19 5l4 4L10 22zM17 7l4 4"/></svg><span class="n">12</span><div><b>Ask a Question</b><span class="s">Send one, anonymously if you like</span></div></a>
 </div>
-<div class="ef-section">Recent posts</div>
+<h2 class="ef-section">Articles</h2>
 <ul class="ef-posts" id="ef-list">
-{% for post in site.posts offset: 1 %}
-  <li class="ef-item ef-g">
+{% for post in site.posts %}
+  <li class="ef-item">
     <div>{% if post.tags.size > 0 %}<span class="ef-pill">{{ post.tags[0] }}</span>{% endif %}<span class="ef-date">{{ post.date | date: "%b %-d, %Y" }}</span></div>
     <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
     <p>{{ post.excerpt | strip_html | strip_newlines | truncatewords: 30 }}</p>
@@ -132,5 +151,38 @@ layout: default
     if (scroll) { window.scrollTo(0, 0); }
   }
   render(false);
+})();
+</script>
+<script>
+(function () {
+  var rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-n]').forEach(function (e) {
+    var n = +e.getAttribute('data-n');
+    if (rm || !n) { return; }
+    var t0 = null;
+    function f(t) { if (t0 === null) { t0 = t; } var p = Math.min((t - t0) / 1500, 1); e.textContent = Math.round(n * (1 - Math.pow(1 - p, 3))); if (p < 1) { requestAnimationFrame(f); } }
+    e.textContent = '0'; requestAnimationFrame(f);
+  });
+  document.querySelectorAll('.ef-tool').forEach(function (c, i) {
+    c.classList.add('ef-up'); c.style.animationDelay = (0.8 + i * 0.06) + 's';
+    c.addEventListener('mousemove', function (e) { var r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
+  });
+  var cv = document.getElementById('ef-sky');
+  if (!cv || !cv.getContext) { return; }
+  var cx = cv.getContext('2d'), S = [], W, H, sh = null;
+  function rs() { W = cv.width = innerWidth; H = cv.height = innerHeight; S = []; var n = Math.floor(W * H / 9000); for (var i = 0; i < n; i++) { S.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.3 + 0.2, p: Math.random() * 6, s: 0.5 + Math.random() * 1.5 }); } }
+  rs(); addEventListener('resize', rs);
+  function col() { return getComputedStyle(document.documentElement).getPropertyValue('--ef-star').trim() || '#fff'; }
+  function fr(t) {
+    cx.clearRect(0, 0, W, H);
+    var light = col() !== '#ffffff';
+    cx.fillStyle = col();
+    for (var i = 0; i < S.length; i++) { var s = S[i]; cx.globalAlpha = (0.2 + 0.6 * Math.abs(Math.sin(t / 1000 * s.s + s.p))) * (light ? 0.7 : 1); cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, 7); cx.fill(); }
+    if (!sh && Math.random() < 0.004) { sh = { x: Math.random() * W * 0.8, y: Math.random() * H * 0.3, l: 0 }; }
+    if (sh) { cx.globalAlpha = 1 - sh.l / 60; cx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--ef-rust').trim(); cx.lineWidth = 1.5; cx.beginPath(); cx.moveTo(sh.x, sh.y); cx.lineTo(sh.x - 70, sh.y - 35); cx.stroke(); sh.x += 9; sh.y += 4.5; if (++sh.l > 60) { sh = null; } }
+    cx.globalAlpha = 1;
+    if (!rm) { requestAnimationFrame(fr); }
+  }
+  requestAnimationFrame(fr);
 })();
 </script>
